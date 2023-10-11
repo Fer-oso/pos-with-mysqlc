@@ -1,7 +1,7 @@
 package main;
 
 import entitiys.client.NormalClient;
-import persistence.dao.NormalClientRepository;
+import persistence.dao.NormalClientRepositoryImp;
 import services.NormalClientServiceImp;
 
 public class Poswithmysqlc {
@@ -9,11 +9,9 @@ public class Poswithmysqlc {
     public static void main(String[] args) throws Exception{
         System.out.println("Hello World!");
         
-        NormalClientRepository normalClientRepository = new NormalClientRepository();
+        NormalClientRepositoryImp normalClientRepository = new NormalClientRepositoryImp();
         
         NormalClientServiceImp normalClientServiceImp = new NormalClientServiceImp(normalClientRepository);
-        
-       
         
         NormalClient normalClient = normalClientServiceImp.findById(14);
 

@@ -1,9 +1,9 @@
 package services;
 
 import entitiys.client.NormalClient;
+import interfaces.persistences.repositorys.entitys.clients.normalclient.NormalClientRepository;
 import java.util.List;
 import java.util.Optional;
-import persistence.dao.NormalClientRepository;
 import services.exceptions.ClientServiceExceptions;
 import services.interfaces.client.NormalClientService;
 
@@ -76,24 +76,27 @@ public class NormalClientServiceImp implements NormalClientService<NormalClient,
     }
 
     @Override
-    public <S extends NormalClient> List<S> findByName(String name) {
+    public List<NormalClient> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public <S extends NormalClient> S findByLastName(String lastName) {
+    public List<NormalClient> findByName(String name) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public <S extends NormalClient> List<S> findByAge() {
+    public List<NormalClient> findByLastName(String lastName) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public <S extends NormalClient> S findBySsn(Integer ssn) {
+    public List<NormalClient> findByAge() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-
+    @Override
+    public NormalClient findBySsn(Integer ssn) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

@@ -1,6 +1,5 @@
 package persistence.dao;
 
-import interfaces.persistences.crud.CrudRepository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,7 +7,7 @@ import java.sql.SQLException;
 import persistence.config.Config;
 import persistence.dao.exceptios.DaoExceptions;
 
-public abstract class DaoRepository<T, ID> implements CrudRepository<T, ID> {
+public abstract class DaoRepository {
 
     protected Connection connection;
 
@@ -19,6 +18,7 @@ public abstract class DaoRepository<T, ID> implements CrudRepository<T, ID> {
     protected Connection startConnection() throws DaoExceptions {
 
         try {
+
             connection = Config.getConnection();
 
             connection.setAutoCommit(false);
@@ -34,6 +34,7 @@ public abstract class DaoRepository<T, ID> implements CrudRepository<T, ID> {
     protected void closeConnection() throws DaoExceptions {
 
         try {
+
             if (!connection.isClosed()) {
 
                 connection.close();
@@ -48,6 +49,7 @@ public abstract class DaoRepository<T, ID> implements CrudRepository<T, ID> {
     protected void rollbackTransaction() throws DaoExceptions {
 
         try {
+
             connection.rollback();
 
         } catch (SQLException e) {
