@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface FindAll<T extends Object> {
     
-    List<T> findAll();
+    List<T> findAll() throws Exception;
 }

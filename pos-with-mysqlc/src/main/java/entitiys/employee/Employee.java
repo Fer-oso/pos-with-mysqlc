@@ -1,23 +1,18 @@
 package entitiys.employee;
 
-import entitiys.addres.Addres;
-import entitiys.person.Person;
-import entitiys.phone.Phone;
 import interfaces.entitys.employee.IEmployee;
-import java.util.List;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @NoArgsConstructor
 @ToString(callSuper = true)
-public class Employee extends Person<Integer> implements IEmployee {
+public class Employee implements IEmployee {
 
     private boolean active;
     private String rol;
     private Double salary;
 
-    public Employee(Integer id, String name, String lastName, String ssn, Integer age, List<Addres> addres, List<Phone> phone,boolean active, String rol, Double salary) {
-        super(id, name, lastName, age, ssn, addres, phone);
+    public Employee(boolean active, String rol, Double salary) {
         this.active = active;
         this.rol = rol;
         this.salary = salary;
