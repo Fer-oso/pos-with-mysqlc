@@ -2,7 +2,6 @@ package main;
 
 import entitiys.client.RegularClient;
 import entitiys.phone.Telephone;
-import interfaces.entitys.clients.NormalClient;
 import interfaces.entitys.phone.Phone;
 import interfaces.persistences.repositorys.entitys.clients.normalclient.NormalClientRepository;
 import persistence.dao.NormalClientRepositoryImp;
