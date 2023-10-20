@@ -15,5 +15,4 @@ public class ClientServiceExceptions extends Exception{
     public ClientServiceExceptions(Throwable cause) {
         super(cause);
     }
-
 }

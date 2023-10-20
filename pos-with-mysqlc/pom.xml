@@ -8,12 +8,17 @@
     
     <dependencies>
         
-        <!-- https://mvnrepository.com/artifact/com.formdev/flatlaf -->
+<!-- https://mvnrepository.com/artifact/com.formdev/flatlaf -->
 <dependency>
-    <groupId>com.formdev</groupId>
-    <artifactId>flatlaf</artifactId>
-    <version>3.2.1</version>
-    <scope>runtime</scope>
+  <groupId>com.formdev</groupId>
+  <artifactId>flatlaf</artifactId>
+  <version>3.2.2</version>
+</dependency>
+
+<dependency>
+  <groupId>com.formdev</groupId>
+  <artifactId>flatlaf-intellij-themes</artifactId>
+  <version>3.2.2</version>
 </dependency>
 
 
@@ -32,9 +37,11 @@
     <version>1.18.28</version>
     <scope>provided</scope>
 </dependency>
-
-<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail -->
- 
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE180</version>
+        </dependency>
     </dependencies>
     
     <properties>

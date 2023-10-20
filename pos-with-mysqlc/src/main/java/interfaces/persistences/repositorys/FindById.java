@@ -1,6 +1,8 @@
 package interfaces.persistences.repositorys;
 
-public interface FindById<T extends Object,K extends Object> {
+import java.util.Optional;
+
+public interface FindById<T, K> {
     
-    T findById (K id) throws Exception;
+    Optional<T> findById (K id) throws Exception;
 }

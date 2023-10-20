@@ -1,19 +1,20 @@
 package persistence.dao;
 
-import entitiys.addres.RegularAddress;
 import entitiys.phone.Telephone;
-import interfaces.entitys.addres.Address;
 import interfaces.entitys.phone.Phone;
 import interfaces.persistences.repositorys.entitys.phones.PhoneRepository;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import persistence.dao.exceptios.DaoExceptions;
 
 public class PhoneRepositoryImp extends DaoRepository implements PhoneRepository {
 
+    private Integer idGeneratedKey;
+
     @Override
-    public void save(Phone object) throws Exception {
+    public Phone save(Phone object) throws Exception {
         try {
 
             String sql = "INSERT INTO phone (number_phone, type_phone) VALUES (?, ?)";
@@ -27,6 +28,15 @@ public class PhoneRepositoryImp extends DaoRepository implements PhoneRepository
             preparedStatement.executeUpdate();
 
             connection.commit();
+
+            if (resultSet.next()) {
+
+                idGeneratedKey = resultSet.getInt(1);
+            }
+
+            connection.commit();
+
+            return findById(idGeneratedKey).get();
 
         } catch (SQLException e) {
 
@@ -42,7 +52,7 @@ public class PhoneRepositoryImp extends DaoRepository implements PhoneRepository
 
     @Override
     public Phone update(Integer id, Phone object) throws Exception {
-        try {
+          try {
 
             String sql = "UPDATE phone SET number_phone = ?, type_phone = ? WHERE id = ?)";
 
@@ -58,7 +68,7 @@ public class PhoneRepositoryImp extends DaoRepository implements PhoneRepository
 
             connection.commit();
 
-            return findById(id);
+            return findById(id).get();
 
         } catch (SQLException e) {
 
@@ -101,7 +111,7 @@ public class PhoneRepositoryImp extends DaoRepository implements PhoneRepository
     }
 
     @Override
-    public Phone findById(Integer id) throws Exception {
+    public Optional<Phone> findById(Integer id) throws Exception {
         try {
             String sql = "SELECT * FROM phone WHERE id = ?";
 
@@ -113,9 +123,14 @@ public class PhoneRepositoryImp extends DaoRepository implements PhoneRepository
 
             if (resultSet.next()) {
 
-                return new Telephone(resultSet.getInt("id"),
+                Phone phone = new Telephone(resultSet.getInt("id"),
                         resultSet.getInt("number_phone"),
                         resultSet.getString("type_phone"));
+
+                Optional<Phone> optionalPhone = Optional.ofNullable(phone);
+
+                return optionalPhone;
+
             } else {
 
                 throw new DaoExceptions("Not Found By ID Maybe Doesn't exists");
@@ -134,7 +149,7 @@ public class PhoneRepositoryImp extends DaoRepository implements PhoneRepository
 
     @Override
     public List<Phone> findAll() throws Exception {
-        try {
+          try {
             String sql = "SELECT * FROM phone";
 
             connection = startConnection();
@@ -168,4 +183,6 @@ public class PhoneRepositoryImp extends DaoRepository implements PhoneRepository
             closeConnection();
         }
     }
+    
+
 }

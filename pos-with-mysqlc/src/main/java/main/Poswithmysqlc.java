@@ -1,58 +1,76 @@
 package main;
 
-import entitiys.client.RegularClient;
+import entitiys.addres.StandardAddress;
+import entitiys.client.StandardClient;
 import entitiys.phone.Telephone;
 import interfaces.entitys.phone.Phone;
-import interfaces.persistences.repositorys.entitys.clients.normalclient.NormalClientRepository;
-import persistence.dao.NormalClientRepositoryImp;
-import services.client.NormalClientServiceImp;
-import services.interfaces.NormalClientService;
-import interfaces.persistences.repositorys.entitys.address.AddressRepository;
+import interfaces.persistences.repositorys.entitys.address.StandardAddressRepository;
 import interfaces.persistences.repositorys.entitys.phones.PhoneRepository;
-import persistence.dao.AddressRepositoryImp;
+import persistence.dao.StandardAddressRepositoryImp;
 import persistence.dao.PhoneRepositoryImp;
-import services.interfaces.AddressService;
-import services.address.AddressServiceImp;
-import services.interfaces.PhoneService;
+import services.address.StandardAddressServiceImp;
+import interfaces.services.services.interfaces.PhoneService;
+import persistence.dao.StandardClientRepositoryImp;
+import services.client.StandarClientServiceImp;
 import services.phone.PhoneServiceImp;
+import interfaces.persistences.repositorys.entitys.clients.client.StandardClientRepository;
+import interfaces.services.StandardAddressService;
+import interfaces.services.StandardClientService;
+import views.POS;
 
 public class Poswithmysqlc {
 
     public static void main(String[] args) throws Exception {
 
         System.out.println("Hello World!");
+        
+       // POS.main(args);
+        
 
-        NormalClientRepository norClientRepository = new NormalClientRepositoryImp();
+        StandardClientRepository standarClientRepository = new StandardClientRepositoryImp();
 
-        NormalClientService normalClientServiceImp = new NormalClientServiceImp(norClientRepository);
+        StandardClientService standarClientService = new StandarClientServiceImp(standarClientRepository);
         
         
-        AddressRepository addressRepository = new AddressRepositoryImp();
+        StandardAddressRepository addressRepository = new StandardAddressRepositoryImp();
         
-        AddressService addressService = new AddressServiceImp(addressRepository);
-        
+        StandardAddressService addressService = new StandardAddressServiceImp(addressRepository);
         
         PhoneRepository phoneRepository = new PhoneRepositoryImp();
         
         PhoneService phoneService = new PhoneServiceImp(phoneRepository);
         
+        StandardAddress standarAddres = new StandardAddress();
+        
+        standarAddres.setStreetDirection("Islas Malvinas");
+        
+        standarAddres.setStreetNumber(2532);
+        
+        standarAddres.setCity("Isidro Casanova");
+        
+        standarAddres.setState("Buenos");
+        
+        standarAddres.setPostalCode(1765);
+        
+       
+        
+        addressService.save(standarAddres);
         
         
-        
-        Phone telephone = phoneService.create(Telephone.class);
-        
-        System.out.println(phoneService.findById(1));
-        
-        
-        RegularClient regularClient = normalClientServiceImp.create(RegularClient.class);
-        
-        System.out.println(regularClient);
+//        Phone telephone = phoneService.create(Telephone.class);
+//        
+//        System.out.println(phoneService.findById(1));
+//        
+//        
+//        StandardClient regularClient = standarClientService.create(StandardClient.class);
+//        
+//        System.out.println(regularClient);
         
         //normalClientServiceImp.save(normalClient);
         
         
         
-      //  System.out.println(normalClientServiceImp.createNormalClient(RegularClient.class));
+      //  System.out.println(normalClientServiceImp.createNormalClient(StandardClient.class));
 
         // System.out.println(normalClientServiceImp.findAll());
         // norClientRepository.save(normalClient);

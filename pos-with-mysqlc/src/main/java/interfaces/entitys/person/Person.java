@@ -30,4 +30,8 @@ public interface Person<K> extends Entity<K> {
     ArrayList<Phone> getPhone();
     
     void setPhone (Phone phone);
+    
+    boolean isAvailability();
+    
+    void setAvailability(boolean availability);
 }
