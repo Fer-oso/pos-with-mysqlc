@@ -1,5 +1,5 @@
 
-package interfaces.services;
+package interfaces.services.services.interfaces;
 
 import java.lang.reflect.Constructor;
 import services.exceptions.ClientServiceExceptions;

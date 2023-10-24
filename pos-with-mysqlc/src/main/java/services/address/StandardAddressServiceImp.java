@@ -10,9 +10,9 @@ import services.exceptions.AddresServiceException;
 
 public class StandardAddressServiceImp implements StandardAddressService {
 
-    StandardAddressRepository addressRepository;
+    private final StandardAddressRepository addressRepository;
 
-    StandardAddress standardAddress;
+    private StandardAddress standardAddress;
 
     public StandardAddressServiceImp(StandardAddressRepository addressRepository) {
         this.addressRepository = addressRepository;
@@ -23,7 +23,7 @@ public class StandardAddressServiceImp implements StandardAddressService {
 
         if (checkDuplicate(object)) {
 
-            System.out.println("duplicated" + standardAddress);
+            System.out.println("duplicated" + object);
 
             return findById(standardAddress.getId()).orElseThrow(() -> new Exception("Not found"));
 

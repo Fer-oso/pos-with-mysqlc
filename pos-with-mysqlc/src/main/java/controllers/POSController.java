@@ -1,39 +1,39 @@
 package controllers;
 
 import interfaces.persistences.repositorys.entitys.address.StandardAddressRepository;
-import interfaces.persistences.repositorys.entitys.phones.PhoneRepository;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import interfaces.services.services.interfaces.PhoneService;
 
 import views.POS;
 import views.clients.ClientFindByNameFormView;
 import views.clients.ClientRegisterFormView;
 import persistence.dao.StandardAddressRepositoryImp;
-import persistence.dao.PhoneRepositoryImp;
+import persistence.dao.TelephoneRepositoryImp;
 import persistence.dao.StandardClientRepositoryImp;
 import services.address.StandardAddressServiceImp;
 import services.client.StandarClientServiceImp;
-import services.phone.PhoneServiceImp;
+import services.phone.TelephoneServiceImp;
 import interfaces.persistences.repositorys.entitys.clients.client.StandardClientRepository;
+import interfaces.persistences.repositorys.entitys.phones.TelephoneRepository;
 import interfaces.services.StandardAddressService;
 import interfaces.services.StandardClientService;
+import interfaces.services.services.TelephoneService;
 
 public class POSController implements ActionListener {
 
     POS pos;
 
-    StandardClientRepository standarClientRepository = new StandardClientRepositoryImp();
-
-    StandardClientService normalClientService = new StandarClientServiceImp(standarClientRepository);
-
     StandardAddressRepository addressRepository = new StandardAddressRepositoryImp();
 
     StandardAddressService addressService = new StandardAddressServiceImp(addressRepository);
 
-    PhoneRepository phoneRepository = new PhoneRepositoryImp();
+    TelephoneRepository phoneRepository = new TelephoneRepositoryImp();
 
-    PhoneService phoneService = new PhoneServiceImp(phoneRepository);
+    TelephoneService phoneService = new TelephoneServiceImp(phoneRepository);
+
+    StandardClientRepository standarClientRepository = new StandardClientRepositoryImp();
+
+    StandardClientService normalClientService = new StandarClientServiceImp(standarClientRepository);
 
 //    ShopFormView shopForm = new ShopFormView( normalClientService );
     // ProductRegisterFormView productRegisterFormView = new ProductRegisterFormView(productServiceImp);

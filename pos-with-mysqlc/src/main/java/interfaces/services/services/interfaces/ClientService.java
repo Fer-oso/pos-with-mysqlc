@@ -1,5 +1,6 @@
-package interfaces.services;
+package interfaces.services.services.interfaces;
 
+import interfaces.services.services.interfaces.Service;
 import interfaces.entitys.clients.Client;
 import interfaces.persistences.crud.Delete;
 import interfaces.persistences.crud.Save;

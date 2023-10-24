@@ -1,25 +1,25 @@
 package persistence.dao;
 
 import entitiys.phone.Telephone;
-import interfaces.entitys.phone.Phone;
-import interfaces.persistences.repositorys.entitys.phones.PhoneRepository;
+import interfaces.persistences.repositorys.entitys.phones.TelephoneRepository;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import persistence.dao.exceptios.DaoExceptions;
 
-public class PhoneRepositoryImp extends DaoRepository implements PhoneRepository {
+public class TelephoneRepositoryImp extends DaoRepository implements TelephoneRepository {
 
     private Integer idGeneratedKey;
 
     @Override
-    public Phone save(Phone object) throws Exception {
+    public Telephone save(Telephone object) throws Exception {
         try {
 
             String sql = "INSERT INTO phone (number_phone, type_phone) VALUES (?, ?)";
 
-            preparedStatement = startConnection().prepareStatement(sql);
+            preparedStatement = startConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setInt(1, object.getNumberPhone());
 
@@ -28,13 +28,13 @@ public class PhoneRepositoryImp extends DaoRepository implements PhoneRepository
             preparedStatement.executeUpdate();
 
             connection.commit();
+            
+            resultSet = preparedStatement.getGeneratedKeys();
 
             if (resultSet.next()) {
 
                 idGeneratedKey = resultSet.getInt(1);
             }
-
-            connection.commit();
 
             return findById(idGeneratedKey).get();
 
@@ -51,8 +51,8 @@ public class PhoneRepositoryImp extends DaoRepository implements PhoneRepository
     }
 
     @Override
-    public Phone update(Integer id, Phone object) throws Exception {
-          try {
+    public Telephone update(Integer id, Telephone object) throws Exception {
+        try {
 
             String sql = "UPDATE phone SET number_phone = ?, type_phone = ? WHERE id = ?)";
 
@@ -111,7 +111,7 @@ public class PhoneRepositoryImp extends DaoRepository implements PhoneRepository
     }
 
     @Override
-    public Optional<Phone> findById(Integer id) throws Exception {
+    public Optional<Telephone> findById(Integer id) throws Exception {
         try {
             String sql = "SELECT * FROM phone WHERE id = ?";
 
@@ -123,11 +123,11 @@ public class PhoneRepositoryImp extends DaoRepository implements PhoneRepository
 
             if (resultSet.next()) {
 
-                Phone phone = new Telephone(resultSet.getInt("id"),
+                Telephone phone = new Telephone(resultSet.getInt("id"),
                         resultSet.getInt("number_phone"),
                         resultSet.getString("type_phone"));
 
-                Optional<Phone> optionalPhone = Optional.ofNullable(phone);
+                Optional<Telephone> optionalPhone = Optional.ofNullable(phone);
 
                 return optionalPhone;
 
@@ -148,8 +148,8 @@ public class PhoneRepositoryImp extends DaoRepository implements PhoneRepository
     }
 
     @Override
-    public List<Phone> findAll() throws Exception {
-          try {
+    public List<Telephone> findAll() throws Exception {
+        try {
             String sql = "SELECT * FROM phone";
 
             connection = startConnection();
@@ -158,11 +158,11 @@ public class PhoneRepositoryImp extends DaoRepository implements PhoneRepository
 
             resultSet = preparedStatement.executeQuery();
 
-            List<Phone> phones = new ArrayList<>();
+            List<Telephone> phones = new ArrayList<>();
 
             while (resultSet.next()) {
 
-                Phone phone = new Telephone(
+                Telephone phone = new Telephone(
                         resultSet.getInt("id"),
                         resultSet.getInt("number_phone"),
                         resultSet.getString("type_phone"));
@@ -183,6 +183,5 @@ public class PhoneRepositoryImp extends DaoRepository implements PhoneRepository
             closeConnection();
         }
     }
-    
 
 }

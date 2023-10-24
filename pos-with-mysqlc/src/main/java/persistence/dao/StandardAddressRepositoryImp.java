@@ -18,36 +18,32 @@ public class StandardAddressRepositoryImp extends DaoRepository implements Stand
 
         try {
 
+            String sql = "INSERT INTO address (street_direction, street_number, city, state, postal_code ) VALUES (?, ?, ?, ?, ?)";
+
+            preparedStatement = startConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setString(1, object.getStreetDirection());
+
+            preparedStatement.setInt(2, object.getStreetNumber());
+
+            preparedStatement.setString(3, object.getCity());
+
+            preparedStatement.setString(4, object.getState());
+
+            preparedStatement.setInt(5, object.getPostalCode());
+
+            preparedStatement.executeUpdate();
             
+            connection.commit();
 
-                String sql = "INSERT INTO address (street_direction, street_number, city, state, postal_code ) VALUES (?, ?, ?, ?, ?)";
+            resultSet = preparedStatement.getGeneratedKeys();
 
-                preparedStatement = startConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            if (resultSet.next()) {
 
-                preparedStatement.setString(1, object.getStreetDirection());
+                idGeneratedKey = resultSet.getInt(1);
+            }
 
-                preparedStatement.setInt(2, object.getStreetNumber());
-
-                preparedStatement.setString(3, object.getCity());
-
-                preparedStatement.setString(4, object.getState());
-
-                preparedStatement.setInt(5, object.getPostalCode());
-
-                preparedStatement.executeUpdate();
-
-                resultSet = preparedStatement.getGeneratedKeys();
-
-                if (resultSet.next()) {
-
-                    idGeneratedKey = resultSet.getInt(1);
-                }
-
-                connection.commit();
-
-                return findById(idGeneratedKey).get();
-
-            
+            return findById(idGeneratedKey).get();
 
         } catch (SQLException e) {
 
@@ -210,6 +206,4 @@ public class StandardAddressRepositoryImp extends DaoRepository implements Stand
             closeConnection();
         }
     }
-
-   
 }

@@ -1,6 +1,6 @@
 package views;
 
-import com.formdev.flatlaf.intellijthemes.FlatArcIJTheme;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import controllers.POSController;
 
 public class POS extends javax.swing.JFrame {
@@ -47,21 +47,19 @@ public class POS extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jMenuShop.setIcon(new javax.swing.ImageIcon("C:\\Users\\XFAO03\\Documents\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\market icons\\menushopicons\\shop icon.png")); // NOI18N
+        jMenuShop.setIcon(new javax.swing.ImageIcon("D:\\Users\\elfisu\\OneDrive\\Documentos\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\market icons\\menushopicons\\shop icon.png")); // NOI18N
         jMenuShop.setText("Shop");
 
-        jMenuItemShopForm.setIcon(new javax.swing.ImageIcon("C:\\Users\\XFAO03\\Documents\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\market icons\\menushopicons\\shopping cart form icon.png")); // NOI18N
+        jMenuItemShopForm.setIcon(new javax.swing.ImageIcon("D:\\Users\\elfisu\\OneDrive\\Documentos\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\market icons\\menushopicons\\shopping cart form icon.png")); // NOI18N
         jMenuItemShopForm.setText("Shopping cart form");
         jMenuShop.add(jMenuItemShopForm);
 
-        jMenuShopCar.setIcon(new javax.swing.ImageIcon("C:\\Users\\XFAO03\\Documents\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\market icons\\menushopicons\\shopping cart info icon.png")); // NOI18N
+        jMenuShopCar.setIcon(new javax.swing.ImageIcon("D:\\Users\\elfisu\\OneDrive\\Documentos\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\market icons\\menushopicons\\shopping cart info icon.png")); // NOI18N
         jMenuShopCar.setText("Shopping cart info");
 
-        jMenuItemShopCarLast.setIcon(new javax.swing.ImageIcon("C:\\Users\\XFAO03\\Documents\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\market icons\\menushopicons\\shopping cart last icon.png")); // NOI18N
         jMenuItemShopCarLast.setText("Last");
         jMenuShopCar.add(jMenuItemShopCarLast);
 
-        jMenuItemShopCarHistory.setIcon(new javax.swing.ImageIcon("C:\\Users\\XFAO03\\Documents\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\market icons\\menushopicons\\shopping cart history icon.png")); // NOI18N
         jMenuItemShopCarHistory.setText("History");
         jMenuShopCar.add(jMenuItemShopCarHistory);
 
@@ -69,37 +67,37 @@ public class POS extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuShop);
 
-        jMenuClient.setIcon(new javax.swing.ImageIcon("C:\\Users\\XFAO03\\Documents\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\market icons\\menuclientsicons\\clients menu icon.png")); // NOI18N
+        jMenuClient.setIcon(new javax.swing.ImageIcon("D:\\Users\\elfisu\\OneDrive\\Documentos\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\market icons\\menuclientsicons\\clients menu icon.png")); // NOI18N
         jMenuClient.setText("Client");
 
-        jMenuClientFind.setIcon(new javax.swing.ImageIcon("C:\\Users\\XFAO03\\Documents\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\market icons\\menuclientsicons\\find client icon.png")); // NOI18N
+        jMenuClientFind.setIcon(new javax.swing.ImageIcon("D:\\Users\\elfisu\\OneDrive\\Documentos\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\market icons\\menuclientsicons\\find client icon.png")); // NOI18N
         jMenuClientFind.setText("Find");
 
-        jMenuItemClientByName.setIcon(new javax.swing.ImageIcon("C:\\Users\\XFAO03\\Documents\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\market icons\\menuproductsicons\\find all icon.png")); // NOI18N
+        jMenuItemClientByName.setIcon(new javax.swing.ImageIcon("D:\\Users\\elfisu\\OneDrive\\Documentos\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\market icons\\menuproductsicons\\find all icon.png")); // NOI18N
         jMenuItemClientByName.setText("by name");
         jMenuClientFind.add(jMenuItemClientByName);
 
         jMenuClient.add(jMenuClientFind);
 
-        jMenuItemClientRegister.setIcon(new javax.swing.ImageIcon("C:\\Users\\XFAO03\\Documents\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\market icons\\menuclientsicons\\register client icon.png")); // NOI18N
+        jMenuItemClientRegister.setIcon(new javax.swing.ImageIcon("D:\\Users\\elfisu\\OneDrive\\Documentos\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\market icons\\menuclientsicons\\register client icon.png")); // NOI18N
         jMenuItemClientRegister.setText("Register");
         jMenuClient.add(jMenuItemClientRegister);
 
         jMenuBar1.add(jMenuClient);
 
-        jMenuProduct.setIcon(new javax.swing.ImageIcon("C:\\Users\\XFAO03\\Documents\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\market icons\\menuproductsicons\\menu product icon.png")); // NOI18N
+        jMenuProduct.setIcon(new javax.swing.ImageIcon("D:\\Users\\elfisu\\OneDrive\\Documentos\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\market icons\\menuproductsicons\\menu product icon.png")); // NOI18N
         jMenuProduct.setText("Product");
 
-        jMenuProductFind.setIcon(new javax.swing.ImageIcon("C:\\Users\\XFAO03\\Documents\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\market icons\\menuproductsicons\\product find icon.png")); // NOI18N
+        jMenuProductFind.setIcon(new javax.swing.ImageIcon("D:\\Users\\elfisu\\OneDrive\\Documentos\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\market icons\\menuproductsicons\\product find icon.png")); // NOI18N
         jMenuProductFind.setText("Find");
 
-        jMenuItemProductByPC.setIcon(new javax.swing.ImageIcon("C:\\Users\\XFAO03\\Documents\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\market icons\\menuproductsicons\\find all icon.png")); // NOI18N
+        jMenuItemProductByPC.setIcon(new javax.swing.ImageIcon("D:\\Users\\elfisu\\OneDrive\\Documentos\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\market icons\\menuproductsicons\\find all icon.png")); // NOI18N
         jMenuItemProductByPC.setText("by PC");
         jMenuProductFind.add(jMenuItemProductByPC);
 
         jMenuProduct.add(jMenuProductFind);
 
-        jMenuItemProductRegister.setIcon(new javax.swing.ImageIcon("C:\\Users\\XFAO03\\Documents\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\market icons\\menuproductsicons\\product register icon.png")); // NOI18N
+        jMenuItemProductRegister.setIcon(new javax.swing.ImageIcon("D:\\Users\\elfisu\\OneDrive\\Documentos\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\market icons\\menuproductsicons\\product register icon.png")); // NOI18N
         jMenuItemProductRegister.setText("Register");
         jMenuProduct.add(jMenuItemProductRegister);
 
@@ -113,7 +111,7 @@ public class POS extends javax.swing.JFrame {
     public static void main(String args[]) {
 
         /* Set the Nimbus look and feel */
-        FlatArcIJTheme.setup();
+        FlatMacLightLaf.setup();
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {

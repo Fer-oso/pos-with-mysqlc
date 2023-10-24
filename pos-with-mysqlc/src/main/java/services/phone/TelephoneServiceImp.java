@@ -1,22 +1,22 @@
 package services.phone;
 
-import interfaces.entitys.phone.Phone;
-import interfaces.persistences.repositorys.entitys.phones.PhoneRepository;
+import entitiys.phone.Telephone;
+import interfaces.persistences.repositorys.entitys.phones.TelephoneRepository;
+import interfaces.services.services.TelephoneService;
 import java.util.List;
-import interfaces.services.services.interfaces.PhoneService;
 import java.util.Optional;
 import services.exceptions.PhoneServiceException;
 
-public class PhoneServiceImp implements PhoneService {
+public class TelephoneServiceImp implements TelephoneService {
 
-    PhoneRepository phoneRepository;
+   private final TelephoneRepository phoneRepository;
 
-    public PhoneServiceImp(PhoneRepository phoneRepository) {
+    public TelephoneServiceImp(TelephoneRepository phoneRepository) {
         this.phoneRepository = phoneRepository;
     }
 
     @Override
-    public Phone save(Phone object) throws Exception {
+    public Telephone save(Telephone object) throws Exception {
         try {
 
             return phoneRepository.save(object);
@@ -29,7 +29,7 @@ public class PhoneServiceImp implements PhoneService {
     }
 
     @Override
-    public Phone update(Integer id, Phone object) throws Exception {
+    public Telephone update(Integer id, Telephone object) throws Exception {
         try {
 
             return phoneRepository.update(id, object);
@@ -53,7 +53,7 @@ public class PhoneServiceImp implements PhoneService {
     }
 
     @Override
-    public Optional<Phone> findById(Integer id) throws Exception {
+    public Optional<Telephone> findById(Integer id) throws Exception {
         try {
 
             return phoneRepository.findById(id);
@@ -65,7 +65,7 @@ public class PhoneServiceImp implements PhoneService {
     }
 
     @Override
-    public List<Phone> findAll() throws Exception {
+    public List<Telephone> findAll() throws Exception {
         try {
 
             return phoneRepository.findAll();

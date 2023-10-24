@@ -7,7 +7,7 @@
         <Menu class="javax.swing.JMenu" name="jMenuShop">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\XFAO03\Documents\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\market icons\menushopicons\shop icon.png"/>
+              <Image iconType="2" name="D:\Users\elfisu\OneDrive\Documentos\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\market icons\menushopicons\shop icon.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Shop"/>
           </Properties>
@@ -18,7 +18,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemShopForm">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\XFAO03\Documents\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\market icons\menushopicons\shopping cart form icon.png"/>
+                  <Image iconType="2" name="D:\Users\elfisu\OneDrive\Documentos\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\market icons\menushopicons\shopping cart form icon.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Shopping cart form"/>
               </Properties>
@@ -29,7 +29,7 @@
             <Menu class="javax.swing.JMenu" name="jMenuShopCar">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\XFAO03\Documents\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\market icons\menushopicons\shopping cart info icon.png"/>
+                  <Image iconType="2" name="D:\Users\elfisu\OneDrive\Documentos\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\market icons\menushopicons\shopping cart info icon.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Shopping cart info"/>
               </Properties>
@@ -39,9 +39,6 @@
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItemShopCarLast">
                   <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="C:\Users\XFAO03\Documents\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\market icons\menushopicons\shopping cart last icon.png"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" value="Last"/>
                   </Properties>
                   <AuxValues>
@@ -50,9 +47,6 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItemShopCarHistory">
                   <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="C:\Users\XFAO03\Documents\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\market icons\menushopicons\shopping cart history icon.png"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" value="History"/>
                   </Properties>
                   <AuxValues>
@@ -66,7 +60,7 @@
         <Menu class="javax.swing.JMenu" name="jMenuClient">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\XFAO03\Documents\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\market icons\menuclientsicons\clients menu icon.png"/>
+              <Image iconType="2" name="D:\Users\elfisu\OneDrive\Documentos\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\market icons\menuclientsicons\clients menu icon.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Client"/>
           </Properties>
@@ -77,7 +71,7 @@
             <Menu class="javax.swing.JMenu" name="jMenuClientFind">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\XFAO03\Documents\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\market icons\menuclientsicons\find client icon.png"/>
+                  <Image iconType="2" name="D:\Users\elfisu\OneDrive\Documentos\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\market icons\menuclientsicons\find client icon.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Find"/>
               </Properties>
@@ -88,7 +82,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItemClientByName">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="C:\Users\XFAO03\Documents\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\market icons\menuproductsicons\find all icon.png"/>
+                      <Image iconType="2" name="D:\Users\elfisu\OneDrive\Documentos\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\market icons\menuproductsicons\find all icon.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="by name"/>
                   </Properties>
@@ -101,7 +95,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemClientRegister">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\XFAO03\Documents\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\market icons\menuclientsicons\register client icon.png"/>
+                  <Image iconType="2" name="D:\Users\elfisu\OneDrive\Documentos\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\market icons\menuclientsicons\register client icon.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Register"/>
               </Properties>
@@ -114,7 +108,7 @@
         <Menu class="javax.swing.JMenu" name="jMenuProduct">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\XFAO03\Documents\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\market icons\menuproductsicons\menu product icon.png"/>
+              <Image iconType="2" name="D:\Users\elfisu\OneDrive\Documentos\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\market icons\menuproductsicons\menu product icon.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Product"/>
           </Properties>
@@ -125,7 +119,7 @@
             <Menu class="javax.swing.JMenu" name="jMenuProductFind">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\XFAO03\Documents\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\market icons\menuproductsicons\product find icon.png"/>
+                  <Image iconType="2" name="D:\Users\elfisu\OneDrive\Documentos\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\market icons\menuproductsicons\product find icon.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Find"/>
               </Properties>
@@ -136,7 +130,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItemProductByPC">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="C:\Users\XFAO03\Documents\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\market icons\menuproductsicons\find all icon.png"/>
+                      <Image iconType="2" name="D:\Users\elfisu\OneDrive\Documentos\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\market icons\menuproductsicons\find all icon.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="by PC"/>
                   </Properties>
@@ -149,7 +143,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemProductRegister">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\XFAO03\Documents\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\market icons\menuproductsicons\product register icon.png"/>
+                  <Image iconType="2" name="D:\Users\elfisu\OneDrive\Documentos\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\market icons\menuproductsicons\product register icon.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Register"/>
               </Properties>

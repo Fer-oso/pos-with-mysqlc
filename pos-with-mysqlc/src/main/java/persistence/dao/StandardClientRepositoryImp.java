@@ -1,6 +1,8 @@
 package persistence.dao;
 
+import entitiys.addres.StandardAddress;
 import entitiys.client.StandardClient;
+import entitiys.phone.Telephone;
 import interfaces.persistences.repositorys.entitys.clients.client.StandardClientRepository;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,6 +14,8 @@ import persistence.dao.exceptios.DaoExceptions;
 public class StandardClientRepositoryImp extends DaoRepository implements StandardClientRepository {
 
     private Integer idGeneratedKey;
+
+    private StandardClient standardClient;
 
     @Override
     public StandardClient save(StandardClient object) throws Exception {
@@ -33,15 +37,15 @@ public class StandardClientRepositoryImp extends DaoRepository implements Standa
             preparedStatement.setString(5, object.getClasification());
 
             preparedStatement.executeUpdate();
-
+            
             connection.commit();
+
+            resultSet = preparedStatement.getGeneratedKeys();
 
             if (resultSet.next()) {
 
                 idGeneratedKey = resultSet.getInt(1);
             }
-
-            connection.commit();
 
             return findById(idGeneratedKey).get();
 
@@ -59,17 +63,73 @@ public class StandardClientRepositoryImp extends DaoRepository implements Standa
 
     @Override
     public StandardClient update(Integer id, StandardClient object) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        String sql = "UPDATE clients SET name = ?, lastname = ?, age = ?, ssn = ?, clasification = ? WHERE id = ?";
+
+        try {
+            preparedStatement = startConnection().prepareStatement(sql);
+
+            preparedStatement.setString(1, object.getName());
+
+            preparedStatement.setString(2, object.getLastName());
+
+            preparedStatement.setInt(3, object.getAge());
+
+            preparedStatement.setString(4, object.getSsn());
+
+            preparedStatement.setString(5, object.getClasification());
+
+            preparedStatement.setInt(6, id);
+
+            preparedStatement.executeUpdate();
+
+            connection.commit();
+
+            return findById(id).get();
+
+        } catch (SQLException e) {
+
+            rollbackTransaction();
+
+            throw new DaoExceptions("Error Mysql" + e.getMessage());
+
+        } finally {
+
+            closeConnection();
+        }
     }
 
     @Override
     public void delete(Integer id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        String sql = "DELETE FROM clients WHERE id = ?";
+
+        try {
+            preparedStatement = startConnection().prepareStatement(sql);
+
+            preparedStatement.setInt(1, id);
+
+            preparedStatement.executeUpdate();
+
+            connection.commit();
+
+        } catch (SQLException e) {
+
+            rollbackTransaction();
+
+            throw new DaoExceptions(e.getMessage());
+
+        } finally {
+
+            closeConnection();
+        }
     }
 
     @Override
     public Optional<StandardClient> findById(Integer id) throws Exception {
+
         try {
+
             String sql = "SELECT * FROM clients WHERE id = ?";
 
             connection = startConnection();
@@ -82,7 +142,7 @@ public class StandardClientRepositoryImp extends DaoRepository implements Standa
 
             if (resultSet.next()) {
 
-                StandardClient standardClient = new StandardClient(
+                standardClient = new StandardClient(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getString("lastname"),
@@ -91,15 +151,9 @@ public class StandardClientRepositoryImp extends DaoRepository implements Standa
                         new ArrayList<>(),
                         new ArrayList<>(),
                         resultSet.getString("clasification"));
-
-                Optional<StandardClient> optionalStandardClient = Optional.ofNullable(standardClient);
-
-                return optionalStandardClient;
-
-            } else {
-
-                return null;
             }
+
+            return Optional.ofNullable(standardClient);
 
         } catch (SQLException e) {
 
@@ -150,7 +204,61 @@ public class StandardClientRepositoryImp extends DaoRepository implements Standa
 
             closeConnection();
         }
+    }
 
+    @Override
+    public void insertClientAddress(StandardClient client, StandardAddress address) throws Exception {
+
+        String sql = "INSERT INTO client_address ( id_client, id_address ) VALUES (?, ?)";
+
+        try {
+
+            preparedStatement = startConnection().prepareStatement(sql);
+
+            preparedStatement.setInt(1, client.getId());
+
+            preparedStatement.setInt(2, address.getId());
+
+            preparedStatement.executeUpdate();
+
+            connection.commit();
+
+        } catch (SQLException e) {
+
+            rollbackTransaction();
+
+            throw new DaoExceptions(e.getMessage());
+
+        } finally {
+
+            closeConnection();
+        }
+    }
+
+    @Override
+    public void insertClientPhone(StandardClient client, Telephone phone) throws Exception {
+        String sql = "INSERT INTO client_phone (id_client, id_phone) VALUES (?, ?)";
+
+        try {
+            preparedStatement = startConnection().prepareStatement(sql);
+
+            preparedStatement.setInt(1, client.getId());
+
+            preparedStatement.setInt(2, phone.getId());
+
+            preparedStatement.executeUpdate();
+
+            connection.commit();
+
+        } catch (SQLException e) {
+            rollbackTransaction();
+
+            throw new DaoExceptions(e.getMessage());
+
+        } finally {
+
+            closeConnection();
+        }
     }
 
     @Override

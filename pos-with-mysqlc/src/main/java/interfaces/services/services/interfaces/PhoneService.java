@@ -6,8 +6,7 @@ import interfaces.persistences.crud.Save;
 import interfaces.persistences.crud.Update;
 import interfaces.persistences.repositorys.FindAll;
 import interfaces.persistences.repositorys.FindById;
-import interfaces.services.Service;
 
-public interface PhoneService extends Service<Phone>, Save<Phone>, Update<Phone, Integer>, Delete<Integer>, FindById<Phone, Integer>,FindAll<Phone>{
+public interface PhoneService<T extends Phone,ID> extends Service<T>, Save<T>, Update<T, ID>, Delete<ID>, FindById<T, Integer>,FindAll<T>{
 
 }

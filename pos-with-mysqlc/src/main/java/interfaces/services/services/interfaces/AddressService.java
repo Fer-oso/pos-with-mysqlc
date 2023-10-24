@@ -1,4 +1,4 @@
-package interfaces.services;
+package interfaces.services.services.interfaces;
 
 import interfaces.entitys.addres.Address;
 import interfaces.persistences.crud.Delete;
