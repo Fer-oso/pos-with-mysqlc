@@ -24,7 +24,7 @@ public class StandardClient implements Client, Serializable {
     private String clasification;
     private boolean availability;
 
-    public StandardClient(Integer id, String name, String lastName, Integer age, String ssn, ArrayList<Address> address, ArrayList<Phone> phone, String clasification) {
+    public StandardClient(Integer id, String name, String lastName, Integer age, String ssn, ArrayList<Address> address, ArrayList<Phone> phone, String clasification, boolean availability) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -33,6 +33,7 @@ public class StandardClient implements Client, Serializable {
         this.address = address;
         this.phone = phone;
         this.clasification = clasification;
+        this.availability = availability;
     }
 
     @Override

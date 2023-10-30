@@ -39,18 +39,11 @@ public class Poswithmysqlc {
         
         //Telephone phone = telephoneService.findById(12).get();
 
-        StandardClient standardClient = standarClientService.create(StandardClient.class);
+        StandardClient standardClient = standarClientService.findById(10).get();
 
-        standardClient.setName("fer");
-        standardClient.setLastName("Osorio");
-        standardClient.setAge(29);
-        standardClient.setClasification("normal");
-        standardClient.setSsn("38128526");
-        standardClient.setAvailability(true);
-
-        standardClient = standarClientService.save(standardClient);
+     //   standardClient = standarClientService.save(standardClient);
         
-        
+        System.out.println(standarClientService.getPhonesClients(standardClient));
         
      //   standarClientService.insertClientAddressPhone(standardClient, standarAddres, phone);
         

@@ -8,6 +8,7 @@ import interfaces.persistences.repositorys.entitys.clients.client.StandardClient
 import java.util.Optional;
 import interfaces.services.StandardClientService;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import services.exceptions.ClientServiceExceptions;
 
 public class StandarClientServiceImp implements StandardClientService {
@@ -152,4 +153,30 @@ public class StandarClientServiceImp implements StandardClientService {
         }
     
     }
+
+    @Override
+    public ArrayList<Telephone> getPhonesClients(StandardClient client) throws Exception {
+        try {
+            
+          return  standarClientRepository.getPhonesClients(client);
+          
+        } catch (Exception e) {
+        
+            throw new ClientServiceExceptions(e.getMessage());
+        }
+    }
+
+    @Override
+    public ArrayList<StandardAddress> getAddressClients(StandardClient client) throws Exception {
+        try {
+            
+          return  standarClientRepository.getAddressClients(client);
+          
+        } catch (Exception e) {
+        
+            throw new ClientServiceExceptions(e.getMessage());
+        }
+    }
+    
+    
 }

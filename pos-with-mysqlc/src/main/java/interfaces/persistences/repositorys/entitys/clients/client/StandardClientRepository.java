@@ -3,10 +3,15 @@ package interfaces.persistences.repositorys.entitys.clients.client;
 import entitiys.addres.StandardAddress;
 import entitiys.client.StandardClient;
 import entitiys.phone.Telephone;
+import java.util.ArrayList;
 
-public interface StandardClientRepository extends ClientRepository<StandardClient, Integer>{
+public interface StandardClientRepository extends ClientRepository<StandardClient, Integer> {
+
+    void insertClientAddress(StandardClient client, StandardAddress address) throws Exception;
+
+    void insertClientPhone(StandardClient client, Telephone phone) throws Exception;
+
+    ArrayList<Telephone> getPhonesClients(StandardClient client) throws Exception;
     
-  void insertClientAddress(StandardClient client, StandardAddress address) throws Exception;
-  
-  void insertClientPhone(StandardClient client, Telephone phone) throws Exception;
+    ArrayList<StandardAddress> getAddressClients(StandardClient client) throws Exception;
 }

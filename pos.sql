@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-10-2023 a las 19:43:47
+-- Tiempo de generación: 30-10-2023 a las 03:38:40
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -35,14 +35,6 @@ CREATE TABLE `address` (
   `state` varchar(32) NOT NULL,
   `postal_code` smallint(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `address`
---
-
-INSERT INTO `address` (`id`, `street_direction`, `street_number`, `city`, `state`, `postal_code`) VALUES
-(1, 'jose ignacio rucci', 3394, 'Isidro Casanova', 'Buenos Aires', 1765),
-(2, 'Islas Malvinas', 2532, 'Isidro Casanova', 'Buenos Aires', 1765);
 
 -- --------------------------------------------------------
 
@@ -85,17 +77,6 @@ CREATE TABLE `clients` (
   `clasification` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `clients`
---
-
-INSERT INTO `clients` (`id`, `name`, `lastname`, `age`, `ssn`, `clasification`) VALUES
-(3, 'JEJEJE', 'Osorio', 29, '38128526', 'Vip'),
-(4, 'fabian', 'oso', 29, '333', NULL),
-(7, 'alejandro', 'oso', 29, '444', NULL),
-(8, 'Patroclo', 'oso', 29, '444', NULL),
-(9, 'Lucio', 'oso', 29, '444', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -106,15 +87,6 @@ CREATE TABLE `client_address` (
   `id_client` int(11) NOT NULL,
   `id_address` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `client_address`
---
-
-INSERT INTO `client_address` (`id_client`, `id_address`) VALUES
-(3, 1),
-(3, 2),
-(4, 2);
 
 -- --------------------------------------------------------
 
@@ -149,13 +121,6 @@ CREATE TABLE `phone` (
   `number_phone` int(11) NOT NULL,
   `type_phone` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `phone`
---
-
-INSERT INTO `phone` (`id`, `number_phone`, `type_phone`) VALUES
-(1, 46698856, 'Home Telephone');
 
 --
 -- Índices para tablas volcadas
@@ -193,6 +158,13 @@ ALTER TABLE `clients`
 ALTER TABLE `client_address`
   ADD KEY `client_FK` (`id_client`),
   ADD KEY `address_FK` (`id_address`);
+
+--
+-- Indices de la tabla `client_phone`
+--
+ALTER TABLE `client_phone`
+  ADD KEY `client_phone_FK` (`id_client`),
+  ADD KEY `client_phone_update_FK` (`id_phone`);
 
 --
 -- Indices de la tabla `editorial`
@@ -243,8 +215,15 @@ ALTER TABLE `book`
 -- Filtros para la tabla `client_address`
 --
 ALTER TABLE `client_address`
-  ADD CONSTRAINT `address_FK` FOREIGN KEY (`id_address`) REFERENCES `address` (`id`),
-  ADD CONSTRAINT `client_FK` FOREIGN KEY (`id_client`) REFERENCES `clients` (`id`);
+  ADD CONSTRAINT `address_FK` FOREIGN KEY (`id_address`) REFERENCES `address` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `client_FK` FOREIGN KEY (`id_client`) REFERENCES `clients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `client_phone`
+--
+ALTER TABLE `client_phone`
+  ADD CONSTRAINT `client_phone_FK` FOREIGN KEY (`id_client`) REFERENCES `clients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `client_phone_update_FK` FOREIGN KEY (`id_phone`) REFERENCES `phone` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -200,65 +200,73 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="lblTypePhone" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lblName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtName" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
-                                      <Component id="lblAge" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lblSsn" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblLastname" min="-2" pref="60" max="-2" attributes="0"/>
-                                      <Component id="txtLastname" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
+                          <Component id="lblTypePhone" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtName" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
+                                  <Component id="lblAge" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="txtAge" min="-2" pref="109" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtSsn" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblSsn" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblLastname" min="-2" pref="60" max="-2" attributes="0"/>
+                                  <Component id="txtLastname" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtClasification" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
-                                      <Component id="lblClasification" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lblPhone" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblStreetDirection" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtPhone" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="txtAge" min="-2" pref="109" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txtSsn" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtClasification" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
+                                  <Component id="lblClasification" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtTypePhone" min="-2" pref="109" max="-2" attributes="0"/>
-                                      <Component id="lblStreetNumber" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtStreetNumber" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
-                                      <Component id="lblCity" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtCity" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
-                                      <Component id="lblAvailability" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="btnEdit" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jcbAvailability" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="txtState" alignment="0" pref="125" max="32767" attributes="0"/>
-                                          <Component id="lblState" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblPostalCode" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtStreetDirection" max="32767" attributes="0"/>
-                                          <Component id="txtPostalCode" alignment="0" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jcbPhones" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lblPhone" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblStreetDirection" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="btnDelete" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtTypePhone" min="-2" pref="109" max="-2" attributes="0"/>
+                                  <Component id="lblStreetNumber" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtStreetNumber" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
+                                  <Component id="lblCity" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtCity" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
+                                  <Component id="lblAvailability" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnEdit" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jcbStreetDirection" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jcbAvailability" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="txtState" alignment="0" pref="125" max="32767" attributes="0"/>
+                                              <Component id="lblState" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblPostalCode" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtPostalCode" alignment="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Component id="btnDelete" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                           <Component id="btnCancel" min="-2" pref="109" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -291,9 +299,9 @@
                           <Component id="lblPhone" alignment="3" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtClasification" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="txtPhone" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="txtClasification" pref="30" max="32767" attributes="0"/>
+                          <Component id="jcbPhones" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -301,11 +309,11 @@
                           <Component id="lblStreetDirection" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtTypePhone" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="txtStreetDirection" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="txtTypePhone" pref="30" max="32767" attributes="0"/>
+                          <Component id="jcbStreetDirection" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="lblPostalCode" max="32767" attributes="0"/>
                           <Component id="lblStreetNumber" min="-2" max="-2" attributes="0"/>
@@ -403,8 +411,6 @@
                 <Property name="text" type="java.lang.String" value=" Phone"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtPhone">
-            </Component>
             <Component class="javax.swing.JTextField" name="txtTypePhone">
             </Component>
             <Component class="javax.swing.JLabel" name="lblTypePhone">
@@ -422,8 +428,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Street Direction"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtStreetDirection">
             </Component>
             <Component class="javax.swing.JLabel" name="lblStreetNumber">
               <Properties>
@@ -495,6 +499,26 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cancel"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="jcbPhones">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="0"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Telephone&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="jcbStreetDirection">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="0"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;StandardAddress&gt;"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

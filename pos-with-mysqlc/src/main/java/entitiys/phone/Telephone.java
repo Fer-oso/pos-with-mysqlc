@@ -2,12 +2,10 @@ package entitiys.phone;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import interfaces.entitys.phone.Phone;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class Telephone implements Phone {
 
     Integer id;
@@ -44,5 +42,10 @@ public class Telephone implements Phone {
     @Override
     public void setTypePhone(String typePhone) {
         this.typePhone = typePhone;
+    } 
+
+    @Override
+    public String toString() {
+        return String.valueOf(getNumberPhone());
     }
 }

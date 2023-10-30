@@ -3,9 +3,7 @@ package entitiys.addres;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import interfaces.entitys.addres.Address;
-import lombok.Data;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class StandardAddress implements Address {
@@ -81,4 +79,11 @@ public class StandardAddress implements Address {
     public void setPostalCode(Integer postalCode) {
         this.postalCode = postalCode;
     }
+
+    @Override
+    public String toString() {
+        return getStreetDirection();
+    }
+    
+    
 }

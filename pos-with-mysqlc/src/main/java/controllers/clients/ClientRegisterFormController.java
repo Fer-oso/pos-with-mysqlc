@@ -56,92 +56,92 @@ public class ClientRegisterFormController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-     
-            if (e.getSource() == clientRegisterFormView.getBtnSave()) {
+        if (e.getSource() == clientRegisterFormView.getBtnSave()) {
 
-                try {          
-                    createNewClient();
-                } catch (Exception ex) {
-                    Logger.getLogger(ClientRegisterFormController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            try {
+                createNewClient();
 
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
             }
 
+            if (e.getSource() == clientRegisterFormView.getBtnCancel()) {
 
-        if (e.getSource() == clientRegisterFormView.getBtnCancel()) {
-
-            clearForm();
+                clearForm();
+            }
         }
+
     }
 
     /*Functions*/
     private void createNewClient() throws Exception {
 
-        if (checkFields()) {
- 
-        client = clientServiceImp.create(StandardClient.class);
+        try {
 
-        client.setName(clientRegisterFormView.getTxtName().getText());
+            if (checkFields()) {
 
-        client.setLastName(clientRegisterFormView.getTxtLastName().getText());
+                client = clientServiceImp.create(StandardClient.class);
 
-        client.setAge(Integer.valueOf(clientRegisterFormView.getTxtAge().getText()));
+                client.setName(clientRegisterFormView.getTxtName().getText());
 
-        client.setAvailability(clientRegisterFormView.getJcbAvailability().isSelected());
+                client.setLastName(clientRegisterFormView.getTxtLastName().getText());
 
-        client.setSsn(clientRegisterFormView.getTxtSsn().getText());
+                client.setAge(Integer.valueOf(clientRegisterFormView.getTxtAge().getText()));
 
-        client.setClasification(clientRegisterFormView.getTxtClasification().getText());
+                client.setAvailability(clientRegisterFormView.getJcbAvailability().isSelected());
 
-        client = clientServiceImp.save(client);
+                client.setSsn(clientRegisterFormView.getTxtSsn().getText());
 
-        address = addressServiceImp.create(StandardAddress.class);
+                client.setClasification(clientRegisterFormView.getTxtClasification().getText());
 
-        address.setStreetDirection(clientRegisterFormView.getTxtStreetDirection().getText());
+                client = clientServiceImp.save(client);
 
-        address.setStreetNumber(Integer.valueOf(clientRegisterFormView.getTxtStreetNumber().getText()));
+                address = addressServiceImp.create(StandardAddress.class);
 
-        address.setCity(clientRegisterFormView.getTxtCity().getText());
+                address.setStreetDirection(clientRegisterFormView.getTxtStreetDirection().getText());
 
-        address.setState(clientRegisterFormView.getTxtState().getText());
+                address.setStreetNumber(Integer.valueOf(clientRegisterFormView.getTxtStreetNumber().getText()));
 
-        address.setPostalCode(Integer.valueOf(clientRegisterFormView.getTxtPostalCode().getText()));
+                address.setCity(clientRegisterFormView.getTxtCity().getText());
 
-        address = addressServiceImp.save(address);
+                address.setState(clientRegisterFormView.getTxtState().getText());
 
-        telephone = phoneServiceImp.create(Telephone.class);
+                address.setPostalCode(Integer.valueOf(clientRegisterFormView.getTxtPostalCode().getText()));
 
-        telephone.setNumberPhone(Integer.valueOf(clientRegisterFormView.getTxtNumberPhone().getText()));
+                address = addressServiceImp.save(address);
 
-        telephone.setTypePhone(clientRegisterFormView.getTxtTypePhone().getText());
+                telephone = phoneServiceImp.create(Telephone.class);
 
-        telephone = phoneServiceImp.save(telephone);
-        
-        clientServiceImp.insertClientAddressPhone(client, address, telephone);
-        
-        JOptionPane.showMessageDialog(clientRegisterFormView, "Client created succesfully");
-      
-        }else{
-        
-        
+                telephone.setNumberPhone(Integer.valueOf(clientRegisterFormView.getTxtNumberPhone().getText()));
+
+                telephone.setTypePhone(clientRegisterFormView.getTxtTypePhone().getText());
+
+                telephone = phoneServiceImp.save(telephone);
+
+                clientServiceImp.insertClientAddressPhone(client, address, telephone);
+
+                JOptionPane.showMessageDialog(clientRegisterFormView, "Client created succesfully");
+
+            }
+
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
         }
-
     }
 
     private boolean checkFields() {
-  
+
         if (clientRegisterFormView.getTxtName().getText().equals("") || clientRegisterFormView.getTxtLastName().getText().equals("")
                 || clientRegisterFormView.getTxtAge().getText().equals("") || clientRegisterFormView.getTxtSsn().getText().equals("")
                 || clientRegisterFormView.getTxtClasification().getText().equals("") || clientRegisterFormView.getTxtNumberPhone().getText().equals("")
                 || clientRegisterFormView.getTxtTypePhone().getText().equals("") || clientRegisterFormView.getTxtStreetDirection().getText().equals("")
                 || clientRegisterFormView.getTxtStreetNumber().getText().equals("") || clientRegisterFormView.getTxtPostalCode().getText().equals("")
-                || clientRegisterFormView.getTxtCity().getText().equals("") || clientRegisterFormView.getTxtState().getText().equals("")){
-        
-         JOptionPane.showMessageDialog(clientRegisterFormView, "All fields required");
-         
-         return false;
-        
-        }   
+                || clientRegisterFormView.getTxtCity().getText().equals("") || clientRegisterFormView.getTxtState().getText().equals("")) {
+
+            JOptionPane.showMessageDialog(clientRegisterFormView, "All fields required");
+
+            return false;
+        }
         return true;
     }
 
@@ -156,7 +156,7 @@ public class ClientRegisterFormController implements ActionListener {
         clientRegisterFormView.getTxtAge().setText("");
 
         clientRegisterFormView.getJcbAvailability().setSelected(false);
-        
+
         clientRegisterFormView.getTxtSsn().setText("");
 
         clientRegisterFormView.getTxtNumberPhone().setText("");

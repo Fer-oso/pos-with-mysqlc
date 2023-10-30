@@ -1,18 +1,23 @@
 package views.clients;
 
 import controllers.clients.ClientFindByNameController;
+import entitiys.addres.StandardAddress;
+import entitiys.phone.Telephone;
 import interfaces.services.StandardClientService;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
 
 public class ClientFindByNameFormView extends javax.swing.JPanel {
-
+    
     private static final long serialVersionUID = 1L;
 
+    ClientFindByNameController clientFindByNameController;
 
     public ClientFindByNameFormView(StandardClientService clientService) {
 
         initComponents();
 
-        ClientFindByNameController clientFindByNameController = new ClientFindByNameController(this, clientService);
+        clientFindByNameController = new ClientFindByNameController(this, clientService);
     }
 
     @SuppressWarnings("unchecked")
@@ -41,11 +46,9 @@ public class ClientFindByNameFormView extends javax.swing.JPanel {
         lblClasification = new javax.swing.JLabel();
         txtClasification = new javax.swing.JTextField();
         lblPhone = new javax.swing.JLabel();
-        txtPhone = new javax.swing.JTextField();
         txtTypePhone = new javax.swing.JTextField();
         lblTypePhone = new javax.swing.JLabel();
         lblStreetDirection = new javax.swing.JLabel();
-        txtStreetDirection = new javax.swing.JTextField();
         lblStreetNumber = new javax.swing.JLabel();
         txtStreetNumber = new javax.swing.JTextField();
         lblPostalCode = new javax.swing.JLabel();
@@ -59,6 +62,8 @@ public class ClientFindByNameFormView extends javax.swing.JPanel {
         btnEdit = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
+        jcbPhones = new javax.swing.JComboBox<>();
+        jcbStreetDirection = new javax.swing.JComboBox<>();
 
         setMaximumSize(new java.awt.Dimension(1020, 535));
         setMinimumSize(new java.awt.Dimension(1020, 535));
@@ -192,52 +197,57 @@ public class ClientFindByNameFormView extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(lblTypePhone)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblName)
-                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblAge))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblSsn)
-                                .addComponent(lblLastname, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtLastname)))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtSsn))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtClasification, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblClasification))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblPhone)
-                                .addComponent(lblStreetDirection)
-                                .addComponent(txtPhone)))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtTypePhone, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblStreetNumber)
-                                .addComponent(txtStreetNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblCity)
-                                .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblAvailability)
-                                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jcbAvailability)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtState, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-                                    .addComponent(lblState)
-                                    .addComponent(lblPostalCode)
-                                    .addComponent(txtStreetDirection)
-                                    .addComponent(txtPostalCode))
-                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(lblTypePhone)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblName)
+                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAge))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblSsn)
+                            .addComponent(lblLastname, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtLastname)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSsn))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtClasification, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblClasification))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jcbPhones, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblPhone)
+                                    .addComponent(lblStreetDirection))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTypePhone, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblStreetNumber)
+                            .addComponent(txtStreetNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCity)
+                            .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAvailability)
+                            .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jcbStreetDirection, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jcbAvailability)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtState, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                                        .addComponent(lblState)
+                                        .addComponent(lblPostalCode)
+                                        .addComponent(txtPostalCode))
+                                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,17 +273,17 @@ public class ClientFindByNameFormView extends javax.swing.JPanel {
                     .addComponent(lblClasification)
                     .addComponent(lblPhone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtClasification, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtClasification, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jcbPhones))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTypePhone)
                     .addComponent(lblStreetDirection))
                 .addGap(3, 3, 3)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTypePhone, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtStreetDirection, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtTypePhone, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jcbStreetDirection))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblPostalCode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -342,9 +352,12 @@ public class ClientFindByNameFormView extends javax.swing.JPanel {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
 
-   //     clientFindByNameController.refreshTable();
+        try {
+            clientFindByNameController.refreshTable();
 
-     //   clientFindByNameController.listClients();
+        clientFindByNameController.listClients();
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_formComponentShown
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -364,6 +377,8 @@ public class ClientFindByNameFormView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JCheckBox jcbAvailability;
+    private javax.swing.JComboBox<Telephone> jcbPhones;
+    private javax.swing.JComboBox<StandardAddress> jcbStreetDirection;
     private javax.swing.JPanel jpForm;
     private javax.swing.JTable jtTableClients;
     private javax.swing.JLabel lblAge;
@@ -385,12 +400,10 @@ public class ClientFindByNameFormView extends javax.swing.JPanel {
     private javax.swing.JTextField txtClasification;
     private javax.swing.JTextField txtLastname;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtPhone;
     private javax.swing.JTextField txtPostalCode;
     private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtSsn;
     private javax.swing.JTextField txtState;
-    private javax.swing.JTextField txtStreetDirection;
     private javax.swing.JTextField txtStreetNumber;
     private javax.swing.JTextField txtTypePhone;
     // End of variables declaration//GEN-END:variables
@@ -475,14 +488,23 @@ public class ClientFindByNameFormView extends javax.swing.JPanel {
         this.txtName = txtName;
     }
 
-    public javax.swing.JTextField getTxtPhone() {
-        return txtPhone;
+    public JComboBox<Telephone> getJcbPhones() {
+        return jcbPhones;
     }
 
-    public void setTxtPhone(javax.swing.JTextField txtPhone) {
-        this.txtPhone = txtPhone;
+    public void setJcbPhones(JComboBox<Telephone> jcbPhones) {
+        this.jcbPhones = jcbPhones;
     }
 
+    public JComboBox<StandardAddress> getJcbStreetDirection() {
+        return jcbStreetDirection;
+    }
+
+    public void setJcbStreetDirection(JComboBox<StandardAddress> jcbStreetDirection) {
+        this.jcbStreetDirection = jcbStreetDirection;
+    }
+
+ 
     public javax.swing.JTextField getTxtSearch() {
         return txtSearch;
     }
@@ -498,4 +520,55 @@ public class ClientFindByNameFormView extends javax.swing.JPanel {
     public void setTxtSsn(javax.swing.JTextField txtSsn) {
         this.txtSsn = txtSsn;
     }
+
+    public JTextField getTxtCity() {
+        return txtCity;
+    }
+
+    public void setTxtCity(JTextField txtCity) {
+        this.txtCity = txtCity;
+    }
+
+    public JTextField getTxtClasification() {
+        return txtClasification;
+    }
+
+    public void setTxtClasification(JTextField txtClasification) {
+        this.txtClasification = txtClasification;
+    }
+
+    public JTextField getTxtPostalCode() {
+        return txtPostalCode;
+    }
+
+    public void setTxtPostalCode(JTextField txtPostalCode) {
+        this.txtPostalCode = txtPostalCode;
+    }
+
+    public JTextField getTxtState() {
+        return txtState;
+    }
+
+    public void setTxtState(JTextField txtState) {
+        this.txtState = txtState;
+    }
+
+    
+    public JTextField getTxtStreetNumber() {
+        return txtStreetNumber;
+    }
+
+    public void setTxtStreetNumber(JTextField txtStreetNumber) {
+        this.txtStreetNumber = txtStreetNumber;
+    }
+
+    public JTextField getTxtTypePhone() {
+        return txtTypePhone;
+    }
+
+    public void setTxtTypePhone(JTextField txtTypePhone) {
+        this.txtTypePhone = txtTypePhone;
+    }
+    
+    
 }

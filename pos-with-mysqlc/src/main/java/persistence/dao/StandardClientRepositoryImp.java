@@ -37,7 +37,7 @@ public class StandardClientRepositoryImp extends DaoRepository implements Standa
             preparedStatement.setString(5, object.getClasification());
 
             preparedStatement.executeUpdate();
-            
+
             connection.commit();
 
             resultSet = preparedStatement.getGeneratedKeys();
@@ -150,7 +150,9 @@ public class StandardClientRepositoryImp extends DaoRepository implements Standa
                         resultSet.getString("ssn"),
                         new ArrayList<>(),
                         new ArrayList<>(),
-                        resultSet.getString("clasification"));
+                        resultSet.getString("clasification"),
+                        resultSet.getBoolean("available"));
+
             }
 
             return Optional.ofNullable(standardClient);
@@ -189,7 +191,8 @@ public class StandardClientRepositoryImp extends DaoRepository implements Standa
                         resultSet.getString("ssn"),
                         new ArrayList<>(),
                         new ArrayList<>(),
-                        resultSet.getString("clasification")));
+                        resultSet.getString("clasification"),
+                        resultSet.getBoolean("available")));
             }
 
             return normalClients;
@@ -208,7 +211,6 @@ public class StandardClientRepositoryImp extends DaoRepository implements Standa
 
     @Override
     public void insertClientAddress(StandardClient client, StandardAddress address) throws Exception {
-
         String sql = "INSERT INTO client_address ( id_client, id_address ) VALUES (?, ?)";
 
         try {
@@ -237,6 +239,7 @@ public class StandardClientRepositoryImp extends DaoRepository implements Standa
 
     @Override
     public void insertClientPhone(StandardClient client, Telephone phone) throws Exception {
+
         String sql = "INSERT INTO client_phone (id_client, id_phone) VALUES (?, ?)";
 
         try {
@@ -254,6 +257,77 @@ public class StandardClientRepositoryImp extends DaoRepository implements Standa
             rollbackTransaction();
 
             throw new DaoExceptions(e.getMessage());
+
+        } finally {
+
+            closeConnection();
+        }
+    }
+
+    @Override
+    public ArrayList<Telephone> getPhonesClients(StandardClient client) throws Exception {
+
+        String sql = "SELECT phone.* FROM client_phone JOIN phone ON client_phone.id_phone = phone.id WHERE client_phone.id_client = ?";
+
+        try {
+
+            preparedStatement = startConnection().prepareStatement(sql);
+
+            preparedStatement.setInt(1, client.getId());
+
+            resultSet = preparedStatement.executeQuery();
+
+            ArrayList<Telephone> phonesClient = new ArrayList<>();
+
+            while (resultSet.next()) {
+
+                phonesClient.add(new Telephone(resultSet.getInt("id"), resultSet.getInt("number_phone"), resultSet.getString("type_phone")
+                ));
+            }
+
+            return phonesClient;
+
+        } catch (DaoExceptions e) {
+
+            rollbackTransaction();
+
+            throw new DaoExceptions("SQL ERROR" + e.getMessage());
+
+        } finally {
+
+            closeConnection();
+        }
+
+    }
+
+    @Override
+    public ArrayList<StandardAddress> getAddressClients(StandardClient client) throws Exception {
+
+        String sql = "SELECT address.* FROM client_address JOIN address ON client_address.id_address = address.id WHERE client_address.id_client = ?";
+
+        try {
+
+            preparedStatement = startConnection().prepareStatement(sql);
+
+            preparedStatement.setInt(1, client.getId());
+
+            resultSet = preparedStatement.executeQuery();
+
+            ArrayList<StandardAddress> adressClient = new ArrayList<>();
+
+            while (resultSet.next()) {
+
+                adressClient.add(new StandardAddress(resultSet.getInt("id"), resultSet.getString("street_direction"), resultSet.getInt("street_number"),
+                resultSet.getString("city"), resultSet.getString("state"), resultSet.getInt("postal_code")));
+            }
+
+            return adressClient;
+
+        } catch (DaoExceptions e) {
+
+            rollbackTransaction();
+
+            throw new DaoExceptions("SQL ERROR" + e.getMessage());
 
         } finally {
 
