@@ -1,6 +1,6 @@
 package persistence.dao;
 
-import entitiys.addres.StandardAddress;
+import entitiys.models.addres.StandardAddress;
 import interfaces.persistences.repositorys.entitys.address.StandardAddressRepository;
 import java.sql.SQLException;
 import java.sql.Statement;

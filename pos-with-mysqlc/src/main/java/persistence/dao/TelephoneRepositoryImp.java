@@ -1,6 +1,6 @@
 package persistence.dao;
 
-import entitiys.phone.Telephone;
+import entitiys.models.phone.Telephone;
 import interfaces.persistences.repositorys.entitys.phones.TelephoneRepository;
 import java.sql.SQLException;
 import java.sql.Statement;

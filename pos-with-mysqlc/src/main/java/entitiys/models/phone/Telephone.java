@@ -1,4 +1,4 @@
-package entitiys.phone;
+package entitiys.models.phone;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

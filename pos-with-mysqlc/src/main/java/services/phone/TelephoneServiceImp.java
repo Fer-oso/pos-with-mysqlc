@@ -1,6 +1,6 @@
 package services.phone;
 
-import entitiys.phone.Telephone;
+import entitiys.models.phone.Telephone;
 import interfaces.persistences.repositorys.entitys.phones.TelephoneRepository;
 import interfaces.services.services.TelephoneService;
 import java.util.List;

@@ -641,16 +641,16 @@ public class ClientRegisterFormView extends javax.swing.JPanel {
     private javax.swing.JLabel lblTitleForm;
     private javax.swing.JLabel lblTypePhone;
     private javax.swing.JTextField txtAge;
-    private javax.swing.JTextField txtCity;
+    public javax.swing.JTextField txtCity;
     private javax.swing.JTextField txtClasification;
     private javax.swing.JTextField txtLastName;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtNumberPhone;
-    private javax.swing.JTextField txtPostalCode;
+    public javax.swing.JTextField txtPostalCode;
     private javax.swing.JTextField txtSsn;
-    private javax.swing.JTextField txtState;
-    private javax.swing.JTextField txtStreetDirection;
-    private javax.swing.JTextField txtStreetNumber;
-    private javax.swing.JTextField txtTypePhone;
+    public javax.swing.JTextField txtState;
+    public javax.swing.JTextField txtStreetDirection;
+    public javax.swing.JTextField txtStreetNumber;
+    public javax.swing.JTextField txtTypePhone;
     // End of variables declaration//GEN-END:variables
 }

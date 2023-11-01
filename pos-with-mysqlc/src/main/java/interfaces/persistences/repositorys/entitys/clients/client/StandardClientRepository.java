@@ -1,8 +1,8 @@
 package interfaces.persistences.repositorys.entitys.clients.client;
 
-import entitiys.addres.StandardAddress;
-import entitiys.client.StandardClient;
-import entitiys.phone.Telephone;
+import entitiys.models.addres.StandardAddress;
+import entitiys.dto.clientdto.StandardClient;
+import entitiys.models.phone.Telephone;
 import java.util.ArrayList;
 
 public interface StandardClientRepository extends ClientRepository<StandardClient, Integer> {

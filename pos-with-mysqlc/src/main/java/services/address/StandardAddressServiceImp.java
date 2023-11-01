@@ -1,6 +1,6 @@
 package services.address;
 
-import entitiys.addres.StandardAddress;
+import entitiys.models.addres.StandardAddress;
 import interfaces.persistences.repositorys.entitys.address.StandardAddressRepository;
 import interfaces.services.StandardAddressService;
 import java.sql.SQLException;

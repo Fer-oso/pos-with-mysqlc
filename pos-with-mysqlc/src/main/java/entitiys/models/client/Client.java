@@ -1,16 +1,18 @@
-package entitiys.client;
+package entitiys.models.client;
 
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import interfaces.entitys.addres.Address;
+import interfaces.entitys.clients.IClient;
+import interfaces.entitys.phone.Phone;
 import java.io.Serializable;
 import java.util.ArrayList;
-import interfaces.entitys.addres.Address;
-import interfaces.entitys.clients.Client;
-import interfaces.entitys.phone.Phone;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
-public class StandardClient implements Client, Serializable {
+public class Client implements IClient, Serializable{
 
     private static final long serialVersionUID = 1L;
 
@@ -24,19 +26,7 @@ public class StandardClient implements Client, Serializable {
     private String clasification;
     private boolean availability;
 
-    public StandardClient(Integer id, String name, String lastName, Integer age, String ssn, ArrayList<Address> address, ArrayList<Phone> phone, String clasification, boolean availability) {
-        this.id = id;
-        this.name = name;
-        this.lastName = lastName;
-        this.age = age;
-        this.ssn = ssn;
-        this.address = address;
-        this.phone = phone;
-        this.clasification = clasification;
-        this.availability = availability;
-    }
-
-    @Override
+   @Override
     public Integer getId() {
         return id;
     }

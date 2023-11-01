@@ -1,9 +1,9 @@
 package interfaces.services;
 
-import entitiys.addres.StandardAddress;
+import entitiys.models.addres.StandardAddress;
 import interfaces.services.services.interfaces.ClientService;
-import entitiys.client.StandardClient;
-import entitiys.phone.Telephone;
+import entitiys.dto.clientdto.StandardClient;
+import entitiys.models.phone.Telephone;
 import java.util.ArrayList;
 
 public interface StandardClientService extends ClientService<StandardClient, Integer> {

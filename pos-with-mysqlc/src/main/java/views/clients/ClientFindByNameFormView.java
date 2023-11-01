@@ -1,8 +1,8 @@
 package views.clients;
 
 import controllers.clients.ClientFindByNameController;
-import entitiys.addres.StandardAddress;
-import entitiys.phone.Telephone;
+import entitiys.models.addres.StandardAddress;
+import entitiys.models.phone.Telephone;
 import interfaces.services.StandardClientService;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;

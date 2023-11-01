@@ -1,9 +1,8 @@
 package controllers.clients;
 
-import entitiys.addres.StandardAddress;
-import entitiys.client.StandardClient;
-import entitiys.phone.Telephone;
-import interfaces.entitys.clients.Client;
+import entitiys.models.addres.StandardAddress;
+import entitiys.dto.clientdto.StandardClient;
+import entitiys.models.phone.Telephone;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -15,6 +14,7 @@ import interfaces.services.StandardClientService;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import interfaces.entitys.clients.IClient;
 
 public class ClientFindByNameController extends MouseAdapter implements ActionListener {
 
@@ -165,7 +165,7 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
             model = (DefaultTableModel) clientFindByNameFormView.getJtTableClients().getModel();
 
-            for (Client cl : listClients) {
+            for (IClient cl : listClients) {
 
                 Object[] clientObject = {cl.getId(), cl.getName(), cl.getLastName(), cl.getAge(),
                     cl.isAvailability(), cl.getSsn()};
@@ -240,7 +240,7 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
             return false;
         }
         
-        /*Edicion de entidad Client*/
+        /*Edicion de entidad IClient*/
 
         client.setName(clientFindByNameFormView.getTxtName().getText());
 
@@ -254,7 +254,7 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
         
         client.setClasification(clientFindByNameFormView.getTxtClasification().getText());
         
-        /*Edicion de la entidad Telephone para pasarlo a la entidad Client*/
+        /*Edicion de la entidad Telephone para pasarlo a la entidad IClient*/
         
         telephone.setNumberPhone(Integer.valueOf(clientFindByNameFormView.getJcbPhones().getEditor().getItem().toString()));
         

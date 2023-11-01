@@ -1,8 +1,8 @@
 package main;
 
-import entitiys.addres.StandardAddress;
-import entitiys.client.StandardClient;
-import entitiys.phone.Telephone;
+import entitiys.models.addres.StandardAddress;
+import entitiys.dto.clientdto.StandardClient;
+import entitiys.models.phone.Telephone;
 import interfaces.persistences.repositorys.entitys.address.StandardAddressRepository;
 import persistence.dao.StandardAddressRepositoryImp;
 import persistence.dao.TelephoneRepositoryImp;

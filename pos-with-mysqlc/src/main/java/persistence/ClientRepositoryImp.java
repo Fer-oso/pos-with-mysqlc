@@ -1,24 +1,24 @@
-package persistence.dao;
+package persistence;
 
-import entitiys.models.addres.StandardAddress;
 import entitiys.dto.clientdto.StandardClient;
-import entitiys.models.phone.Telephone;
-import interfaces.persistences.repositorys.entitys.clients.client.StandardClientRepository;
+import entitiys.models.client.Client;
+import interfaces.persistences.repositorys.entitys.clients.client.ClientRepository;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import persistence.dao.DaoRepository;
 import persistence.dao.exceptios.DaoExceptions;
 
-public class StandardClientRepositoryImp extends DaoRepository implements StandardClientRepository {
+public class ClientRepositoryImp extends DaoRepository implements ClientRepository<Client, Integer> {
 
     private Integer idGeneratedKey;
 
-    private StandardClient standardClient;
+    private Client client;
 
     @Override
-    public StandardClient save(StandardClient object) throws Exception {
+    public Client save(Client object) throws Exception {
 
         try {
 
@@ -62,7 +62,7 @@ public class StandardClientRepositoryImp extends DaoRepository implements Standa
     }
 
     @Override
-    public StandardClient update(Integer id, StandardClient object) throws Exception {
+    public Client update(Integer id, Client object) throws Exception {
 
         String sql = "UPDATE clients SET name = ?, lastname = ?, age = ?, ssn = ?, clasification = ? WHERE id = ?";
 
@@ -126,7 +126,7 @@ public class StandardClientRepositoryImp extends DaoRepository implements Standa
     }
 
     @Override
-    public Optional<StandardClient> findById(Integer id) throws Exception {
+    public Optional<Client> findById(Integer id) throws Exception {
 
         try {
 
@@ -142,7 +142,7 @@ public class StandardClientRepositoryImp extends DaoRepository implements Standa
 
             if (resultSet.next()) {
 
-                standardClient = new StandardClient(
+                client = new Client(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getString("lastname"),
@@ -155,7 +155,7 @@ public class StandardClientRepositoryImp extends DaoRepository implements Standa
 
             }
 
-            return Optional.ofNullable(standardClient);
+            return Optional.ofNullable(client);
 
         } catch (SQLException e) {
 
@@ -170,8 +170,7 @@ public class StandardClientRepositoryImp extends DaoRepository implements Standa
     }
 
     @Override
-    public List<StandardClient> findAll() throws Exception {
-
+    public List<Client> findAll() throws Exception {
         try {
             String sql = "SELECT * FROM  clients";
 
@@ -179,11 +178,11 @@ public class StandardClientRepositoryImp extends DaoRepository implements Standa
 
             resultSet = preparedStatement.executeQuery();
 
-            List<StandardClient> normalClients = new ArrayList<>();
+            List<Client> clientsList = new ArrayList<>();
 
             while (resultSet.next()) {
 
-                normalClients.add(new StandardClient(
+                clientsList.add(new Client(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getString("lastname"),
@@ -195,7 +194,7 @@ public class StandardClientRepositoryImp extends DaoRepository implements Standa
                         resultSet.getBoolean("available")));
             }
 
-            return normalClients;
+            return clientsList;
 
         } catch (DaoExceptions e) {
 
@@ -210,154 +209,27 @@ public class StandardClientRepositoryImp extends DaoRepository implements Standa
     }
 
     @Override
-    public void insertClientAddress(StandardClient client, StandardAddress address) throws Exception {
-        
-        String sql = "INSERT INTO client_address ( id_client, id_address ) VALUES (?, ?)";
-
-        try {
-
-            preparedStatement = startConnection().prepareStatement(sql);
-
-            preparedStatement.setInt(1, client.getId());
-
-            preparedStatement.setInt(2, address.getId());
-
-            preparedStatement.executeUpdate();
-
-            connection.commit();
-
-        } catch (SQLException e) {
-
-            rollbackTransaction();
-
-            throw new DaoExceptions(e.getMessage());
-
-        } finally {
-
-            closeConnection();
-        }
-    }
-
-    @Override
-    public void insertClientPhone(StandardClient client, Telephone phone) throws Exception {
-
-        String sql = "INSERT INTO client_phone (id_client, id_phone) VALUES (?, ?)";
-
-        try {
-            preparedStatement = startConnection().prepareStatement(sql);
-
-            preparedStatement.setInt(1, client.getId());
-
-            preparedStatement.setInt(2, phone.getId());
-
-            preparedStatement.executeUpdate();
-
-            connection.commit();
-
-        } catch (SQLException e) {
-            rollbackTransaction();
-
-            throw new DaoExceptions(e.getMessage());
-
-        } finally {
-
-            closeConnection();
-        }
-    }
-
-    @Override
-    public ArrayList<Telephone> getPhonesClients(StandardClient client) throws Exception {
-
-        String sql = "SELECT phone.* FROM client_phone JOIN phone ON client_phone.id_phone = phone.id WHERE client_phone.id_client = ?";
-
-        try {
-
-            preparedStatement = startConnection().prepareStatement(sql);
-
-            preparedStatement.setInt(1, client.getId());
-
-            resultSet = preparedStatement.executeQuery();
-
-            ArrayList<Telephone> phonesClient = new ArrayList<>();
-
-            while (resultSet.next()) {
-
-                phonesClient.add(new Telephone(resultSet.getInt("id"), resultSet.getInt("number_phone"), resultSet.getString("type_phone")
-                ));
-            }
-
-            return phonesClient;
-
-        } catch (DaoExceptions e) {
-
-            rollbackTransaction();
-
-            throw new DaoExceptions("SQL ERROR" + e.getMessage());
-
-        } finally {
-
-            closeConnection();
-        }
-
-    }
-
-    @Override
-    public ArrayList<StandardAddress> getAddressClients(StandardClient client) throws Exception {
-
-        String sql = "SELECT address.* FROM client_address JOIN address ON client_address.id_address = address.id WHERE client_address.id_client = ?";
-
-        try {
-
-            preparedStatement = startConnection().prepareStatement(sql);
-
-            preparedStatement.setInt(1, client.getId());
-
-            resultSet = preparedStatement.executeQuery();
-
-            ArrayList<StandardAddress> adressClient = new ArrayList<>();
-
-            while (resultSet.next()) {
-
-                adressClient.add(new StandardAddress(resultSet.getInt("id"), resultSet.getString("street_direction"), resultSet.getInt("street_number"),
-                resultSet.getString("city"), resultSet.getString("state"), resultSet.getInt("postal_code")));
-            }
-
-            return adressClient;
-
-        } catch (DaoExceptions e) {
-
-            rollbackTransaction();
-
-            throw new DaoExceptions("SQL ERROR" + e.getMessage());
-
-        } finally {
-
-            closeConnection();
-        }
-    }
-
-    @Override
-    public List<StandardClient> findAllByName(String name) throws Exception {
+    public List<Client> findAllByName(String name) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public List<StandardClient> findAllByLastName(String lastName) throws Exception {
+    public List<Client> findAllByLastName(String lastName) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public List<StandardClient> findAllByAge(int age) throws Exception {
+    public List<Client> findAllByAge(int age) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public StandardClient findBySsn(String ssn) throws Exception {
+    public Client findBySsn(String ssn) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public List<StandardClient> findAllByClasification(String clasification) throws Exception {
+    public List<Client> findAllByClasification(String clasification) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

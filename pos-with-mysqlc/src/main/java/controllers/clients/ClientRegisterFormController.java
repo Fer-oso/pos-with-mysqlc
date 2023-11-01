@@ -1,8 +1,8 @@
 package controllers.clients;
 
-import entitiys.addres.StandardAddress;
-import entitiys.client.StandardClient;
-import entitiys.phone.Telephone;
+import entitiys.models.addres.StandardAddress;
+import entitiys.dto.clientdto.StandardClient;
+import entitiys.models.phone.Telephone;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -10,8 +10,6 @@ import interfaces.services.StandardAddressService;
 import views.clients.ClientRegisterFormView;
 import interfaces.services.StandardClientService;
 import interfaces.services.services.TelephoneService;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ClientRegisterFormController implements ActionListener {
 
@@ -142,6 +140,7 @@ public class ClientRegisterFormController implements ActionListener {
 
             return false;
         }
+        
         return true;
     }
 
@@ -160,6 +159,18 @@ public class ClientRegisterFormController implements ActionListener {
         clientRegisterFormView.getTxtSsn().setText("");
 
         clientRegisterFormView.getTxtNumberPhone().setText("");
+        
+        clientRegisterFormView.getTxtTypePhone().setText("");
+        
+        clientRegisterFormView.getTxtStreetDirection().setText("");
+        
+        clientRegisterFormView.getTxtStreetNumber().setText("");
+        
+        clientRegisterFormView.getTxtCity().setText("");
+        
+        clientRegisterFormView.getTxtPostalCode().setText("");
+        
+        clientRegisterFormView.getTxtState().setText("");
     }
 
 }

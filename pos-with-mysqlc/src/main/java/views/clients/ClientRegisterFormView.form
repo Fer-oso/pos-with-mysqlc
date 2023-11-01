@@ -384,6 +384,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtStreetDirection">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="txtName">
             </Component>
@@ -408,8 +411,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtStreetNumber">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTypePhone">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="lblTypePhone">
               <Properties>
@@ -448,6 +457,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtPostalCode">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="lblCity">
               <Properties>
@@ -458,6 +470,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtCity">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="lblState">
               <Properties>
@@ -468,6 +483,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtState">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="lblAvailability">
               <Properties>

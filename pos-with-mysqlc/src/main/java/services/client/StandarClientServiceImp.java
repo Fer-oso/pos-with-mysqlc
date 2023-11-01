@@ -1,8 +1,8 @@
 package services.client;
 
-import entitiys.addres.StandardAddress;
-import entitiys.client.StandardClient;
-import entitiys.phone.Telephone;
+import entitiys.models.addres.StandardAddress;
+import entitiys.dto.clientdto.StandardClient;
+import entitiys.models.phone.Telephone;
 import java.util.List;
 import interfaces.persistences.repositorys.entitys.clients.client.StandardClientRepository;
 import java.util.Optional;
@@ -48,7 +48,7 @@ public class StandarClientServiceImp implements StandardClientService {
         try {
             
             return standarClientRepository.update(id, object);
-            
+             
         } catch (Exception e) {
             
             throw new ClientServiceExceptions(e.getMessage());
@@ -150,8 +150,7 @@ public class StandarClientServiceImp implements StandardClientService {
         } catch (Exception e) {
         
             throw new ClientServiceExceptions(e.getMessage());
-        }
-    
+        }  
     }
 
     @Override
@@ -176,7 +175,5 @@ public class StandarClientServiceImp implements StandardClientService {
         
             throw new ClientServiceExceptions(e.getMessage());
         }
-    }
-    
-    
+    } 
 }
