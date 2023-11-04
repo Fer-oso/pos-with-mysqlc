@@ -1,20 +1,20 @@
 package controllers.clients;
 
 import entitiys.models.addres.StandardAddress;
-import entitiys.dto.clientdto.StandardClient;
+import entitiys.models.client.Client;
 import entitiys.models.phone.Telephone;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import interfaces.services.StandardAddressService;
 import views.clients.ClientRegisterFormView;
-import interfaces.services.StandardClientService;
-import interfaces.services.services.TelephoneService;
+import interfaces.services.TelephoneService;
+import interfaces.services.ClientService;
 
 public class ClientRegisterFormController implements ActionListener {
 
     /*Services*/
-    private final StandardClientService clientServiceImp;
+    private final ClientService clientServiceImp;
 
     private final StandardAddressService addressServiceImp;
 
@@ -23,14 +23,14 @@ public class ClientRegisterFormController implements ActionListener {
     /*VIEWS*/
     private final ClientRegisterFormView clientRegisterFormView;
 
-    private StandardClient client;
+    private Client client;
 
     private StandardAddress address;
 
     private Telephone telephone;
 
     /*Constructors*/
-    public ClientRegisterFormController(ClientRegisterFormView clientRegisterFormView, StandardClientService clientServiceImp, StandardAddressService addressServiceImp, TelephoneService phoneServiceImp) {
+    public ClientRegisterFormController(ClientRegisterFormView clientRegisterFormView, ClientService clientServiceImp, StandardAddressService addressServiceImp, TelephoneService phoneServiceImp) {
 
         this.clientRegisterFormView = clientRegisterFormView;
 
@@ -78,7 +78,7 @@ public class ClientRegisterFormController implements ActionListener {
 
             if (checkFields()) {
 
-                client = clientServiceImp.create(StandardClient.class);
+                client = clientServiceImp.create(Client.class);
 
                 client.setName(clientRegisterFormView.getTxtName().getText());
 

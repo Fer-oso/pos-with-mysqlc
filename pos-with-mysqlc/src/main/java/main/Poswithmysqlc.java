@@ -1,20 +1,21 @@
 package main;
 
-import entitiys.models.addres.StandardAddress;
-import entitiys.dto.clientdto.StandardClient;
+import entitiys.models.client.Client;
 import entitiys.models.phone.Telephone;
+import interfaces.entitys.phone.Phone;
 import interfaces.persistences.repositorys.entitys.address.StandardAddressRepository;
+import interfaces.persistences.repositorys.entitys.clients.client.ClientRepository;
 import persistence.dao.StandardAddressRepositoryImp;
 import persistence.dao.TelephoneRepositoryImp;
 import services.address.StandardAddressServiceImp;
-import persistence.dao.StandardClientRepositoryImp;
-import services.client.StandarClientServiceImp;
+import services.client.ClientServiceImp;
 import services.phone.TelephoneServiceImp;
-import interfaces.persistences.repositorys.entitys.clients.client.StandardClientRepository;
 import interfaces.persistences.repositorys.entitys.phones.TelephoneRepository;
 import interfaces.services.StandardAddressService;
-import interfaces.services.StandardClientService;
-import interfaces.services.services.TelephoneService;
+import interfaces.services.TelephoneService;
+import persistence.dao.ClientRepositoryImp;
+import interfaces.services.ClientService;
+import java.util.ArrayList;
 
 public class Poswithmysqlc {
 
@@ -31,19 +32,31 @@ public class Poswithmysqlc {
 
         TelephoneService telephoneService = new TelephoneServiceImp(phoneRepository);
 
-        StandardClientRepository standarClientRepository = new StandardClientRepositoryImp();
+        ClientRepository ClientRepository = new ClientRepositoryImp();
 
-        StandardClientService standarClientService = new StandarClientServiceImp(standarClientRepository);
+        ClientService standarClientService = new ClientServiceImp(ClientRepository);
 
        // StandardAddress standarAddres = addressService.findById(12).get();
         
         //Telephone phone = telephoneService.findById(12).get();
 
-        StandardClient standardClient = standarClientService.findById(10).get();
+        Client client = new Client();
+        
+        Telephone telephone = new Telephone(1, 123, "Movil");
+        Telephone telephone1 = new Telephone(2,456,"Phone");
+        
+        ArrayList<Phone> phonelists = new ArrayList<>();
+        
+        phonelists.add(telephone);
+        phonelists.add(telephone1);
+        
+        client.setPhone(phonelists);
+        
+        System.out.println(client);
 
      //   standardClient = standarClientService.save(standardClient);
         
-        System.out.println(standarClientService.getPhonesClients(standardClient));
+     //   System.out.println(standarClientService.getPhonesClients(standardClient));
         
      //   standarClientService.insertClientAddressPhone(standardClient, standarAddres, phone);
         

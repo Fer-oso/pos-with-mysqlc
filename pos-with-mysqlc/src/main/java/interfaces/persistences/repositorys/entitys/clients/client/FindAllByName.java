@@ -1,8 +1,8 @@
 package interfaces.persistences.repositorys.entitys.clients.client;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface FindAllByName<T extends Object> {
     
-    List<T> findAllByName(String name) throws Exception;
+    ArrayList<T> findAllByName(String name) throws Exception;
 }

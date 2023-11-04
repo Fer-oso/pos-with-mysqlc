@@ -3,10 +3,13 @@ package entitiys.models.phone;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import interfaces.entitys.phone.Phone;
+import java.io.Serializable;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public class Telephone implements Phone {
+public class Telephone implements Phone,Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     Integer id;
     

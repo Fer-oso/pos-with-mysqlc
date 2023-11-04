@@ -1,47 +1,56 @@
 package controllers.clients;
 
 import entitiys.models.addres.StandardAddress;
-import entitiys.dto.clientdto.StandardClient;
+import entitiys.models.client.Client;
 import entitiys.models.phone.Telephone;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
-import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 import views.clients.ClientFindByNameFormView;
-import interfaces.services.StandardClientService;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import interfaces.entitys.clients.IClient;
+import interfaces.services.ClientService;
+import interfaces.services.StandardAddressService;
+import interfaces.services.TelephoneService;
+import java.io.Serializable;
 
-public class ClientFindByNameController extends MouseAdapter implements ActionListener {
+public class ClientFindByNameController extends MouseAdapter implements ActionListener, Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private final ClientFindByNameFormView clientFindByNameFormView;
 
-    private final StandardClientService clientServiceImp;
+    private final ClientService clientServiceImp;
+    private final TelephoneService telephoneServiceImp;
+    private final StandardAddressService standardAddressServiceImp;
 
     private DefaultTableModel model = new DefaultTableModel();
-    private List<StandardClient> listClients;
+    private ArrayList<Client> listClients;
     private int row;
     private int id;
-    private StandardClient client;
+    private Client client;
     private Telephone telephone;
     private StandardAddress address;
 
-
     /*Constructors*/
-    public ClientFindByNameController(ClientFindByNameFormView clientFindByNameFormView, StandardClientService clientServiceImp) {
+    public ClientFindByNameController(ClientFindByNameFormView clientFindByNameFormView, ClientService clientServiceImp, StandardAddressService standardAddressServiceImp, TelephoneService telephoneServiceImp) {
 
         this.clientFindByNameFormView = clientFindByNameFormView;
 
         this.clientServiceImp = clientServiceImp;
 
+        this.telephoneServiceImp = telephoneServiceImp;
+
+        this.standardAddressServiceImp = standardAddressServiceImp;
+
         addActionsListeners();
     }
 
-//    /*Actions*/
+    /*Actions*/
     private void addActionsListeners() {
 
         clientFindByNameFormView.getJtTableClients().addMouseListener(this);
@@ -54,7 +63,6 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
         clientFindByNameFormView.getBtnCancel().addActionListener(this);
     }
-//
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -88,13 +96,13 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
             try {
                 if (setClientwithDataOfForm()) {
 
-                 //   editClient();
+                    editClient(id, client);
 
-                 //   clearForm();
+                    clearForm();
 
-                 //   refreshTable();
+                    refreshTable();
 
-                 //   listClients();
+                    listClients();
                 }
             } catch (Exception ex) {
 
@@ -107,7 +115,7 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
         if (e.getSource() == clientFindByNameFormView.getBtnDelete()) {
 
             try {
-                deleteClient();
+                deleteClient(id);
 
                 refreshTable();
 
@@ -139,7 +147,6 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
             }
         }
     }
-//
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -155,13 +162,12 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
             }
         }
     }
-//    /*Functions*/
 
+    /*Functions*/
     public void listClients() throws Exception {
 
         try {
             this.listClients = clientServiceImp.findAll();
-            System.out.println(listClients);
 
             model = (DefaultTableModel) clientFindByNameFormView.getJtTableClients().getModel();
 
@@ -176,31 +182,44 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
             this.clientFindByNameFormView.getJtTableClients().setModel(model);
 
         } catch (Exception e) {
+
             throw new Exception(e.getMessage());
         }
     }
 
-    private List<StandardClient> findAllByName() throws Exception {
+    private ArrayList<Client> findAllByName() throws Exception {
 
         String clientName = clientFindByNameFormView.getTxtSearch().getText();
 
         return clientServiceImp.findAllByName(clientName);
     }
 
-    private StandardClient editClient() throws Exception {
+    private void editClient(Integer id, Client client) throws Exception {
 
         try {
-            return clientServiceImp.update(row, client);
+
+            telephoneServiceImp.update(telephone.getId(), telephone);
+
+            standardAddressServiceImp.update(address.getId(), address);
+
+            clientServiceImp.update(id, client);
+
+            JOptionPane.showMessageDialog(null, "Client edited succesfully");
 
         } catch (Exception e) {
 
-            throw new Exception(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error editing client");
+
+            System.out.println(e.getMessage());
+
+            throw new Exception(e.getCause());
         }
     }
 
-    private void deleteClient() throws Exception {
+    private void deleteClient(Integer id) throws Exception {
 
         try {
+
             clientServiceImp.delete(id);
 
         } catch (Exception e) {
@@ -228,91 +247,6 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
         client = listClients.get(row);
 
         id = client.getId();
-    }
-
-    private boolean setClientwithDataOfForm() {
-
-        if (clientFindByNameFormView.getTxtName().getText().equals("") || clientFindByNameFormView.getTxtLastname().getText().equals("")
-         || clientFindByNameFormView.getTxtAge().getText().equals("") || clientFindByNameFormView.getTxtSsn().getText().equals("")) {
-
-            JOptionPane.showMessageDialog(null, "All fields required");
-
-            return false;
-        }
-        
-        /*Edicion de entidad IClient*/
-
-        client.setName(clientFindByNameFormView.getTxtName().getText());
-
-        client.setLastName(clientFindByNameFormView.getTxtLastname().getText());
-
-        client.setAge(Integer.valueOf(clientFindByNameFormView.getTxtAge().getText()));
-
-        client.setAvailability(clientFindByNameFormView.getJcbAvailability().isSelected());
-
-        client.setSsn(clientFindByNameFormView.getTxtSsn().getText());
-        
-        client.setClasification(clientFindByNameFormView.getTxtClasification().getText());
-        
-        /*Edicion de la entidad Telephone para pasarlo a la entidad IClient*/
-        
-        telephone.setNumberPhone(Integer.valueOf(clientFindByNameFormView.getJcbPhones().getEditor().getItem().toString()));
-        
-        telephone.setTypePhone(clientFindByNameFormView.getTxtTypePhone().getText());
-        
-        client.setPhone(telephone);
-        
-        address.setStreetDirection(clientFindByNameFormView.getJcbStreetDirection().getEditor().getItem().toString());
-        
-        address.setStreetNumber(Integer.valueOf(clientFindByNameFormView.getTxtStreetNumber().getText()));
-        
-        address.setPostalCode(Integer.valueOf(clientFindByNameFormView.getTxtPostalCode().getText()));
-        
-        address.setCity(clientFindByNameFormView.getTxtCity().getText());
-        
-        address.setState(clientFindByNameFormView.getTxtState().getText());
-        
-        client.setAddress(address);
-        
-        client.setAvailability(clientFindByNameFormView.getJcbAvailability().isSelected());
-
-        return true;
-    }
-
-    private void setFormWithSelectedClient() throws Exception {
-
-        clientFindByNameFormView.getLblId().setText(String.valueOf(client.getId()));
-
-        clientFindByNameFormView.getTxtName().setText(client.getName());
-
-        clientFindByNameFormView.getTxtLastname().setText(String.valueOf(client.getLastName()));
-
-        clientFindByNameFormView.getTxtAge().setText(String.valueOf(client.getAge()));
-
-        clientFindByNameFormView.getTxtSsn().setText(String.valueOf(client.getSsn()));
-
-        clientFindByNameFormView.getTxtClasification().setText(client.getClasification());
-
-        setModelJcbPhones();
-
-        telephone = clientFindByNameFormView.getJcbPhones().getItemAt(clientFindByNameFormView.getJcbPhones().getSelectedIndex());
-
-        clientFindByNameFormView.getTxtTypePhone().setText(telephone.getTypePhone());
-
-        setModelJcbAddress();
-
-        address = clientFindByNameFormView.getJcbStreetDirection().getItemAt(clientFindByNameFormView.getJcbStreetDirection().getSelectedIndex());
-
-        clientFindByNameFormView.getTxtStreetNumber().setText(String.valueOf(address.getStreetNumber()));
-
-        clientFindByNameFormView.getTxtPostalCode().setText(String.valueOf(address.getPostalCode()));
-
-        clientFindByNameFormView.getTxtCity().setText(address.getCity());
-
-        clientFindByNameFormView.getTxtState().setText(address.getState());
-
-        checkAvailability();
-
     }
 
     private void setModelJcbPhones() throws Exception {
@@ -347,17 +281,87 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
         }
     }
 
-    private void checkAvailability() {
+    private void setFormWithSelectedClient() throws Exception {
 
-        if (client.isAvailability()) {
+        clientFindByNameFormView.getLblId().setText(String.valueOf(client.getId()));
 
-            clientFindByNameFormView.getJcbAvailability().setSelected(true);
+        clientFindByNameFormView.getTxtName().setText(client.getName());
 
-        } else {
+        clientFindByNameFormView.getTxtLastname().setText(String.valueOf(client.getLastName()));
 
-            clientFindByNameFormView.getJcbAvailability().setSelected(false);
+        clientFindByNameFormView.getTxtAge().setText(String.valueOf(client.getAge()));
 
+        clientFindByNameFormView.getTxtSsn().setText(String.valueOf(client.getSsn()));
+
+        clientFindByNameFormView.getTxtClasification().setText(client.getClasification());
+
+        setModelJcbPhones();
+
+        telephone = clientFindByNameFormView.getJcbPhones().getItemAt(clientFindByNameFormView.getJcbPhones().getSelectedIndex());
+
+        clientFindByNameFormView.getTxtTypePhone().setText(telephone.getTypePhone());
+
+        setModelJcbAddress();
+
+        address = clientFindByNameFormView.getJcbStreetDirection().getItemAt(clientFindByNameFormView.getJcbStreetDirection().getSelectedIndex());
+
+        clientFindByNameFormView.getTxtStreetNumber().setText(String.valueOf(address.getStreetNumber()));
+
+        clientFindByNameFormView.getTxtPostalCode().setText(String.valueOf(address.getPostalCode()));
+
+        clientFindByNameFormView.getTxtCity().setText(address.getCity());
+
+        clientFindByNameFormView.getTxtState().setText(address.getState());
+
+        clientFindByNameFormView.getJcbAvailability().setSelected(client.isAvailability());
+    }
+
+    private boolean setClientwithDataOfForm() throws Exception {
+
+        if (clientFindByNameFormView.getTxtName().getText().equals("") || clientFindByNameFormView.getTxtLastname().getText().equals("")
+                || clientFindByNameFormView.getTxtAge().getText().equals("") || clientFindByNameFormView.getTxtSsn().getText().equals("")) {
+
+            JOptionPane.showMessageDialog(null, "All fields required");
+
+            return false;
         }
+
+        /*Edicion de entidad IClient*/
+        client.setName(clientFindByNameFormView.getTxtName().getText());
+
+        client.setLastName(clientFindByNameFormView.getTxtLastname().getText());
+
+        client.setAge(Integer.valueOf(clientFindByNameFormView.getTxtAge().getText()));
+
+        client.setAvailability(clientFindByNameFormView.getJcbAvailability().isSelected());
+
+        client.setSsn(clientFindByNameFormView.getTxtSsn().getText());
+
+        client.setClasification(clientFindByNameFormView.getTxtClasification().getText());
+
+        client.setAvailability(clientFindByNameFormView.getJcbAvailability().isSelected());
+
+        /*Edicion de la entidad Telephone para pasarlo a la entidad Client*/
+        telephone.setNumberPhone(Integer.valueOf(clientFindByNameFormView.getJcbPhones().getEditor().getItem().toString()));
+
+        telephone.setTypePhone(clientFindByNameFormView.getTxtTypePhone().getText());
+
+        client.getPhone().add(telephone);
+
+        /*Edicion de la entidad StandarAddres para pasarle a la entidad Clients*/
+        address.setStreetDirection(clientFindByNameFormView.getJcbStreetDirection().getEditor().getItem().toString());
+
+        address.setStreetNumber(Integer.valueOf(clientFindByNameFormView.getTxtStreetNumber().getText()));
+
+        address.setPostalCode(Integer.valueOf(clientFindByNameFormView.getTxtPostalCode().getText()));
+
+        address.setCity(clientFindByNameFormView.getTxtCity().getText());
+
+        address.setState(clientFindByNameFormView.getTxtState().getText());
+
+        client.getAddress().add(address);
+
+        return true;
     }
 
     public void refreshTable() {
@@ -380,11 +384,24 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
         clientFindByNameFormView.getTxtAge().setText("");
 
-        clientFindByNameFormView.getJcbAvailability().setSelected(false);
-
         clientFindByNameFormView.getTxtSsn().setText("");
 
-        clientFindByNameFormView.getJcbPhones().removeAllItems();
-    }
+        clientFindByNameFormView.getTxtClasification().setText("");
 
+        clientFindByNameFormView.getJcbPhones().removeAllItems();
+
+        clientFindByNameFormView.getTxtTypePhone().setText("");
+
+        clientFindByNameFormView.getJcbStreetDirection().removeAllItems();
+
+        clientFindByNameFormView.getTxtStreetNumber().setText("");
+
+        clientFindByNameFormView.getTxtPostalCode().setText("");
+
+        clientFindByNameFormView.getTxtCity().setText("");
+
+        clientFindByNameFormView.getTxtState().setText("");
+
+        clientFindByNameFormView.getJcbAvailability().setSelected(false);
+    }
 }

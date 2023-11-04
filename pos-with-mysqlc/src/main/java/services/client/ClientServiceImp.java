@@ -1,28 +1,29 @@
 package services.client;
 
 import entitiys.models.addres.StandardAddress;
-import entitiys.dto.clientdto.StandardClient;
+import entitiys.models.client.Client;
 import entitiys.models.phone.Telephone;
-import java.util.List;
-import interfaces.persistences.repositorys.entitys.clients.client.StandardClientRepository;
-import java.util.Optional;
-import interfaces.services.StandardClientService;
-import java.sql.SQLException;
+import interfaces.persistences.repositorys.entitys.clients.client.ClientRepository;
 import java.util.ArrayList;
+import java.util.Optional;
+import java.sql.SQLException;
 import services.exceptions.ClientServiceExceptions;
+import interfaces.services.ClientService;
 
-public class StandarClientServiceImp implements StandardClientService {
+public class ClientServiceImp implements ClientService {
+
+    private static final long serialVersionUID = 1L;
     
-    private final StandardClientRepository standarClientRepository;
+    private final ClientRepository clientRepository;
     
-    private StandardClient standardClient;
+    private Client standardClient;
     
-    public StandarClientServiceImp(StandardClientRepository standarClientRepository) {
-        this.standarClientRepository = standarClientRepository;
+    public ClientServiceImp(ClientRepository clientRepository) {
+        this.clientRepository = clientRepository;
     }
     
     @Override
-    public StandardClient save(StandardClient object) throws Exception {
+    public Client save(Client object) throws Exception {
         
         if (checkDuplicate(object)) {
             System.out.println("duplicated" + object);
@@ -33,7 +34,7 @@ public class StandarClientServiceImp implements StandardClientService {
             
             try {
                 
-                return standarClientRepository.save(object);
+                return clientRepository.save(object);
                 
             } catch (Exception e) {
                 
@@ -43,11 +44,11 @@ public class StandarClientServiceImp implements StandardClientService {
     }
     
     @Override
-    public StandardClient update(Integer id, StandardClient object) throws Exception {
+    public Client update(Integer id, Client object) throws Exception {
         
         try {
             
-            return standarClientRepository.update(id, object);
+            return clientRepository.update(id, object);
              
         } catch (Exception e) {
             
@@ -60,7 +61,7 @@ public class StandarClientServiceImp implements StandardClientService {
         
         try {
             
-            standarClientRepository.delete(id);
+            clientRepository.delete(id);
             
         } catch (Exception e) {
             
@@ -69,11 +70,11 @@ public class StandarClientServiceImp implements StandardClientService {
     }
     
     @Override
-    public Optional<StandardClient> findById(Integer id) throws Exception {
+    public Optional<Client> findById(Integer id) throws Exception {
         
         try {
             
-            return standarClientRepository.findById(id);
+            return clientRepository.findById(id);
             
         } catch (Exception e) {
             
@@ -82,11 +83,11 @@ public class StandarClientServiceImp implements StandardClientService {
     }
     
     @Override
-    public List<StandardClient> findAll() throws Exception {
+    public ArrayList<Client> findAll() throws Exception {
         
         try {
             
-            return standarClientRepository.findAll();
+            return clientRepository.findAll();
             
         } catch (Exception e) {
             
@@ -95,31 +96,31 @@ public class StandarClientServiceImp implements StandardClientService {
     }
     
     @Override
-    public List<StandardClient> findAllByName(String name) throws Exception {
+    public ArrayList<Client> findAllByName(String name) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     @Override
-    public List<StandardClient> findAllByLastName(String lastName) throws Exception {
+    public ArrayList<Client> findAllByLastName(String lastName) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     @Override
-    public List<StandardClient> findAllByAge(int age) throws Exception {
+    public ArrayList<Client> findAllByAge(int age) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     @Override
-    public StandardClient findBySsn(String ssn) throws Exception {
+    public Client findBySsn(String ssn) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     @Override
-    public List<StandardClient> findAllByClasification(String clasification) throws Exception {
+    public ArrayList<Client> findAllByClasification(String clasification) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
-    private boolean checkDuplicate(StandardClient object) throws Exception {
+    private boolean checkDuplicate(Client object) throws Exception {
         
         try {
             
@@ -139,13 +140,13 @@ public class StandarClientServiceImp implements StandardClientService {
     }
     
     @Override
-    public void insertClientAddressPhone(StandardClient client, StandardAddress address, Telephone phone) throws Exception{
+    public void insertClientAddressPhone(Client client, StandardAddress address, Telephone phone) throws Exception{
     
         try {
             
-            standarClientRepository.insertClientAddress(client, address);
+            clientRepository.insertClientAddress(client, address);
             
-            standarClientRepository.insertClientPhone(client, phone);
+            clientRepository.insertClientPhone(client, phone);
             
         } catch (Exception e) {
         
@@ -154,10 +155,10 @@ public class StandarClientServiceImp implements StandardClientService {
     }
 
     @Override
-    public ArrayList<Telephone> getPhonesClients(StandardClient client) throws Exception {
+    public ArrayList<Telephone> getPhonesClients(Client client) throws Exception {
         try {
             
-          return  standarClientRepository.getPhonesClients(client);
+          return  clientRepository.getPhonesClients(client);
           
         } catch (Exception e) {
         
@@ -166,10 +167,10 @@ public class StandarClientServiceImp implements StandardClientService {
     }
 
     @Override
-    public ArrayList<StandardAddress> getAddressClients(StandardClient client) throws Exception {
+    public ArrayList<StandardAddress> getAddressClients(Client client) throws Exception {
         try {
             
-          return  standarClientRepository.getAddressClients(client);
+          return  clientRepository.getAddressClients(client);
           
         } catch (Exception e) {
         

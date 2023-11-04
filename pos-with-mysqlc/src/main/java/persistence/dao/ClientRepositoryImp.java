@@ -1,17 +1,18 @@
-package persistence;
+package persistence.dao;
 
-import entitiys.dto.clientdto.StandardClient;
+import entitiys.models.addres.StandardAddress;
 import entitiys.models.client.Client;
+import entitiys.models.phone.Telephone;
 import interfaces.persistences.repositorys.entitys.clients.client.ClientRepository;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import persistence.dao.DaoRepository;
 import persistence.dao.exceptios.DaoExceptions;
 
-public class ClientRepositoryImp extends DaoRepository implements ClientRepository<Client, Integer> {
+public class ClientRepositoryImp extends DaoRepository implements ClientRepository{
+
+    private static final long serialVersionUID = 1L;
 
     private Integer idGeneratedKey;
 
@@ -22,7 +23,7 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
 
         try {
 
-            String sql = "INSERT INTO clients (name, lastname, age, ssn, clasification ) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO clients (name, lastname, age, ssn, clasification, available ) VALUES (?, ?, ?, ?, ?, ?)";
 
             preparedStatement = startConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -35,6 +36,8 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
             preparedStatement.setString(4, object.getSsn());
 
             preparedStatement.setString(5, object.getClasification());
+            
+            preparedStatement.setBoolean(6, object.isAvailability());
 
             preparedStatement.executeUpdate();
 
@@ -64,7 +67,7 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
     @Override
     public Client update(Integer id, Client object) throws Exception {
 
-        String sql = "UPDATE clients SET name = ?, lastname = ?, age = ?, ssn = ?, clasification = ? WHERE id = ?";
+        String sql = "UPDATE clients SET name = ?, lastname = ?, age = ?, ssn = ?, clasification = ?, available = ? WHERE id = ?";
 
         try {
             preparedStatement = startConnection().prepareStatement(sql);
@@ -78,8 +81,10 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
             preparedStatement.setString(4, object.getSsn());
 
             preparedStatement.setString(5, object.getClasification());
+            
+            preparedStatement.setBoolean(6, object.isAvailability());
 
-            preparedStatement.setInt(6, id);
+            preparedStatement.setInt(7, id);
 
             preparedStatement.executeUpdate();
 
@@ -148,10 +153,10 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
                         resultSet.getString("lastname"),
                         resultSet.getInt("age"),
                         resultSet.getString("ssn"),
-                        new ArrayList<>(),
-                        new ArrayList<>(),
                         resultSet.getString("clasification"),
-                        resultSet.getBoolean("available"));
+                        resultSet.getBoolean("available"),
+                        new ArrayList<>(),
+                        new ArrayList<>());
 
             }
 
@@ -170,7 +175,7 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
     }
 
     @Override
-    public List<Client> findAll() throws Exception {
+    public ArrayList<Client> findAll() throws Exception {
         try {
             String sql = "SELECT * FROM  clients";
 
@@ -178,7 +183,7 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
 
             resultSet = preparedStatement.executeQuery();
 
-            List<Client> clientsList = new ArrayList<>();
+            ArrayList<Client> clientsList = new ArrayList<>();
 
             while (resultSet.next()) {
 
@@ -188,10 +193,10 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
                         resultSet.getString("lastname"),
                         resultSet.getInt("age"),
                         resultSet.getString("ssn"),
-                        new ArrayList<>(),
-                        new ArrayList<>(),
                         resultSet.getString("clasification"),
-                        resultSet.getBoolean("available")));
+                        resultSet.getBoolean("available"),
+                        new ArrayList<>(),
+                        new ArrayList<>()));
             }
 
             return clientsList;
@@ -207,19 +212,146 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
             closeConnection();
         }
     }
+    
+    @Override
+    public void insertClientAddress(Client client, StandardAddress address) throws Exception {
+        
+        String sql = "INSERT INTO client_address ( id_client, id_address ) VALUES (?, ?)";
+
+        try {
+
+            preparedStatement = startConnection().prepareStatement(sql);
+
+            preparedStatement.setInt(1, client.getId());
+
+            preparedStatement.setInt(2, address.getId());
+
+            preparedStatement.executeUpdate();
+
+            connection.commit();
+
+        } catch (SQLException e) {
+
+            rollbackTransaction();
+
+            throw new DaoExceptions(e.getMessage());
+
+        } finally {
+
+            closeConnection();
+        }
+    }
 
     @Override
-    public List<Client> findAllByName(String name) throws Exception {
+    public void insertClientPhone(Client client, Telephone phone) throws Exception {
+
+        String sql = "INSERT INTO client_phone (id_client, id_phone) VALUES (?, ?)";
+
+        try {
+            preparedStatement = startConnection().prepareStatement(sql);
+
+            preparedStatement.setInt(1, client.getId());
+
+            preparedStatement.setInt(2, phone.getId());
+
+            preparedStatement.executeUpdate();
+
+            connection.commit();
+
+        } catch (SQLException e) {
+            rollbackTransaction();
+
+            throw new DaoExceptions(e.getMessage());
+
+        } finally {
+
+            closeConnection();
+        }
+    }
+
+    @Override
+    public ArrayList<Telephone> getPhonesClients(Client client) throws Exception {
+
+        String sql = "SELECT phone.* FROM client_phone JOIN phone ON client_phone.id_phone = phone.id WHERE client_phone.id_client = ?";
+
+        try {
+
+            preparedStatement = startConnection().prepareStatement(sql);
+
+            preparedStatement.setInt(1, client.getId());
+
+            resultSet = preparedStatement.executeQuery();
+
+            ArrayList<Telephone> phonesClient = new ArrayList<>();
+
+            while (resultSet.next()) {
+
+                phonesClient.add(new Telephone(resultSet.getInt("id"), resultSet.getInt("number_phone"), resultSet.getString("type_phone")
+                ));
+            }
+
+            return phonesClient;
+
+        } catch (DaoExceptions e) {
+
+            rollbackTransaction();
+
+            throw new DaoExceptions("SQL ERROR" + e.getMessage());
+
+        } finally {
+
+            closeConnection();
+        }
+
+    }
+
+    @Override
+    public ArrayList<StandardAddress> getAddressClients(Client client) throws Exception {
+
+        String sql = "SELECT address.* FROM client_address JOIN address ON client_address.id_address = address.id WHERE client_address.id_client = ?";
+
+        try {
+
+            preparedStatement = startConnection().prepareStatement(sql);
+
+            preparedStatement.setInt(1, client.getId());
+
+            resultSet = preparedStatement.executeQuery();
+
+            ArrayList<StandardAddress> adressClient = new ArrayList<>();
+
+            while (resultSet.next()) {
+
+                adressClient.add(new StandardAddress(resultSet.getInt("id"), resultSet.getString("street_direction"), resultSet.getInt("street_number"),
+                resultSet.getString("city"), resultSet.getString("state"), resultSet.getInt("postal_code")));
+            }
+
+            return adressClient;
+
+        } catch (DaoExceptions e) {
+
+            rollbackTransaction();
+
+            throw new DaoExceptions("SQL ERROR" + e.getMessage());
+
+        } finally {
+
+            closeConnection();
+        }
+    }
+
+    @Override
+    public ArrayList<Client> findAllByName(String name) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public List<Client> findAllByLastName(String lastName) throws Exception {
+    public ArrayList<Client> findAllByLastName(String lastName) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public List<Client> findAllByAge(int age) throws Exception {
+    public ArrayList<Client> findAllByAge(int age) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -229,7 +361,7 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
     }
 
     @Override
-    public List<Client> findAllByClasification(String clasification) throws Exception {
+    public ArrayList<Client> findAllByClasification(String clasification) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

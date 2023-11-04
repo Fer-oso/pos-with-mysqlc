@@ -12,7 +12,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Client implements IClient, Serializable{
+public class Client implements IClient, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -21,12 +21,12 @@ public class Client implements IClient, Serializable{
     private String lastName;
     private Integer age;
     private String ssn;
-    private ArrayList<Address> address;
-    private ArrayList<Phone> phone;
     private String clasification;
     private boolean availability;
+    private ArrayList<Address> address = new ArrayList<>();
+    private ArrayList<Phone> phone = new ArrayList<>();
 
-   @Override
+    @Override
     public Integer getId() {
         return id;
     }
@@ -87,26 +87,6 @@ public class Client implements IClient, Serializable{
     }
 
     @Override
-    public ArrayList<Address> getAddress() {
-        return address;
-    }
-
-    @Override
-    public void setAddress(Address address) {
-      this.address.add(address);
-    }
-
-    @Override
-    public ArrayList<Phone> getPhone() {
-       return phone;
-    }
-
-    @Override
-    public void setPhone(Phone phone) {
-       this.phone.add(phone);
-    }
-
-    @Override
     public boolean isAvailability() {
         return availability;
     }
@@ -114,5 +94,25 @@ public class Client implements IClient, Serializable{
     @Override
     public void setAvailability(boolean availability) {
         this.availability = availability;
+    }
+
+    @Override
+    public ArrayList<Address> getAddress() {
+        return address;
+    }
+
+    @Override
+    public void setAddress(ArrayList<Address> address) {
+        this.address = address;
+    }
+
+    @Override
+    public ArrayList<Phone> getPhone() {
+        return phone;
+    }
+
+    @Override
+    public void setPhone(ArrayList<Phone> phone) {
+        this.phone = phone;
     }
 }

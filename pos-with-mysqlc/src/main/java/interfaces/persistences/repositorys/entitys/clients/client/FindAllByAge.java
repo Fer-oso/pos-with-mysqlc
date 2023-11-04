@@ -1,8 +1,8 @@
 package interfaces.persistences.repositorys.entitys.clients.client;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface FindAllByAge<T extends Object> {
 
-     List<T> findAllByAge(int age) throws Exception;
+     ArrayList<T> findAllByAge(int age) throws Exception;
 }

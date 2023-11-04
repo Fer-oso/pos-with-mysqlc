@@ -3,10 +3,13 @@ package entitiys.models.addres;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import interfaces.entitys.addres.Address;
+import java.io.Serializable;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public class StandardAddress implements Address {
+public class StandardAddress implements Address, Serializable{
+
+    private static final long serialVersionUID = 1L;
 
     Integer id;
 

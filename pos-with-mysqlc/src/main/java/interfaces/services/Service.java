@@ -1,10 +1,11 @@
 
-package interfaces.services.services.interfaces;
+package interfaces.services;
 
+import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import services.exceptions.ClientServiceExceptions;
 
-public interface Service<T> {
+public interface Service<T> extends Serializable {
     
    default <S extends T> S create(Class<S> normalClientType) throws Exception{
     

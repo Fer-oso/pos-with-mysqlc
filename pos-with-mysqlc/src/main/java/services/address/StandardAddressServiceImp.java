@@ -4,17 +4,20 @@ import entitiys.models.addres.StandardAddress;
 import interfaces.persistences.repositorys.entitys.address.StandardAddressRepository;
 import interfaces.services.StandardAddressService;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 import services.exceptions.AddresServiceException;
 
 public class StandardAddressServiceImp implements StandardAddressService {
+
+    private static final long serialVersionUID = 1L;
 
     private final StandardAddressRepository addressRepository;
 
     private StandardAddress standardAddress;
 
     public StandardAddressServiceImp(StandardAddressRepository addressRepository) {
+        
         this.addressRepository = addressRepository;
     }
 
@@ -59,6 +62,7 @@ public class StandardAddressServiceImp implements StandardAddressService {
         try {
 
             addressRepository.delete(id);
+            
         } catch (Exception e) {
 
             throw new AddresServiceException(e.getMessage());
@@ -78,9 +82,12 @@ public class StandardAddressServiceImp implements StandardAddressService {
     }
 
     @Override
-    public List<StandardAddress> findAll() throws Exception {
+    public ArrayList<StandardAddress> findAll() throws Exception {
+        
         try {
+            
             return addressRepository.findAll();
+            
         } catch (Exception e) {
 
             throw new AddresServiceException(e.getMessage());

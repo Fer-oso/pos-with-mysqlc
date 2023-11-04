@@ -22,16 +22,20 @@ public interface Person<K> extends Entity<K> {
     String getSsn();
 
     void setSsn(String ssn);
-    
+
     ArrayList<Address> getAddress();
-    
-    void setAddress(Address address);
-    
+
+    void setAddress(ArrayList<Address> address);
+
     ArrayList<Phone> getPhone();
-    
-    void setPhone (Phone phone);
-    
+
+    void setPhone(ArrayList<Phone> phone);
+
     boolean isAvailability();
-    
+
     void setAvailability(boolean availability);
+
+    String getClasification();
+
+    void setClasification(String clasification);
 }

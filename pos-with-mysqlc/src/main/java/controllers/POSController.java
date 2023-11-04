@@ -1,6 +1,7 @@
 package controllers;
 
 import interfaces.persistences.repositorys.entitys.address.StandardAddressRepository;
+import interfaces.persistences.repositorys.entitys.clients.client.ClientRepository;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,15 +10,14 @@ import views.clients.ClientFindByNameFormView;
 import views.clients.ClientRegisterFormView;
 import persistence.dao.StandardAddressRepositoryImp;
 import persistence.dao.TelephoneRepositoryImp;
-import persistence.dao.StandardClientRepositoryImp;
 import services.address.StandardAddressServiceImp;
-import services.client.StandarClientServiceImp;
+import services.client.ClientServiceImp;
 import services.phone.TelephoneServiceImp;
-import interfaces.persistences.repositorys.entitys.clients.client.StandardClientRepository;
 import interfaces.persistences.repositorys.entitys.phones.TelephoneRepository;
 import interfaces.services.StandardAddressService;
-import interfaces.services.StandardClientService;
-import interfaces.services.services.TelephoneService;
+import interfaces.services.TelephoneService;
+import interfaces.services.ClientService;
+import persistence.dao.ClientRepositoryImp;
 
 public class POSController implements ActionListener {
 
@@ -31,16 +31,16 @@ public class POSController implements ActionListener {
 
     TelephoneService phoneService = new TelephoneServiceImp(phoneRepository);
 
-    StandardClientRepository standarClientRepository = new StandardClientRepositoryImp();
+    ClientRepository standarClientRepository = new ClientRepositoryImp();
 
-    StandardClientService normalClientService = new StandarClientServiceImp(standarClientRepository);
+    ClientService clientService = new ClientServiceImp(standarClientRepository);
 
-//    ShopFormView shopForm = new ShopFormView( normalClientService );
+//    ShopFormView shopForm = new ShopFormView( clientService );
     // ProductRegisterFormView productRegisterFormView = new ProductRegisterFormView(productServiceImp);
     // ProductFindByPcFormView productFindByPcFormView = new ProductFindByPcFormView(productServiceImp);
-    ClientRegisterFormView clientRegisterFormView = new ClientRegisterFormView(normalClientService, addressService, phoneService);
+    ClientRegisterFormView clientRegisterFormView = new ClientRegisterFormView(clientService, addressService, phoneService);
 
-    ClientFindByNameFormView clientFindByNameFormView = new ClientFindByNameFormView(normalClientService);
+    ClientFindByNameFormView clientFindByNameFormView = new ClientFindByNameFormView(clientService,addressService,phoneService);
 
     public POSController(POS pos) {
 

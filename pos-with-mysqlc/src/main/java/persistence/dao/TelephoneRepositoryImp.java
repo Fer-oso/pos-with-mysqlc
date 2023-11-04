@@ -5,11 +5,12 @@ import interfaces.persistences.repositorys.entitys.phones.TelephoneRepository;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import persistence.dao.exceptios.DaoExceptions;
 
 public class TelephoneRepositoryImp extends DaoRepository implements TelephoneRepository {
+
+    private static final long serialVersionUID = 1L;
 
     private Integer idGeneratedKey;
 
@@ -54,7 +55,7 @@ public class TelephoneRepositoryImp extends DaoRepository implements TelephoneRe
     public Telephone update(Integer id, Telephone object) throws Exception {
         try {
 
-            String sql = "UPDATE phone SET number_phone = ?, type_phone = ? WHERE id = ?)";
+            String sql = "UPDATE phone SET number_phone = ?, type_phone = ? WHERE id = ?";
 
             preparedStatement = startConnection().prepareStatement(sql);
 
@@ -148,7 +149,7 @@ public class TelephoneRepositoryImp extends DaoRepository implements TelephoneRe
     }
 
     @Override
-    public List<Telephone> findAll() throws Exception {
+    public ArrayList<Telephone> findAll() throws Exception {
         try {
             String sql = "SELECT * FROM phone";
 
@@ -158,7 +159,7 @@ public class TelephoneRepositoryImp extends DaoRepository implements TelephoneRe
 
             resultSet = preparedStatement.executeQuery();
 
-            List<Telephone> phones = new ArrayList<>();
+            ArrayList<Telephone> phones = new ArrayList<>();
 
             while (resultSet.next()) {
 

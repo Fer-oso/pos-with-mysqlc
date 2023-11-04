@@ -1,8 +1,8 @@
 package interfaces.persistences.repositorys.entitys.clients.client;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface FindAllByClasification<T extends Object> {
     
-    List<T> findAllByClasification(String clasification) throws Exception;
+    ArrayList<T> findAllByClasification(String clasification) throws Exception;
 }

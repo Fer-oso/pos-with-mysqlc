@@ -1,5 +1,7 @@
 package interfaces.persistences.repositorys;
 
-public interface Repository<T, ID> extends FindById<T, ID>, FindAll<T>{
+import java.io.Serializable;
+
+public interface Repository<T, ID> extends FindById<T, ID>, FindAll<T>,Serializable{
    
 }

@@ -5,11 +5,12 @@ import interfaces.persistences.repositorys.entitys.address.StandardAddressReposi
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import persistence.dao.exceptios.DaoExceptions;
 
 public class StandardAddressRepositoryImp extends DaoRepository implements StandardAddressRepository {
+
+    private static final long serialVersionUID = 1L;
 
     private Integer idGeneratedKey;
 
@@ -75,7 +76,9 @@ public class StandardAddressRepositoryImp extends DaoRepository implements Stand
             preparedStatement.setString(4, object.getState());
 
             preparedStatement.setInt(5, object.getPostalCode());
-
+            
+            preparedStatement.setInt(6, id);
+            
             preparedStatement.executeUpdate();
 
             connection.commit();
@@ -169,7 +172,7 @@ public class StandardAddressRepositoryImp extends DaoRepository implements Stand
     }
 
     @Override
-    public List<StandardAddress> findAll() throws Exception {
+    public ArrayList<StandardAddress> findAll() throws Exception {
 
         try {
             String sql = "SELECT * FROM address";
@@ -180,7 +183,7 @@ public class StandardAddressRepositoryImp extends DaoRepository implements Stand
 
             resultSet = preparedStatement.executeQuery();
 
-            List<StandardAddress> addresses = new ArrayList<>();
+            ArrayList<StandardAddress> addresses = new ArrayList<>();
 
             while (resultSet.next()) {
 
