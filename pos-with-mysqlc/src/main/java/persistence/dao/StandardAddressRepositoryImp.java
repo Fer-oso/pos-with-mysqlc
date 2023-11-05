@@ -1,21 +1,21 @@
 package persistence.dao;
 
-import entitiys.models.addres.StandardAddress;
-import interfaces.persistences.repositorys.entitys.address.StandardAddressRepository;
+import entitiys.models.addres.Address;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Optional;
 import persistence.dao.exceptios.DaoExceptions;
+import interfaces.persistences.repositorys.entitys.address.AddressRepository;
 
-public class StandardAddressRepositoryImp extends DaoRepository implements StandardAddressRepository {
+public class StandardAddressRepositoryImp extends DaoRepository implements AddressRepository {
 
     private static final long serialVersionUID = 1L;
 
     private Integer idGeneratedKey;
 
     @Override
-    public StandardAddress save(StandardAddress object) throws Exception {
+    public Address save(Address object) throws Exception {
 
         try {
 
@@ -59,7 +59,7 @@ public class StandardAddressRepositoryImp extends DaoRepository implements Stand
     }
 
     @Override
-    public StandardAddress update(Integer id, StandardAddress object) throws Exception {
+    public Address update(Integer id, Address object) throws Exception {
 
         try {
 
@@ -127,7 +127,7 @@ public class StandardAddressRepositoryImp extends DaoRepository implements Stand
     }
 
     @Override
-    public Optional<StandardAddress> findById(Integer id) throws Exception {
+    public Optional<Address> findById(Integer id) throws Exception {
 
         try {
 
@@ -143,14 +143,14 @@ public class StandardAddressRepositoryImp extends DaoRepository implements Stand
 
             if (resultSet.next()) {
 
-                StandardAddress standardAddress = new StandardAddress(
+                Address standardAddress = new Address(
                         resultSet.getInt("id"),
                         resultSet.getString("street_direction"),
                         resultSet.getInt("street_number"),
                         resultSet.getString("city"),
                         resultSet.getString("state"),
                         resultSet.getInt("postal_code"));
-                Optional<StandardAddress> optionalStandardAddress = Optional.ofNullable(standardAddress);
+                Optional<Address> optionalStandardAddress = Optional.ofNullable(standardAddress);
 
                 return optionalStandardAddress;
 
@@ -172,7 +172,7 @@ public class StandardAddressRepositoryImp extends DaoRepository implements Stand
     }
 
     @Override
-    public ArrayList<StandardAddress> findAll() throws Exception {
+    public ArrayList<Address> findAll() throws Exception {
 
         try {
             String sql = "SELECT * FROM address";
@@ -183,11 +183,11 @@ public class StandardAddressRepositoryImp extends DaoRepository implements Stand
 
             resultSet = preparedStatement.executeQuery();
 
-            ArrayList<StandardAddress> addresses = new ArrayList<>();
+            ArrayList<Address> addresses = new ArrayList<>();
 
             while (resultSet.next()) {
 
-                addresses.add(new StandardAddress(
+                addresses.add(new Address(
                         resultSet.getInt("id"),
                         resultSet.getString("street_direction"),
                         resultSet.getInt("street_number"),

@@ -1,6 +1,6 @@
 package persistence.dao;
 
-import entitiys.models.addres.StandardAddress;
+import entitiys.models.addres.Address;
 import entitiys.models.client.Client;
 import entitiys.models.phone.Telephone;
 import interfaces.persistences.repositorys.entitys.clients.client.ClientRepository;
@@ -214,7 +214,7 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
     }
     
     @Override
-    public void insertClientAddress(Client client, StandardAddress address) throws Exception {
+    public void insertClientAddress(Client client, Address address) throws Exception {
         
         String sql = "INSERT INTO client_address ( id_client, id_address ) VALUES (?, ?)";
 
@@ -306,7 +306,7 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
     }
 
     @Override
-    public ArrayList<StandardAddress> getAddressClients(Client client) throws Exception {
+    public ArrayList<Address> getAddressClients(Client client) throws Exception {
 
         String sql = "SELECT address.* FROM client_address JOIN address ON client_address.id_address = address.id WHERE client_address.id_client = ?";
 
@@ -318,11 +318,11 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
 
             resultSet = preparedStatement.executeQuery();
 
-            ArrayList<StandardAddress> adressClient = new ArrayList<>();
+            ArrayList<Address> adressClient = new ArrayList<>();
 
             while (resultSet.next()) {
 
-                adressClient.add(new StandardAddress(resultSet.getInt("id"), resultSet.getString("street_direction"), resultSet.getInt("street_number"),
+                adressClient.add(new Address(resultSet.getInt("id"), resultSet.getString("street_direction"), resultSet.getInt("street_number"),
                 resultSet.getString("city"), resultSet.getString("state"), resultSet.getInt("postal_code")));
             }
 

@@ -1,13 +1,13 @@
 package views.clients;
 
 import controllers.clients.ClientFindByNameController;
-import entitiys.models.addres.StandardAddress;
+import entitiys.models.addres.Address;
 import entitiys.models.phone.Telephone;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
-import interfaces.services.ClientService;
-import interfaces.services.StandardAddressService;
 import interfaces.services.TelephoneService;
+import interfaces.services.AddressService;
+import interfaces.services.IClientService;
 
 public class ClientFindByNameFormView extends javax.swing.JPanel {
 
@@ -15,7 +15,7 @@ public class ClientFindByNameFormView extends javax.swing.JPanel {
 
     ClientFindByNameController clientFindByNameController;
 
-    public ClientFindByNameFormView(ClientService clientService,StandardAddressService standardAddressService, TelephoneService telephoneService) {
+    public ClientFindByNameFormView(IClientService clientService,AddressService standardAddressService, TelephoneService telephoneService) {
 
         initComponents();
 
@@ -379,7 +379,7 @@ public class ClientFindByNameFormView extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JCheckBox jcbAvailability;
     private javax.swing.JComboBox<Telephone> jcbPhones;
-    private javax.swing.JComboBox<StandardAddress> jcbStreetDirection;
+    private javax.swing.JComboBox<Address> jcbStreetDirection;
     private javax.swing.JPanel jpForm;
     private javax.swing.JTable jtTableClients;
     private javax.swing.JLabel lblAge;
@@ -497,11 +497,11 @@ public class ClientFindByNameFormView extends javax.swing.JPanel {
         this.jcbPhones = jcbPhones;
     }
 
-    public JComboBox<StandardAddress> getJcbStreetDirection() {
+    public JComboBox<Address> getJcbStreetDirection() {
         return jcbStreetDirection;
     }
 
-    public void setJcbStreetDirection(JComboBox<StandardAddress> jcbStreetDirection) {
+    public void setJcbStreetDirection(JComboBox<Address> jcbStreetDirection) {
         this.jcbStreetDirection = jcbStreetDirection;
     }
 

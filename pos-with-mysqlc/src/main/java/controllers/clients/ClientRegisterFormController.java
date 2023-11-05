@@ -1,14 +1,14 @@
 package controllers.clients;
 
-import entitiys.models.addres.StandardAddress;
+import entitiys.models.addres.Address;
 import entitiys.models.client.Client;
 import entitiys.models.phone.Telephone;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import interfaces.services.StandardAddressService;
 import views.clients.ClientRegisterFormView;
 import interfaces.services.TelephoneService;
+import interfaces.services.AddressService;
 import interfaces.services.ClientService;
 
 public class ClientRegisterFormController implements ActionListener {
@@ -16,7 +16,7 @@ public class ClientRegisterFormController implements ActionListener {
     /*Services*/
     private final ClientService clientServiceImp;
 
-    private final StandardAddressService addressServiceImp;
+    private final AddressService addressServiceImp;
 
     private final TelephoneService phoneServiceImp;
 
@@ -25,12 +25,12 @@ public class ClientRegisterFormController implements ActionListener {
 
     private Client client;
 
-    private StandardAddress address;
+    private Address address;
 
     private Telephone telephone;
 
     /*Constructors*/
-    public ClientRegisterFormController(ClientRegisterFormView clientRegisterFormView, ClientService clientServiceImp, StandardAddressService addressServiceImp, TelephoneService phoneServiceImp) {
+    public ClientRegisterFormController(ClientRegisterFormView clientRegisterFormView, ClientService clientServiceImp, AddressService addressServiceImp, TelephoneService phoneServiceImp) {
 
         this.clientRegisterFormView = clientRegisterFormView;
 
@@ -94,7 +94,7 @@ public class ClientRegisterFormController implements ActionListener {
 
                 client = clientServiceImp.save(client);
 
-                address = addressServiceImp.create(StandardAddress.class);
+                address = addressServiceImp.create(Address.class);
 
                 address.setStreetDirection(clientRegisterFormView.getTxtStreetDirection().getText());
 
@@ -140,7 +140,7 @@ public class ClientRegisterFormController implements ActionListener {
 
             return false;
         }
-        
+
         return true;
     }
 
@@ -159,17 +159,17 @@ public class ClientRegisterFormController implements ActionListener {
         clientRegisterFormView.getTxtSsn().setText("");
 
         clientRegisterFormView.getTxtNumberPhone().setText("");
-        
+
         clientRegisterFormView.getTxtTypePhone().setText("");
-        
+
         clientRegisterFormView.getTxtStreetDirection().setText("");
-        
+
         clientRegisterFormView.getTxtStreetNumber().setText("");
-        
+
         clientRegisterFormView.getTxtCity().setText("");
-        
+
         clientRegisterFormView.getTxtPostalCode().setText("");
-        
+
         clientRegisterFormView.getTxtState().setText("");
     }
 

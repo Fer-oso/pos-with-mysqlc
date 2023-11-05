@@ -1,26 +1,26 @@
 package views.clients;
 
 import controllers.clients.ClientRegisterFormController;
-import interfaces.services.StandardAddressService;
 import javax.swing.JTextField;
 import interfaces.services.TelephoneService;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import interfaces.services.AddressService;
 import interfaces.services.ClientService;
 
 public class ClientRegisterFormView extends javax.swing.JPanel {
 
     private static final long serialVersionUID = 1L;
-    
-    public ClientRegisterFormView(ClientService clientService, StandardAddressService addressService, TelephoneService phoneService) {
-        
+
+    public ClientRegisterFormView(ClientService clientService, AddressService addressService, TelephoneService phoneService) {
+
         initComponents();
-        
+
         ClientRegisterFormController clientRegisterFormController = new ClientRegisterFormController(this, clientService, addressService, phoneService);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -609,10 +609,8 @@ public class ClientRegisterFormView extends javax.swing.JPanel {
     public void setTxtTypePhone(JTextField txtTypePhone) {
         this.txtTypePhone = txtTypePhone;
     }
-    
-    
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDelete;

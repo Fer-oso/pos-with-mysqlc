@@ -1,7 +1,5 @@
 package controllers;
 
-import interfaces.persistences.repositorys.entitys.address.StandardAddressRepository;
-import interfaces.persistences.repositorys.entitys.clients.client.ClientRepository;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,26 +12,28 @@ import services.address.StandardAddressServiceImp;
 import services.client.ClientServiceImp;
 import services.phone.TelephoneServiceImp;
 import interfaces.persistences.repositorys.entitys.phones.TelephoneRepository;
-import interfaces.services.StandardAddressService;
 import interfaces.services.TelephoneService;
-import interfaces.services.ClientService;
 import persistence.dao.ClientRepositoryImp;
+import interfaces.persistences.repositorys.entitys.address.AddressRepository;
+import interfaces.persistences.repositorys.entitys.clients.client.ClientRepository;
+import interfaces.services.AddressService;
+import interfaces.services.ClientService;
 
 public class POSController implements ActionListener {
 
     POS pos;
 
-    StandardAddressRepository addressRepository = new StandardAddressRepositoryImp();
+    AddressRepository addressRepository = new StandardAddressRepositoryImp();
 
-    StandardAddressService addressService = new StandardAddressServiceImp(addressRepository);
+    AddressService addressService = new StandardAddressServiceImp(addressRepository);
 
     TelephoneRepository phoneRepository = new TelephoneRepositoryImp();
 
     TelephoneService phoneService = new TelephoneServiceImp(phoneRepository);
 
-    ClientRepository standarClientRepository = new ClientRepositoryImp();
+    ClientRepository clientRepository = new ClientRepositoryImp();
 
-    ClientService clientService = new ClientServiceImp(standarClientRepository);
+    ClientService clientService = new ClientServiceImp(clientRepository);
 
 //    ShopFormView shopForm = new ShopFormView( clientService );
     // ProductRegisterFormView productRegisterFormView = new ProductRegisterFormView(productServiceImp);

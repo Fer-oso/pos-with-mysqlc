@@ -2,8 +2,8 @@ package interfaces.entitys.person;
 
 import interfaces.entitys.entity.Entity;
 import java.util.ArrayList;
-import interfaces.entitys.addres.Address;
-import interfaces.entitys.phone.Phone;
+import interfaces.entitys.addres.IAddress;
+import interfaces.entitys.phone.IPhone;
 
 public interface Person<K> extends Entity<K> {
 
@@ -23,13 +23,13 @@ public interface Person<K> extends Entity<K> {
 
     void setSsn(String ssn);
 
-    ArrayList<Address> getAddress();
+    ArrayList<IAddress> getAddress();
 
-    void setAddress(ArrayList<Address> address);
+    void setAddress(ArrayList<IAddress> address);
 
-    ArrayList<Phone> getPhone();
+    ArrayList<IPhone> getPhone();
 
-    void setPhone(ArrayList<Phone> phone);
+    void setPhone(ArrayList<IPhone> phone);
 
     boolean isAvailability();
 

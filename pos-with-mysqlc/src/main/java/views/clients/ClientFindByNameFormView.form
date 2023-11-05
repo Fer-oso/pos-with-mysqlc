@@ -533,7 +533,7 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;StandardAddress&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;entitiys.models.addres.Address&gt;"/>
               </AuxValues>
             </Component>
           </SubComponents>

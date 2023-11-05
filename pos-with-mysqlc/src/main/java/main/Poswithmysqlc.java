@@ -2,20 +2,20 @@ package main;
 
 import entitiys.models.client.Client;
 import entitiys.models.phone.Telephone;
-import interfaces.entitys.phone.Phone;
-import interfaces.persistences.repositorys.entitys.address.StandardAddressRepository;
-import interfaces.persistences.repositorys.entitys.clients.client.ClientRepository;
 import persistence.dao.StandardAddressRepositoryImp;
 import persistence.dao.TelephoneRepositoryImp;
 import services.address.StandardAddressServiceImp;
 import services.client.ClientServiceImp;
 import services.phone.TelephoneServiceImp;
 import interfaces.persistences.repositorys.entitys.phones.TelephoneRepository;
-import interfaces.services.StandardAddressService;
 import interfaces.services.TelephoneService;
 import persistence.dao.ClientRepositoryImp;
-import interfaces.services.ClientService;
 import java.util.ArrayList;
+import interfaces.entitys.phone.IPhone;
+import interfaces.persistences.repositorys.entitys.address.AddressRepository;
+import interfaces.persistences.repositorys.entitys.clients.client.ClientRepository;
+import interfaces.services.AddressService;
+import interfaces.services.IClientService;
 
 public class Poswithmysqlc {
 
@@ -24,9 +24,9 @@ public class Poswithmysqlc {
         System.out.println("Hello World!");
 
         // POS.main(args);
-        StandardAddressRepository addressRepository = new StandardAddressRepositoryImp();
+        AddressRepository addressRepository = new StandardAddressRepositoryImp();
 
-        StandardAddressService addressService = new StandardAddressServiceImp(addressRepository);
+        AddressService addressService = new StandardAddressServiceImp(addressRepository);
 
         TelephoneRepository phoneRepository = new TelephoneRepositoryImp();
 
@@ -34,7 +34,7 @@ public class Poswithmysqlc {
 
         ClientRepository ClientRepository = new ClientRepositoryImp();
 
-        ClientService standarClientService = new ClientServiceImp(ClientRepository);
+        IClientService standarClientService = new ClientServiceImp(ClientRepository);
 
        // StandardAddress standarAddres = addressService.findById(12).get();
         
@@ -45,7 +45,7 @@ public class Poswithmysqlc {
         Telephone telephone = new Telephone(1, 123, "Movil");
         Telephone telephone1 = new Telephone(2,456,"Phone");
         
-        ArrayList<Phone> phonelists = new ArrayList<>();
+        ArrayList<IPhone> phonelists = new ArrayList<>();
         
         phonelists.add(telephone);
         phonelists.add(telephone1);
@@ -75,7 +75,7 @@ public class Poswithmysqlc {
 //       
 //        
 //        addressService.save(standarAddres);
-//        Phone telephone = phoneService.create(Telephone.class);
+//        IPhone telephone = phoneService.create(Telephone.class);
 //        
 //        System.out.println(phoneService.findById(1));
 //        

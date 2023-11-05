@@ -2,7 +2,7 @@ package interfaces.entitys.phone;
 
 import interfaces.entitys.entity.Entity;
 
-public interface Phone extends Entity<Integer>{
+public interface IPhone extends Entity<Integer>{
     
     Integer getNumberPhone();
     

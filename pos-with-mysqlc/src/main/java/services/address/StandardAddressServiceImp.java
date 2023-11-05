@@ -1,28 +1,28 @@
 package services.address;
 
-import entitiys.models.addres.StandardAddress;
-import interfaces.persistences.repositorys.entitys.address.StandardAddressRepository;
-import interfaces.services.StandardAddressService;
+import entitiys.models.addres.Address;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
 import services.exceptions.AddresServiceException;
+import interfaces.persistences.repositorys.entitys.address.AddressRepository;
+import interfaces.services.AddressService;
 
-public class StandardAddressServiceImp implements StandardAddressService {
+public class StandardAddressServiceImp implements AddressService {
 
     private static final long serialVersionUID = 1L;
 
-    private final StandardAddressRepository addressRepository;
+    private final AddressRepository addressRepository;
 
-    private StandardAddress standardAddress;
+    private Address standardAddress;
 
-    public StandardAddressServiceImp(StandardAddressRepository addressRepository) {
+    public StandardAddressServiceImp(AddressRepository addressRepository) {
         
         this.addressRepository = addressRepository;
     }
 
     @Override
-    public StandardAddress save(StandardAddress object) throws Exception {
+    public Address save(Address object) throws Exception {
 
         if (checkDuplicate(object)) {
 
@@ -44,7 +44,7 @@ public class StandardAddressServiceImp implements StandardAddressService {
     }
 
     @Override
-    public StandardAddress update(Integer id, StandardAddress object) throws Exception {
+    public Address update(Integer id, Address object) throws Exception {
 
         try {
 
@@ -70,7 +70,7 @@ public class StandardAddressServiceImp implements StandardAddressService {
     }
 
     @Override
-    public Optional<StandardAddress> findById(Integer id) throws Exception {
+    public Optional<Address> findById(Integer id) throws Exception {
         try {
 
             return addressRepository.findById(id);
@@ -82,7 +82,7 @@ public class StandardAddressServiceImp implements StandardAddressService {
     }
 
     @Override
-    public ArrayList<StandardAddress> findAll() throws Exception {
+    public ArrayList<Address> findAll() throws Exception {
         
         try {
             
@@ -94,7 +94,7 @@ public class StandardAddressServiceImp implements StandardAddressService {
         }
     }
 
-    private boolean checkDuplicate(StandardAddress address) throws Exception {
+    private boolean checkDuplicate(Address address) throws Exception {
 
         try {
 

@@ -2,7 +2,7 @@ package interfaces.entitys.addres;
 
 import interfaces.entitys.entity.Entity;
 
-public interface Address extends Entity<Integer>{
+public interface IAddress extends Entity<Integer>{
 
     String getStreetDirection();
     

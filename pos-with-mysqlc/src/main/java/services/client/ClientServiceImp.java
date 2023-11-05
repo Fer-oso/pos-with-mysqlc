@@ -1,14 +1,14 @@
 package services.client;
 
-import entitiys.models.addres.StandardAddress;
+import entitiys.models.addres.Address;
 import entitiys.models.client.Client;
 import entitiys.models.phone.Telephone;
 import interfaces.persistences.repositorys.entitys.clients.client.ClientRepository;
+import interfaces.services.ClientService;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.sql.SQLException;
 import services.exceptions.ClientServiceExceptions;
-import interfaces.services.ClientService;
 
 public class ClientServiceImp implements ClientService {
 
@@ -26,8 +26,7 @@ public class ClientServiceImp implements ClientService {
     public Client save(Client object) throws Exception {
         
         if (checkDuplicate(object)) {
-            System.out.println("duplicated" + object);
-            
+
             return findById(standardClient.getId()).orElseThrow(() -> new Exception("Not Found"));
         
         } else {
@@ -140,7 +139,7 @@ public class ClientServiceImp implements ClientService {
     }
     
     @Override
-    public void insertClientAddressPhone(Client client, StandardAddress address, Telephone phone) throws Exception{
+    public void insertClientAddressPhone(Client client, Address address, Telephone phone) throws Exception{
     
         try {
             
@@ -167,7 +166,7 @@ public class ClientServiceImp implements ClientService {
     }
 
     @Override
-    public ArrayList<StandardAddress> getAddressClients(Client client) throws Exception {
+    public ArrayList<Address> getAddressClients(Client client) throws Exception {
         try {
             
           return  clientRepository.getAddressClients(client);

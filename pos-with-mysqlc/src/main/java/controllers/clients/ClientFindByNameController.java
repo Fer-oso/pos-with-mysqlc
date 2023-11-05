@@ -1,6 +1,6 @@
 package controllers.clients;
 
-import entitiys.models.addres.StandardAddress;
+import entitiys.models.addres.Address;
 import entitiys.models.client.Client;
 import entitiys.models.phone.Telephone;
 import java.awt.event.ActionEvent;
@@ -13,10 +13,10 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import interfaces.entitys.clients.IClient;
-import interfaces.services.ClientService;
-import interfaces.services.StandardAddressService;
 import interfaces.services.TelephoneService;
 import java.io.Serializable;
+import interfaces.services.AddressService;
+import interfaces.services.IClientService;
 
 public class ClientFindByNameController extends MouseAdapter implements ActionListener, Serializable {
 
@@ -24,9 +24,9 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
     private final ClientFindByNameFormView clientFindByNameFormView;
 
-    private final ClientService clientServiceImp;
+    private final IClientService clientServiceImp;
     private final TelephoneService telephoneServiceImp;
-    private final StandardAddressService standardAddressServiceImp;
+    private final AddressService standardAddressServiceImp;
 
     private DefaultTableModel model = new DefaultTableModel();
     private ArrayList<Client> listClients;
@@ -34,10 +34,10 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
     private int id;
     private Client client;
     private Telephone telephone;
-    private StandardAddress address;
+    private Address address;
 
     /*Constructors*/
-    public ClientFindByNameController(ClientFindByNameFormView clientFindByNameFormView, ClientService clientServiceImp, StandardAddressService standardAddressServiceImp, TelephoneService telephoneServiceImp) {
+    public ClientFindByNameController(ClientFindByNameFormView clientFindByNameFormView, IClientService clientServiceImp, AddressService standardAddressServiceImp, TelephoneService telephoneServiceImp) {
 
         this.clientFindByNameFormView = clientFindByNameFormView;
 
@@ -118,6 +118,8 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
                 deleteClient(id);
 
                 refreshTable();
+                
+                clearForm();
 
                 listClients();
 
@@ -157,7 +159,9 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
                 getClientSelectedOfTable();
 
                 setFormWithSelectedClient();
+                
             } catch (Exception ex) {
+                
                 System.out.println(ex.getMessage());
             }
         }
@@ -267,7 +271,7 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
     private void setModelJcbAddress() throws Exception {
 
-        ArrayList<StandardAddress> addressList = new ArrayList<>();
+        ArrayList<Address> addressList = new ArrayList<>();
 
         addressList = clientServiceImp.getAddressClients(client);
 
@@ -275,7 +279,7 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
         clientFindByNameFormView.getJcbStreetDirection().setEditable(true);
 
-        for (StandardAddress address : addressList) {
+        for (Address address : addressList) {
 
             clientFindByNameFormView.getJcbStreetDirection().addItem(address);
         }

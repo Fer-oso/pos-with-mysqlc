@@ -1,15 +1,14 @@
 package services.phone;
 
 import entitiys.models.phone.Telephone;
-import interfaces.entitys.phone.Phone;
 import interfaces.persistences.repositorys.entitys.phones.TelephoneRepository;
 import interfaces.services.TelephoneService;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
-import javax.swing.JOptionPane;
 import services.exceptions.AddresServiceException;
 import services.exceptions.PhoneServiceException;
+import interfaces.entitys.phone.IPhone;
 
 public class TelephoneServiceImp implements TelephoneService {
 
@@ -28,10 +27,8 @@ public class TelephoneServiceImp implements TelephoneService {
 
         if (checkDuplicate(object)) {
 
-            JOptionPane.showConfirmDialog(null, "Telephone duplicated, Ask client if the number is the correct");
-
-            return findById(telephone.getId()).orElseThrow(() -> new Exception("Not found"));
-
+             return findById(telephone.getId()).orElseThrow(() -> new Exception("Not found"));
+               
         } else {
 
             try {
@@ -93,8 +90,8 @@ public class TelephoneServiceImp implements TelephoneService {
         }
     }
 
-    private boolean checkDuplicate(Phone phone) throws Exception {
-
+    private boolean checkDuplicate(IPhone phone) throws Exception {
+   
         try {
 
             return findAll().stream().anyMatch(t -> {

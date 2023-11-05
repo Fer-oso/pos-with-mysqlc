@@ -2,12 +2,12 @@ package entitiys.models.phone;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import interfaces.entitys.phone.Phone;
 import java.io.Serializable;
+import interfaces.entitys.phone.IPhone;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public class Telephone implements Phone,Serializable {
+public class Telephone implements IPhone,Serializable {
 
     private static final long serialVersionUID = 1L;
 

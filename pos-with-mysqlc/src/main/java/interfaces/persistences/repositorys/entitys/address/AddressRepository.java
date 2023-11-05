@@ -1,8 +1,6 @@
 package interfaces.persistences.repositorys.entitys.address;
 
-import interfaces.entitys.addres.Address;
-import interfaces.persistences.crud.CrudRepository;
+import entitiys.models.addres.Address;
 
-public interface AddressRepository<T extends Address, ID> extends CrudRepository<T,ID>{
-
+public interface AddressRepository extends IAddressRepository<Address, Integer>{
 }

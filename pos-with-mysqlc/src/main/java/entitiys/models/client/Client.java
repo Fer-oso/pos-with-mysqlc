@@ -1,13 +1,13 @@
 package entitiys.models.client;
 
-import interfaces.entitys.addres.Address;
 import interfaces.entitys.clients.IClient;
-import interfaces.entitys.phone.Phone;
 import java.io.Serializable;
 import java.util.ArrayList;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import interfaces.entitys.addres.IAddress;
+import interfaces.entitys.phone.IPhone;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,8 +23,8 @@ public class Client implements IClient, Serializable {
     private String ssn;
     private String clasification;
     private boolean availability;
-    private ArrayList<Address> address = new ArrayList<>();
-    private ArrayList<Phone> phone = new ArrayList<>();
+    private ArrayList<IAddress> address = new ArrayList<>();
+    private ArrayList<IPhone> phone = new ArrayList<>();
 
     @Override
     public Integer getId() {
@@ -97,22 +97,22 @@ public class Client implements IClient, Serializable {
     }
 
     @Override
-    public ArrayList<Address> getAddress() {
+    public ArrayList<IAddress> getAddress() {
         return address;
     }
 
     @Override
-    public void setAddress(ArrayList<Address> address) {
+    public void setAddress(ArrayList<IAddress> address) {
         this.address = address;
     }
 
     @Override
-    public ArrayList<Phone> getPhone() {
+    public ArrayList<IPhone> getPhone() {
         return phone;
     }
 
     @Override
-    public void setPhone(ArrayList<Phone> phone) {
+    public void setPhone(ArrayList<IPhone> phone) {
         this.phone = phone;
     }
 }
