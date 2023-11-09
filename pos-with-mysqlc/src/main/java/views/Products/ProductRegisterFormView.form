@@ -135,17 +135,20 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" pref="73" max="-2" attributes="0"/>
-                      <EmptySpace pref="289" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="306" max="32767" attributes="0"/>
                       <Component id="jLabel1" min="-2" pref="644" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel2" alignment="0" pref="80" max="32767" attributes="0"/>
-                  <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabel1" pref="80" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -165,7 +168,7 @@
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img/market icons/menuproductsicons/product register form icon 64px.png"/>
+                  <Image iconType="2" name="D:\Users\elfisu\OneDrive\Documentos\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\marketicons\menuproductsicons\product register form icon 64px.png"/>
                 </Property>
               </Properties>
             </Component>
@@ -302,7 +305,7 @@
             <Component class="javax.swing.JButton" name="btnSave">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img/market icons/menuclientsicons/client save icon 2.png"/>
+                  <Image iconType="2" name="D:\Users\elfisu\OneDrive\Documentos\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\marketicons\menuclientsicons\client save icon 2.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Save"/>
               </Properties>
@@ -310,7 +313,7 @@
             <Component class="javax.swing.JButton" name="btnDelete">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img/market icons/menuclientsicons/client remove icon 2.png"/>
+                  <Image iconType="2" name="D:\Users\elfisu\OneDrive\Documentos\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\marketicons\menuclientsicons\client remove icon 2.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Delete"/>
               </Properties>
@@ -318,7 +321,7 @@
             <Component class="javax.swing.JButton" name="btnEdit">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img/market icons/menuclientsicons/client edit icon.png"/>
+                  <Image iconType="2" name="D:\Users\elfisu\OneDrive\Documentos\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\marketicons\menuclientsicons\client edit icon.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Edit"/>
               </Properties>
@@ -326,7 +329,7 @@
             <Component class="javax.swing.JButton" name="btnCancel">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img/market icons/general icons/cancel icon 2.png"/>
+                  <Image iconType="2" name="D:\Users\elfisu\OneDrive\Documentos\NetBeansProjects\pos-with-mysqlc\pos-with-mysqlc\src\main\java\img\marketicons\generalicons\cancel icon 2.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cancel"/>
               </Properties>

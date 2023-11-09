@@ -1,6 +1,7 @@
 package controllers.products;
 
 import entitiys.models.product.Product;
+import interfaces.services.ProductService;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -9,7 +10,6 @@ import javax.swing.table.DefaultTableModel;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import services.products.ProductServiceImp;
 import views.Products.ProductRegisterFormView;
 
 public class ProductRegisterFormController extends MouseAdapter implements ActionListener, Serializable {
@@ -18,14 +18,14 @@ public class ProductRegisterFormController extends MouseAdapter implements Actio
 
     private final ProductRegisterFormView productRegisterFormView;
 
-    private final ProductServiceImp productServiceImp;
+    private final ProductService productServiceImp;
 
     private DefaultTableModel model = new DefaultTableModel();
     private ArrayList<Product> listProducts;
     private Product product;
 
     /*Constructors*/
-    public ProductRegisterFormController(ProductRegisterFormView productRegisterFormView, ProductServiceImp productServiceImp) {
+    public ProductRegisterFormController(ProductRegisterFormView productRegisterFormView, ProductService productServiceImp) {
 
         this.productRegisterFormView = productRegisterFormView;
 

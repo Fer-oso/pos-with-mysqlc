@@ -1,8 +1,8 @@
 
 package views.Products;
 
-import services.products.ProductServiceImp;
 import controllers.products.ProductFindByPcController;
+import interfaces.services.ProductService;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -15,7 +15,7 @@ public class ProductFindByPcFormView extends javax.swing.JPanel {
     
     ProductFindByPcController productFindByPcController;
     
-    public ProductFindByPcFormView(ProductServiceImp productServiceImp) {
+    public ProductFindByPcFormView(ProductService productServiceImp) {
         
         initComponents();
        
@@ -94,10 +94,10 @@ public class ProductFindByPcFormView extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel1.setText("Find product form");
 
-        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/general icons/find icon.png"))); // NOI18N
+        btnSearch.setIcon(new javax.swing.ImageIcon("D:\\Users\\elfisu\\OneDrive\\Documentos\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\marketicons\\generalicons\\find icon.png")); // NOI18N
         btnSearch.setText("Search");
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuproductsicons/product register form icon 64px.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon("D:\\Users\\elfisu\\OneDrive\\Documentos\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\marketicons\\menuproductsicons\\product register form icon 64px.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -140,13 +140,13 @@ public class ProductFindByPcFormView extends javax.swing.JPanel {
         lblPhone.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         lblPhone.setText("Code");
 
-        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuclientsicons/client edit icon.png"))); // NOI18N
+        btnEdit.setIcon(new javax.swing.ImageIcon("D:\\Users\\elfisu\\OneDrive\\Documentos\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\marketicons\\menuclientsicons\\client edit icon.png")); // NOI18N
         btnEdit.setText("Edit");
 
-        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuclientsicons/client remove icon 2.png"))); // NOI18N
+        btnDelete.setIcon(new javax.swing.ImageIcon("D:\\Users\\elfisu\\OneDrive\\Documentos\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\marketicons\\menuclientsicons\\client remove icon 2.png")); // NOI18N
         btnDelete.setText("Delete");
 
-        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/general icons/cancel icon 2.png"))); // NOI18N
+        btnCancel.setIcon(new javax.swing.ImageIcon("D:\\Users\\elfisu\\OneDrive\\Documentos\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\marketicons\\generalicons\\cancel icon 2.png")); // NOI18N
         btnCancel.setText("Cancel");
 
         lblAvailability.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N

@@ -1,6 +1,7 @@
 package controllers.products;
 
 import entitiys.models.product.Product;
+import interfaces.services.ProductService;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -12,7 +13,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import lombok.SneakyThrows;
-import services.products.ProductServiceImp;
 import views.Products.ProductFindByPcFormView;
 
 public class ProductFindByPcController extends MouseAdapter implements ActionListener,Serializable {
@@ -21,7 +21,7 @@ public class ProductFindByPcController extends MouseAdapter implements ActionLis
 
     private final ProductFindByPcFormView productFindByPcFormView;
 
-    private final ProductServiceImp productServiceImp;
+    private final ProductService productServiceImp;
 
     private DefaultTableModel model = new DefaultTableModel();
 
@@ -31,7 +31,7 @@ public class ProductFindByPcController extends MouseAdapter implements ActionLis
     private Product product;
 
     /*Constructors*/
-    public ProductFindByPcController(ProductFindByPcFormView productFindByPcFormView, ProductServiceImp productServiceImp) {
+    public ProductFindByPcController(ProductFindByPcFormView productFindByPcFormView, ProductService productServiceImp) {
 
         this.productFindByPcFormView = productFindByPcFormView;
 

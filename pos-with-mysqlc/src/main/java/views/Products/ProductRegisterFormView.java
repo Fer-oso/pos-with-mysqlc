@@ -2,6 +2,9 @@ package views.Products;
 
 import services.products.ProductServiceImp;
 import controllers.products.ProductRegisterFormController;
+import interfaces.services.ProductService;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -14,7 +17,7 @@ public class ProductRegisterFormView extends javax.swing.JPanel {
 
     ProductRegisterFormController productRegisterFormController;
 
-    public ProductRegisterFormView(ProductServiceImp productServiceImp) {
+    public ProductRegisterFormView(ProductService productServiceImp) {
 
         initComponents();
 
@@ -90,22 +93,24 @@ public class ProductRegisterFormView extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel1.setText("Product register form");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuproductsicons/product register form icon 64px.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\Users\\elfisu\\OneDrive\\Documentos\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\marketicons\\menuproductsicons\\product register form icon 64px.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 289, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 306, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2))
         );
 
         lblName.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
@@ -123,16 +128,16 @@ public class ProductRegisterFormView extends javax.swing.JPanel {
         lblCode.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         lblCode.setText("Code");
 
-        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuclientsicons/client save icon 2.png"))); // NOI18N
+        btnSave.setIcon(new javax.swing.ImageIcon("D:\\Users\\elfisu\\OneDrive\\Documentos\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\marketicons\\menuclientsicons\\client save icon 2.png")); // NOI18N
         btnSave.setText("Save");
 
-        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuclientsicons/client remove icon 2.png"))); // NOI18N
+        btnDelete.setIcon(new javax.swing.ImageIcon("D:\\Users\\elfisu\\OneDrive\\Documentos\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\marketicons\\menuclientsicons\\client remove icon 2.png")); // NOI18N
         btnDelete.setText("Delete");
 
-        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/menuclientsicons/client edit icon.png"))); // NOI18N
+        btnEdit.setIcon(new javax.swing.ImageIcon("D:\\Users\\elfisu\\OneDrive\\Documentos\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\marketicons\\menuclientsicons\\client edit icon.png")); // NOI18N
         btnEdit.setText("Edit");
 
-        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/general icons/cancel icon 2.png"))); // NOI18N
+        btnCancel.setIcon(new javax.swing.ImageIcon("D:\\Users\\elfisu\\OneDrive\\Documentos\\NetBeansProjects\\pos-with-mysqlc\\pos-with-mysqlc\\src\\main\\java\\img\\marketicons\\generalicons\\cancel icon 2.png")); // NOI18N
         btnCancel.setText("Cancel");
 
         lblAvailability.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
@@ -245,9 +250,13 @@ public class ProductRegisterFormView extends javax.swing.JPanel {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
 
-       // productRegisterFormController.refreshTable();
-
-       // productRegisterFormController.listProducts();
+        try {
+            productRegisterFormController.refreshTable();
+            
+            productRegisterFormController.listProducts();
+        } catch (Exception ex) {
+            Logger.getLogger(ProductRegisterFormView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_formComponentShown
 
     public JButton getBtnCancel() {
