@@ -1,6 +1,5 @@
 package entitiys.models.product;
 
-import interfaces.entitys.entity.Entity;
 import interfaces.entitys.product.IProduct;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -9,7 +8,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Product implements IProduct,Entity<Integer>{
+public class Product implements IProduct{
+
+    private static final long serialVersionUID = 1L;
 
     private Integer id;
     private String name;

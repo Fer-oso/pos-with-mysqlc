@@ -16,7 +16,7 @@ import interfaces.entitys.clients.IClient;
 import interfaces.services.TelephoneService;
 import java.io.Serializable;
 import interfaces.services.AddressService;
-import interfaces.services.IClientService;
+import interfaces.services.ClientService;
 
 public class ClientFindByNameController extends MouseAdapter implements ActionListener, Serializable {
 
@@ -24,7 +24,7 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
     private final ClientFindByNameFormView clientFindByNameFormView;
 
-    private final IClientService clientServiceImp;
+    private final ClientService clientServiceImp;
     private final TelephoneService telephoneServiceImp;
     private final AddressService standardAddressServiceImp;
 
@@ -37,7 +37,7 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
     private Address address;
 
     /*Constructors*/
-    public ClientFindByNameController(ClientFindByNameFormView clientFindByNameFormView, IClientService clientServiceImp, AddressService standardAddressServiceImp, TelephoneService telephoneServiceImp) {
+    public ClientFindByNameController(ClientFindByNameFormView clientFindByNameFormView, ClientService clientServiceImp, AddressService standardAddressServiceImp, TelephoneService telephoneServiceImp) {
 
         this.clientFindByNameFormView = clientFindByNameFormView;
 

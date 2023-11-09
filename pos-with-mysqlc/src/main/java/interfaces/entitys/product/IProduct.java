@@ -1,6 +1,8 @@
 package interfaces.entitys.product;
 
-public interface IProduct {
+import interfaces.entitys.entity.Entity;
+
+public interface IProduct extends Entity<Integer> {
     
     String getName();
     
