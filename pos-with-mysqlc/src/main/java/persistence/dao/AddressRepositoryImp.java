@@ -7,10 +7,19 @@ import java.util.ArrayList;
 import java.util.Optional;
 import persistence.dao.exceptios.DaoExceptions;
 import interfaces.persistences.repositorys.entitys.address.AddressRepository;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import persistence.config.DbConnector;
 
-public class StandardAddressRepositoryImp extends DaoRepository implements AddressRepository {
+public class AddressRepositoryImp implements AddressRepository {
 
     private static final long serialVersionUID = 1L;
+    
+    DbConnector dbConnector;
+
+    public AddressRepositoryImp(DbConnector dbConnector) {
+        this.dbConnector = dbConnector;
+    }
 
     private Integer idGeneratedKey;
 
@@ -21,7 +30,7 @@ public class StandardAddressRepositoryImp extends DaoRepository implements Addre
 
             String sql = "INSERT INTO address (street_direction, street_number, city, state, postal_code ) VALUES (?, ?, ?, ?, ?)";
 
-            preparedStatement = startConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setString(1, object.getStreetDirection());
 
@@ -34,10 +43,10 @@ public class StandardAddressRepositoryImp extends DaoRepository implements Addre
             preparedStatement.setInt(5, object.getPostalCode());
 
             preparedStatement.executeUpdate();
-            
-            connection.commit();
 
-            resultSet = preparedStatement.getGeneratedKeys();
+            dbConnector.commit();
+
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
 
             if (resultSet.next()) {
 
@@ -48,13 +57,13 @@ public class StandardAddressRepositoryImp extends DaoRepository implements Addre
 
         } catch (SQLException e) {
 
-            rollbackTransaction();
+            dbConnector.rollbackTransaction();
 
             throw new DaoExceptions("Error en mySQL " + e.toString());
 
         } finally {
 
-            closeConnection();
+            dbConnector.closeConnection();
         }
     }
 
@@ -65,7 +74,7 @@ public class StandardAddressRepositoryImp extends DaoRepository implements Addre
 
             String sql = "UPDATE address SET  street_direction = ?, street_number = ?, city = ?, state = ?, postal_code = ? WHERE id = ?";
 
-            preparedStatement = startConnection().prepareStatement(sql);
+            PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
 
             preparedStatement.setString(1, object.getStreetDirection());
 
@@ -76,24 +85,24 @@ public class StandardAddressRepositoryImp extends DaoRepository implements Addre
             preparedStatement.setString(4, object.getState());
 
             preparedStatement.setInt(5, object.getPostalCode());
-            
+
             preparedStatement.setInt(6, id);
-            
+
             preparedStatement.executeUpdate();
 
-            connection.commit();
+            dbConnector.commit();
 
             return findById(id).get();
 
         } catch (SQLException e) {
 
-            rollbackTransaction();
+            dbConnector.rollbackTransaction();
 
             throw new DaoExceptions("Error en mySQL " + e.toString());
 
         } finally {
 
-            closeConnection();
+            dbConnector.closeConnection();
         }
     }
 
@@ -104,25 +113,23 @@ public class StandardAddressRepositoryImp extends DaoRepository implements Addre
 
             String sql = "DELETE FROM address WHERE id = ?";
 
-            connection = startConnection();
-
-            preparedStatement = connection.prepareStatement(sql);
+            PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
 
             preparedStatement.setInt(1, id);
 
             preparedStatement.executeUpdate();
 
-            connection.commit();
+            dbConnector.commit();
 
         } catch (SQLException e) {
 
-            rollbackTransaction();
+            dbConnector.rollbackTransaction();
 
             throw new DaoExceptions("MYSQL Error" + e.getMessage());
 
         } finally {
 
-            closeConnection();
+            dbConnector.closeConnection();
         }
     }
 
@@ -133,24 +140,22 @@ public class StandardAddressRepositoryImp extends DaoRepository implements Addre
 
             String sql = "SELECT * FROM address WHERE id = ?";
 
-            connection = startConnection();
-
-            preparedStatement = connection.prepareStatement(sql);
+            PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
 
             preparedStatement.setInt(1, id);
 
-            resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
 
-                Address standardAddress = new Address(
+                Address address = new Address(
                         resultSet.getInt("id"),
                         resultSet.getString("street_direction"),
                         resultSet.getInt("street_number"),
                         resultSet.getString("city"),
                         resultSet.getString("state"),
                         resultSet.getInt("postal_code"));
-                Optional<Address> optionalStandardAddress = Optional.ofNullable(standardAddress);
+                Optional<Address> optionalStandardAddress = Optional.ofNullable(address);
 
                 return optionalStandardAddress;
 
@@ -161,13 +166,13 @@ public class StandardAddressRepositoryImp extends DaoRepository implements Addre
 
         } catch (SQLException e) {
 
-            rollbackTransaction();
+            dbConnector.rollbackTransaction();
 
             throw new DaoExceptions("Error Mysql" + e.getMessage());
 
         } finally {
 
-            closeConnection();
+            dbConnector.closeConnection();
         }
     }
 
@@ -177,11 +182,9 @@ public class StandardAddressRepositoryImp extends DaoRepository implements Addre
         try {
             String sql = "SELECT * FROM address";
 
-            connection = startConnection();
+            PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
 
-            preparedStatement = connection.prepareStatement(sql);
-
-            resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             ArrayList<Address> addresses = new ArrayList<>();
 
@@ -200,13 +203,13 @@ public class StandardAddressRepositoryImp extends DaoRepository implements Addre
 
         } catch (SQLException e) {
 
-            rollbackTransaction();
+            dbConnector.rollbackTransaction();
 
             throw new DaoExceptions("Error Mysql" + e.getMessage());
 
         } finally {
 
-            closeConnection();
+            dbConnector.closeConnection();
         }
     }
 }

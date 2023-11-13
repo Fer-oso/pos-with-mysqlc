@@ -17,11 +17,11 @@ public class ProductRegisterFormView extends javax.swing.JPanel {
 
     ProductRegisterFormController productRegisterFormController;
 
-    public ProductRegisterFormView(ProductService productServiceImp) {
+    public ProductRegisterFormView(ProductService productService) {
 
         initComponents();
 
-        productRegisterFormController = new ProductRegisterFormController(this, productServiceImp);
+        productRegisterFormController = new ProductRegisterFormController(this, productService);
     }
 
     @SuppressWarnings("unchecked")

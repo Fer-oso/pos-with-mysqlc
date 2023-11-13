@@ -1,21 +1,15 @@
-package persistence.dao;
+package persistence.config;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import persistence.config.Config;
 import persistence.dao.exceptios.DaoExceptions;
 
-public abstract class DaoRepository {
+public class JdbcConnectorImp implements DbConnector {
 
-    protected Connection connection;
+    public static Connection connection;
 
-    protected PreparedStatement preparedStatement;
-
-    protected ResultSet resultSet;
-
-    protected Connection startConnection() throws DaoExceptions {
+    @Override
+    public Connection startConnection() throws DaoExceptions {
 
         try {
 
@@ -31,7 +25,8 @@ public abstract class DaoRepository {
         }
     }
 
-    protected void closeConnection() throws DaoExceptions {
+    @Override
+    public void closeConnection() throws DaoExceptions {
 
         try {
 
@@ -46,7 +41,8 @@ public abstract class DaoRepository {
         }
     }
 
-    protected void rollbackTransaction() throws DaoExceptions {
+    @Override
+    public void rollbackTransaction() throws DaoExceptions {
 
         try {
 
@@ -57,4 +53,11 @@ public abstract class DaoRepository {
             throw new DaoExceptions("Rollback error" + e);
         }
     }
+
+    @Override
+    public void commit() throws Exception {
+       connection.commit();
+    }
+    
+   
 }

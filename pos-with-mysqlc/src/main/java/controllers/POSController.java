@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import views.POS;
 import views.clients.ClientFindByNameFormView;
 import views.clients.ClientRegisterFormView;
-import persistence.dao.StandardAddressRepositoryImp;
+import persistence.dao.AddressRepositoryImp;
 import persistence.dao.TelephoneRepositoryImp;
 import services.address.StandardAddressServiceImp;
 import services.client.ClientServiceImp;
@@ -20,6 +20,8 @@ import interfaces.persistences.repositorys.entitys.products.ProductRepository;
 import interfaces.services.AddressService;
 import interfaces.services.ClientService;
 import interfaces.services.ProductService;
+import persistence.config.DbConnector;
+import persistence.config.JdbcConnectorImp;
 import persistence.dao.ProductRepositoryImp;
 import services.products.ProductServiceImp;
 import views.Products.ProductFindByPcFormView;
@@ -28,16 +30,18 @@ import views.Products.ProductRegisterFormView;
 public class POSController implements ActionListener {
 
     POS pos;
+    
+    DbConnector dbConnector = new JdbcConnectorImp();
 
-    AddressRepository addressRepository = new StandardAddressRepositoryImp();
+    AddressRepository addressRepository = new AddressRepositoryImp(dbConnector);
 
     AddressService addressService = new StandardAddressServiceImp(addressRepository);
 
-    TelephoneRepository phoneRepository = new TelephoneRepositoryImp();
+    TelephoneRepository phoneRepository = new TelephoneRepositoryImp(dbConnector);
 
     TelephoneService phoneService = new TelephoneServiceImp(phoneRepository);
 
-    ClientRepository clientRepository = new ClientRepositoryImp();
+    ClientRepository clientRepository = new ClientRepositoryImp(dbConnector);
 
     ClientService clientService = new ClientServiceImp(clientRepository);
 

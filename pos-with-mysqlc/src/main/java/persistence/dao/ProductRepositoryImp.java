@@ -5,7 +5,7 @@ import interfaces.persistences.repositorys.entitys.products.ProductRepository;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class ProductRepositoryImp extends DaoRepository implements ProductRepository{
+public class ProductRepositoryImp implements ProductRepository{
 
     private static final long serialVersionUID = 1L;
     

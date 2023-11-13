@@ -4,15 +4,25 @@ import entitiys.models.addres.Address;
 import entitiys.models.client.Client;
 import entitiys.models.phone.Telephone;
 import interfaces.persistences.repositorys.entitys.clients.client.ClientRepository;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Optional;
+import persistence.config.DbConnector;
 import persistence.dao.exceptios.DaoExceptions;
 
-public class ClientRepositoryImp extends DaoRepository implements ClientRepository{
+public class ClientRepositoryImp implements ClientRepository{
 
     private static final long serialVersionUID = 1L;
+    
+    DbConnector dbConnector;
+
+    public ClientRepositoryImp(DbConnector dbConnector) {
+        this.dbConnector = dbConnector;
+    }
+   
 
     private Integer idGeneratedKey;
 
@@ -25,7 +35,7 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
 
             String sql = "INSERT INTO clients (name, lastname, age, ssn, clasification, available ) VALUES (?, ?, ?, ?, ?, ?)";
 
-            preparedStatement = startConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setString(1, object.getName());
 
@@ -41,9 +51,9 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
 
             preparedStatement.executeUpdate();
 
-            connection.commit();
+            dbConnector.commit();
 
-            resultSet = preparedStatement.getGeneratedKeys();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
 
             if (resultSet.next()) {
 
@@ -54,13 +64,13 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
 
         } catch (SQLException e) {
 
-            rollbackTransaction();
+            dbConnector.rollbackTransaction();
 
             throw new DaoExceptions("Error en mySQL " + e.toString());
 
         } finally {
 
-            closeConnection();
+            dbConnector.closeConnection();
         }
     }
 
@@ -70,7 +80,7 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
         String sql = "UPDATE clients SET name = ?, lastname = ?, age = ?, ssn = ?, clasification = ?, available = ? WHERE id = ?";
 
         try {
-            preparedStatement = startConnection().prepareStatement(sql);
+            PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
 
             preparedStatement.setString(1, object.getName());
 
@@ -88,19 +98,19 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
 
             preparedStatement.executeUpdate();
 
-            connection.commit();
+            dbConnector.commit();
 
             return findById(id).get();
 
         } catch (SQLException e) {
 
-            rollbackTransaction();
+            dbConnector.rollbackTransaction();
 
             throw new DaoExceptions("Error Mysql" + e.getMessage());
 
         } finally {
 
-            closeConnection();
+            dbConnector.closeConnection();
         }
     }
 
@@ -110,23 +120,23 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
         String sql = "DELETE FROM clients WHERE id = ?";
 
         try {
-            preparedStatement = startConnection().prepareStatement(sql);
+            PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
 
             preparedStatement.setInt(1, id);
 
             preparedStatement.executeUpdate();
 
-            connection.commit();
+            dbConnector.commit();
 
         } catch (SQLException e) {
 
-            rollbackTransaction();
+            dbConnector.rollbackTransaction();
 
             throw new DaoExceptions(e.getMessage());
 
         } finally {
 
-            closeConnection();
+            dbConnector.closeConnection();
         }
     }
 
@@ -137,13 +147,11 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
 
             String sql = "SELECT * FROM clients WHERE id = ?";
 
-            connection = startConnection();
-
-            preparedStatement = connection.prepareStatement(sql);
+            PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
 
             preparedStatement.setInt(1, id);
 
-            resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
 
@@ -164,13 +172,13 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
 
         } catch (SQLException e) {
 
-            rollbackTransaction();
+            dbConnector.rollbackTransaction();
 
             throw new DaoExceptions("Error Mysql" + e.getMessage());
 
         } finally {
 
-            closeConnection();
+            dbConnector.closeConnection();
         }
     }
 
@@ -179,9 +187,9 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
         try {
             String sql = "SELECT * FROM  clients";
 
-            preparedStatement = startConnection().prepareStatement(sql);
+            PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
 
-            resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             ArrayList<Client> clientsList = new ArrayList<>();
 
@@ -203,13 +211,13 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
 
         } catch (DaoExceptions e) {
 
-            rollbackTransaction();
+            dbConnector.rollbackTransaction();
 
             throw new DaoExceptions("SQL ERROR" + e.getMessage());
 
         } finally {
 
-            closeConnection();
+            dbConnector.closeConnection();
         }
     }
     
@@ -220,7 +228,7 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
 
         try {
 
-            preparedStatement = startConnection().prepareStatement(sql);
+            PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
 
             preparedStatement.setInt(1, client.getId());
 
@@ -228,17 +236,17 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
 
             preparedStatement.executeUpdate();
 
-            connection.commit();
+            dbConnector.commit();
 
         } catch (SQLException e) {
 
-            rollbackTransaction();
+            dbConnector.rollbackTransaction();
 
             throw new DaoExceptions(e.getMessage());
 
         } finally {
 
-            closeConnection();
+            dbConnector.closeConnection();
         }
     }
 
@@ -248,7 +256,7 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
         String sql = "INSERT INTO client_phone (id_client, id_phone) VALUES (?, ?)";
 
         try {
-            preparedStatement = startConnection().prepareStatement(sql);
+            PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
 
             preparedStatement.setInt(1, client.getId());
 
@@ -256,16 +264,17 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
 
             preparedStatement.executeUpdate();
 
-            connection.commit();
+            dbConnector.commit();
 
         } catch (SQLException e) {
-            rollbackTransaction();
+            
+            dbConnector.rollbackTransaction();
 
             throw new DaoExceptions(e.getMessage());
 
         } finally {
 
-            closeConnection();
+            dbConnector.closeConnection();
         }
     }
 
@@ -276,11 +285,11 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
 
         try {
 
-            preparedStatement = startConnection().prepareStatement(sql);
+            PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
 
             preparedStatement.setInt(1, client.getId());
 
-            resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             ArrayList<Telephone> phonesClient = new ArrayList<>();
 
@@ -294,13 +303,13 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
 
         } catch (DaoExceptions e) {
 
-            rollbackTransaction();
+            dbConnector.rollbackTransaction();
 
             throw new DaoExceptions("SQL ERROR" + e.getMessage());
 
         } finally {
 
-            closeConnection();
+            dbConnector.closeConnection();
         }
 
     }
@@ -312,11 +321,11 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
 
         try {
 
-            preparedStatement = startConnection().prepareStatement(sql);
+            PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
 
             preparedStatement.setInt(1, client.getId());
 
-            resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             ArrayList<Address> adressClient = new ArrayList<>();
 
@@ -330,13 +339,13 @@ public class ClientRepositoryImp extends DaoRepository implements ClientReposito
 
         } catch (DaoExceptions e) {
 
-            rollbackTransaction();
+            dbConnector.rollbackTransaction();
 
             throw new DaoExceptions("SQL ERROR" + e.getMessage());
 
         } finally {
 
-            closeConnection();
+            dbConnector.closeConnection();
         }
     }
 

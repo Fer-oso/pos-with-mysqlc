@@ -2,7 +2,7 @@ package main;
 
 import entitiys.models.client.Client;
 import entitiys.models.phone.Telephone;
-import persistence.dao.StandardAddressRepositoryImp;
+import persistence.dao.AddressRepositoryImp;
 import persistence.dao.TelephoneRepositoryImp;
 import services.address.StandardAddressServiceImp;
 import services.client.ClientServiceImp;
@@ -16,6 +16,8 @@ import interfaces.persistences.repositorys.entitys.address.AddressRepository;
 import interfaces.persistences.repositorys.entitys.clients.client.ClientRepository;
 import interfaces.services.AddressService;
 import interfaces.services.IClientService;
+import persistence.config.DbConnector;
+import persistence.config.JdbcConnectorImp;
 
 public class Poswithmysqlc {
 
@@ -24,15 +26,18 @@ public class Poswithmysqlc {
         System.out.println("Hello World!");
 
         // POS.main(args);
-        AddressRepository addressRepository = new StandardAddressRepositoryImp();
+        
+        DbConnector dbConnector = new JdbcConnectorImp();
+        
+        AddressRepository addressRepository = new AddressRepositoryImp(dbConnector);
 
         AddressService addressService = new StandardAddressServiceImp(addressRepository);
 
-        TelephoneRepository phoneRepository = new TelephoneRepositoryImp();
+        TelephoneRepository phoneRepository = new TelephoneRepositoryImp(dbConnector);
 
         TelephoneService telephoneService = new TelephoneServiceImp(phoneRepository);
 
-        ClientRepository ClientRepository = new ClientRepositoryImp();
+        ClientRepository ClientRepository = new ClientRepositoryImp(dbConnector);
 
         IClientService standarClientService = new ClientServiceImp(ClientRepository);
 

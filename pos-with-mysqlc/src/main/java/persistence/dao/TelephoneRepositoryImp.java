@@ -1,18 +1,27 @@
 package persistence.dao;
 
+import persistence.config.DbConnector;
 import entitiys.models.phone.Telephone;
 import interfaces.persistences.repositorys.entitys.phones.TelephoneRepository;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Optional;
 import persistence.dao.exceptios.DaoExceptions;
 
-public class TelephoneRepositoryImp extends DaoRepository implements TelephoneRepository {
+public class TelephoneRepositoryImp implements TelephoneRepository {
+    
+    DbConnector dbConnector;
 
+    public TelephoneRepositoryImp(DbConnector dbConnector) {
+        this.dbConnector = dbConnector; 
+    }
+    
     private static final long serialVersionUID = 1L;
 
-    private Integer idGeneratedKey;
+    private static Integer idGeneratedKey;
 
     @Override
     public Telephone save(Telephone object) throws Exception {
@@ -20,7 +29,7 @@ public class TelephoneRepositoryImp extends DaoRepository implements TelephoneRe
 
             String sql = "INSERT INTO phone (number_phone, type_phone) VALUES (?, ?)";
 
-            preparedStatement = startConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setInt(1, object.getNumberPhone());
 
@@ -28,9 +37,9 @@ public class TelephoneRepositoryImp extends DaoRepository implements TelephoneRe
 
             preparedStatement.executeUpdate();
 
-            connection.commit();
+            dbConnector.commit();
             
-            resultSet = preparedStatement.getGeneratedKeys();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
 
             if (resultSet.next()) {
 
@@ -41,13 +50,13 @@ public class TelephoneRepositoryImp extends DaoRepository implements TelephoneRe
 
         } catch (SQLException e) {
 
-            rollbackTransaction();
+            dbConnector.rollbackTransaction();
 
             throw new DaoExceptions("Error en mySQL " + e.toString());
 
         } finally {
 
-            closeConnection();
+            dbConnector.closeConnection();
         }
     }
 
@@ -57,7 +66,7 @@ public class TelephoneRepositoryImp extends DaoRepository implements TelephoneRe
 
             String sql = "UPDATE phone SET number_phone = ?, type_phone = ? WHERE id = ?";
 
-            preparedStatement = startConnection().prepareStatement(sql);
+           PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
 
             preparedStatement.setInt(1, object.getNumberPhone());
 
@@ -67,19 +76,19 @@ public class TelephoneRepositoryImp extends DaoRepository implements TelephoneRe
 
             preparedStatement.executeUpdate();
 
-            connection.commit();
+            dbConnector.commit();
 
             return findById(id).get();
 
         } catch (SQLException e) {
 
-            rollbackTransaction();
+            dbConnector.rollbackTransaction();
 
             throw new DaoExceptions("Error en mySQL " + e.toString());
 
         } finally {
 
-            closeConnection();
+            dbConnector.closeConnection();
         }
     }
 
@@ -89,25 +98,23 @@ public class TelephoneRepositoryImp extends DaoRepository implements TelephoneRe
 
             String sql = "DELETE FROM phone WHERE id = ?";
 
-            connection = startConnection();
-
-            preparedStatement = connection.prepareStatement(sql);
+            PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
 
             preparedStatement.setInt(1, id);
 
             preparedStatement.executeUpdate();
 
-            connection.commit();
+            dbConnector.commit();
 
         } catch (SQLException e) {
 
-            rollbackTransaction();
+            dbConnector.rollbackTransaction();
 
             throw new DaoExceptions("MYSQL Error" + e.getMessage());
 
         } finally {
 
-            closeConnection();
+            dbConnector.closeConnection();
         }
     }
 
@@ -116,11 +123,11 @@ public class TelephoneRepositoryImp extends DaoRepository implements TelephoneRe
         try {
             String sql = "SELECT * FROM phone WHERE id = ?";
 
-            preparedStatement = startConnection().prepareStatement(sql);
+            PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
 
             preparedStatement.setInt(1, id);
 
-            resultSet = preparedStatement.executeQuery();
+           ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
 
@@ -138,13 +145,13 @@ public class TelephoneRepositoryImp extends DaoRepository implements TelephoneRe
             }
         } catch (SQLException e) {
 
-            rollbackTransaction();
+            dbConnector.rollbackTransaction();
 
             throw new DaoExceptions(e.getMessage());
 
         } finally {
 
-            closeConnection();
+            dbConnector.closeConnection();
         }
     }
 
@@ -153,11 +160,9 @@ public class TelephoneRepositoryImp extends DaoRepository implements TelephoneRe
         try {
             String sql = "SELECT * FROM phone";
 
-            connection = startConnection();
+            PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
 
-            preparedStatement = connection.prepareStatement(sql);
-
-            resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             ArrayList<Telephone> phones = new ArrayList<>();
 
@@ -175,13 +180,13 @@ public class TelephoneRepositoryImp extends DaoRepository implements TelephoneRe
 
         } catch (SQLException e) {
 
-            rollbackTransaction();
+            dbConnector.rollbackTransaction();
 
             throw new DaoExceptions("Error Mysql" + e.getMessage());
 
         } finally {
 
-            closeConnection();
+            dbConnector.closeConnection();
         }
     }
 

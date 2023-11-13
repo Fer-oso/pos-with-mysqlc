@@ -15,11 +15,11 @@ public class ProductFindByPcFormView extends javax.swing.JPanel {
     
     ProductFindByPcController productFindByPcController;
     
-    public ProductFindByPcFormView(ProductService productServiceImp) {
+    public ProductFindByPcFormView(ProductService productService) {
         
         initComponents();
        
-        productFindByPcController = new ProductFindByPcController(this, productServiceImp);
+        productFindByPcController = new ProductFindByPcController(this, productService);
     }
 
     @SuppressWarnings("unchecked")
