@@ -49,18 +49,18 @@ public class Poswithmysqlc {
          
        // FunctionalEjemplos functionalEjemplos = new FunctionalEjemplos();
         
-         Product productToSave = new Product(1, "lupi", "asd", 100.00, 3, true, "fer");
+       //  Product productToSave = new Product(1, "lupi", "asd", 100.00, 3, true, "fer");
 //         
-        productService.save(productToSave);
+      //  productService.save(productToSave);
          
-//        Product productDB = productService.findById(6);
+      Product productDB = productService.findById(6);
 //        
 //        
 //            
 //         System.out.println(productDB);
 //         productDB.setName("fer");
 //         
-//         System.out.println(productService.update(5, productDB));
+        System.out.println(productService.update(5, productDB));
 //                  
 //        
 //         System.out.println(productService.findAll());

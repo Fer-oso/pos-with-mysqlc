@@ -15,11 +15,11 @@ public class TelephoneServiceImp implements TelephoneService {
 
     private final TelephoneRepository phoneRepository;
 
-    private Telephone telephone;
-
     public TelephoneServiceImp(TelephoneRepository phoneRepository) {
         this.phoneRepository = phoneRepository;
     }
+
+    private Telephone telephone;
 
     @Override
     @SneakyThrows
@@ -27,18 +27,24 @@ public class TelephoneServiceImp implements TelephoneService {
 
         if (checkDuplicate(object)) {
 
-            return findById(telephone.getId());
+            throw new AddresServiceException("Cant duplicate registers, that product already registered with number_phone " + object.getNumberPhone());
 
         } else {
 
-            try {
+            return phoneRepository.save(object).orElseThrow();
+        }
+    }
 
-                return phoneRepository.save(object).orElseThrow();
+    @Override
+    @SneakyThrows
+    public Telephone findById(Integer id) {
+        try {
 
-            } catch (Exception e) {
+            return phoneRepository.findById(id).orElseThrow(() -> new PhoneServiceException("Value not present. Cant find by that id"));
 
-                throw new AddresServiceException(e.getMessage());
-            }
+        } catch (Exception e) {
+
+            throw new PhoneServiceException(e.getMessage());
         }
     }
 
@@ -61,19 +67,6 @@ public class TelephoneServiceImp implements TelephoneService {
         try {
 
             phoneRepository.delete(id);
-
-        } catch (Exception e) {
-
-            throw new PhoneServiceException(e.getMessage());
-        }
-    }
-
-    @Override
-    @SneakyThrows
-    public Telephone findById(Integer id) {
-        try {
-
-            return phoneRepository.findById(id).orElseThrow(() -> new PhoneServiceException("Value not present. Cant find by that id"));
 
         } catch (Exception e) {
 

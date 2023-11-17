@@ -19,18 +19,18 @@ public class ProductServiceImp implements ProductService {
     }
 
     Product product;
-    
+
     @Override
     @SneakyThrows
     public Product save(Product object) {
 
-        if (!checkDuplicate(object)) {
+        if (checkDuplicate(object)) {
 
-            return productRepository.save(object).orElseThrow();
+            throw new ProductServiceException("Cant duplicate registers, that product already registered with product_code " + product.getProductCode());
 
         } else {
 
-            throw new ProductServiceException("Cant duplicate registers, that product already registered with product_code " + product.getProductCode());
+            return productRepository.save(object).orElseThrow();
         }
     }
 
@@ -38,34 +38,23 @@ public class ProductServiceImp implements ProductService {
     @SneakyThrows
     public Product findById(Integer id) {
 
-        if (productRepository.findById(id).isPresent()) {
-
-            return productRepository.findById(id).orElseThrow();
-
-        } else {
-
-            throw new ProductServiceException("No value present with that id");
-        }
+        return productRepository.findById(id).orElseThrow(() -> new ProductServiceException("No value present with that id"));
     }
 
     @Override
     @SneakyThrows
     public Product update(Integer id, Product object) {
-        
-        if (productRepository.findById(id).isPresent()) {
-            
-             return productRepository.update(id, object).orElseThrow();
-        }else{
-        
-            throw new ProductServiceException("No value present with that id");
-        }   
+
+       // findById(id);
+
+        return productRepository.update(id, object).orElseThrow(() -> new ProductServiceException("No value present with that id"));
     }
 
     @Override
     @SneakyThrows
     public void delete(Integer id) {
 
-        Product product = productRepository.findById(id).orElseThrow(() -> new ProductServiceException("No value present"));
+        Product product = productRepository.findById(id).orElseThrow(() -> new ProductServiceException("No value present with that id"));
 
         productRepository.delete(product.getId());
     }
@@ -85,7 +74,7 @@ public class ProductServiceImp implements ProductService {
 
             System.out.println(e.getMessage());
         }
-        
+
         return productRepository.findAll();
     }
 
