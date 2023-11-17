@@ -1,0 +1,29 @@
+Predicate se utiliza como un boolean, este siempre tiene que retornar true o false;
+
+Predicate<String> isnamevalid = name -> condicionparacomparar;
+
+isnamevalid.test(object.getname());
+
+
+Function<Type, Return> se utiliza para retornar un valor y solo toma un parametro
+
+Function<Object,Object> saveobject = objectrepository.save();
+
+ /*Ejemplos*/
+
+Product productToSave = new Product();
+
+Function<Product, Product> guardar = product ->  productService.save(product);
+                
+Function<Product, Product> buscar = product -> productService.findById(product.getId());
+
+guardar.andThen(buscar).apply(productToSave);
+
+la funcion andThen la utilizamos para concatenar funciones. y .apply se usa para pasar el parametro al final de la concatenacion.
+
+/*	*/
+
+Consumer se utiliza para realizar alguna accion sin retornar valor. es tipo void y recibe un parametro
+
+Consumer<String> sayHelloConsumer = object  -> sout("hello "+ object.getname());
+

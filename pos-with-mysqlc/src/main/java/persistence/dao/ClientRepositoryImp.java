@@ -10,26 +10,27 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Optional;
+import lombok.SneakyThrows;
 import persistence.config.DbConnector;
 import persistence.dao.exceptios.DaoExceptions;
 
-public class ClientRepositoryImp implements ClientRepository{
+public class ClientRepositoryImp implements ClientRepository {
 
     private static final long serialVersionUID = 1L;
-    
+
     DbConnector dbConnector;
 
     public ClientRepositoryImp(DbConnector dbConnector) {
         this.dbConnector = dbConnector;
     }
-   
 
     private Integer idGeneratedKey;
 
     private Client client;
 
     @Override
-    public Client save(Client object) throws Exception {
+    @SneakyThrows
+    public Optional<Client> save(Client object) {
 
         try {
 
@@ -46,7 +47,7 @@ public class ClientRepositoryImp implements ClientRepository{
             preparedStatement.setString(4, object.getSsn());
 
             preparedStatement.setString(5, object.getClasification());
-            
+
             preparedStatement.setBoolean(6, object.isAvailability());
 
             preparedStatement.executeUpdate();
@@ -56,11 +57,11 @@ public class ClientRepositoryImp implements ClientRepository{
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
 
             if (resultSet.next()) {
-
+                
                 idGeneratedKey = resultSet.getInt(1);
             }
-
-            return findById(idGeneratedKey).get();
+            
+            return findById(idGeneratedKey);
 
         } catch (SQLException e) {
 
@@ -75,7 +76,8 @@ public class ClientRepositoryImp implements ClientRepository{
     }
 
     @Override
-    public Client update(Integer id, Client object) throws Exception {
+    @SneakyThrows
+    public Optional<Client> update(Integer id, Client object) {
 
         String sql = "UPDATE clients SET name = ?, lastname = ?, age = ?, ssn = ?, clasification = ?, available = ? WHERE id = ?";
 
@@ -91,7 +93,7 @@ public class ClientRepositoryImp implements ClientRepository{
             preparedStatement.setString(4, object.getSsn());
 
             preparedStatement.setString(5, object.getClasification());
-            
+
             preparedStatement.setBoolean(6, object.isAvailability());
 
             preparedStatement.setInt(7, id);
@@ -100,7 +102,7 @@ public class ClientRepositoryImp implements ClientRepository{
 
             dbConnector.commit();
 
-            return findById(id).get();
+            return findById(id);
 
         } catch (SQLException e) {
 
@@ -115,7 +117,8 @@ public class ClientRepositoryImp implements ClientRepository{
     }
 
     @Override
-    public void delete(Integer id) throws Exception {
+    @SneakyThrows
+    public void delete(Integer id) {
 
         String sql = "DELETE FROM clients WHERE id = ?";
 
@@ -141,7 +144,8 @@ public class ClientRepositoryImp implements ClientRepository{
     }
 
     @Override
-    public Optional<Client> findById(Integer id) throws Exception {
+    @SneakyThrows
+    public Optional<Client> findById(Integer id){
 
         try {
 
@@ -183,7 +187,8 @@ public class ClientRepositoryImp implements ClientRepository{
     }
 
     @Override
-    public ArrayList<Client> findAll() throws Exception {
+    @SneakyThrows
+    public ArrayList<Client> findAll() {
         try {
             String sql = "SELECT * FROM  clients";
 
@@ -220,10 +225,10 @@ public class ClientRepositoryImp implements ClientRepository{
             dbConnector.closeConnection();
         }
     }
-    
+
     @Override
     public void insertClientAddress(Client client, Address address) throws Exception {
-        
+
         String sql = "INSERT INTO client_address ( id_client, id_address ) VALUES (?, ?)";
 
         try {
@@ -267,7 +272,7 @@ public class ClientRepositoryImp implements ClientRepository{
             dbConnector.commit();
 
         } catch (SQLException e) {
-            
+
             dbConnector.rollbackTransaction();
 
             throw new DaoExceptions(e.getMessage());
@@ -332,7 +337,7 @@ public class ClientRepositoryImp implements ClientRepository{
             while (resultSet.next()) {
 
                 adressClient.add(new Address(resultSet.getInt("id"), resultSet.getString("street_direction"), resultSet.getInt("street_number"),
-                resultSet.getString("city"), resultSet.getString("state"), resultSet.getInt("postal_code")));
+                        resultSet.getString("city"), resultSet.getString("state"), resultSet.getInt("postal_code")));
             }
 
             return adressClient;

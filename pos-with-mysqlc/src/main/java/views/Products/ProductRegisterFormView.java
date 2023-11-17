@@ -254,6 +254,7 @@ public class ProductRegisterFormView extends javax.swing.JPanel {
             productRegisterFormController.refreshTable();
             
             productRegisterFormController.listProducts();
+            
         } catch (Exception ex) {
             Logger.getLogger(ProductRegisterFormView.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -106,19 +106,13 @@ public class ProductRegisterFormController extends MouseAdapter implements Actio
             return false;
         }
 
-        String name = productRegisterFormView.getTxtName().getText();
-
-        Double price = Double.valueOf(productRegisterFormView.getTxtPrice().getText());
-
-        Integer stock = Integer.valueOf(productRegisterFormView.getTxtStock().getText());
-
-        boolean availability = productRegisterFormView.getJcbAvailability().isSelected();
-
-        String brand = productRegisterFormView.getTxtBrand().getText();
-
-        String productCode = productRegisterFormView.getTxtCode().getText();
-
-        product = new Product(stock, name, price, availability, stock, brand, productCode, stock);
+        product = new Product(null, 
+                productRegisterFormView.getTxtName().getText(), 
+                productRegisterFormView.getTxtBrand().getText(),
+                Double.valueOf(productRegisterFormView.getTxtPrice().getText()), 
+                Integer.valueOf(productRegisterFormView.getTxtStock().getText()), 
+                productRegisterFormView.getJcbAvailability().isSelected(), 
+                productRegisterFormView.getTxtCode().getText());
 
         System.out.println(product);
 

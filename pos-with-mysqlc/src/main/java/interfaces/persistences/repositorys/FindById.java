@@ -4,5 +4,5 @@ import java.util.Optional;
 
 public interface FindById<T, K> {
     
-    Optional<T> findById (K id) throws Exception;
+    Optional<T> findById (K id);
 }

@@ -26,10 +26,5 @@ public interface IProduct extends Entity<Integer> {
     
     String getProductCode();
     
-    void setProductCode(String productCode);
-    
-    Integer getQuantity();
-    
-    void setQuantity(Integer quantity);
-    
+    void setProductCode(String productCode);    
 }

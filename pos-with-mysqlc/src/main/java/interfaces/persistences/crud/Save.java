@@ -1,7 +1,9 @@
 package interfaces.persistences.crud;
 
+import java.util.Optional;
+
 @FunctionalInterface
 public interface Save<T> {
-
-     T save(T object) throws Exception;
+    
+    Optional<T> save(T object);
 }

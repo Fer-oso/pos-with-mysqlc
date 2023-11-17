@@ -4,47 +4,100 @@ import entitiys.models.product.Product;
 import interfaces.persistences.repositorys.entitys.products.ProductRepository;
 import interfaces.services.ProductService;
 import java.util.ArrayList;
-import java.util.Optional;
+import lombok.SneakyThrows;
+import services.exceptions.ProductServiceException;
 
-public class ProductServiceImp implements ProductService{
+public class ProductServiceImp implements ProductService {
 
     private static final long serialVersionUID = 1L;
-    
+
     private final ProductRepository productRepository;
 
     public ProductServiceImp(ProductRepository productRepository) {
+
         this.productRepository = productRepository;
     }
+
+    Product product;
     
     @Override
-    public Product save(Product object) throws Exception {
-        
-        try {
-            return productRepository.save(object);
-        } catch (Exception e) {
-            
-            throw new Exception(e.getMessage());
+    @SneakyThrows
+    public Product save(Product object) {
+
+        if (!checkDuplicate(object)) {
+
+            return productRepository.save(object).orElseThrow();
+
+        } else {
+
+            throw new ProductServiceException("Cant duplicate registers, that product already registered with product_code " + product.getProductCode());
         }
     }
 
     @Override
-    public Product update(Integer id, Product object) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    @SneakyThrows
+    public Product findById(Integer id) {
+
+        if (productRepository.findById(id).isPresent()) {
+
+            return productRepository.findById(id).orElseThrow();
+
+        } else {
+
+            throw new ProductServiceException("No value present with that id");
+        }
     }
 
     @Override
-    public void delete(Integer id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    @SneakyThrows
+    public Product update(Integer id, Product object) {
+        
+        if (productRepository.findById(id).isPresent()) {
+            
+             return productRepository.update(id, object).orElseThrow();
+        }else{
+        
+            throw new ProductServiceException("No value present with that id");
+        }   
     }
 
     @Override
-    public Optional<Product> findById(Integer id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    @SneakyThrows
+    public void delete(Integer id) {
+
+        Product product = productRepository.findById(id).orElseThrow(() -> new ProductServiceException("No value present"));
+
+        productRepository.delete(product.getId());
     }
 
     @Override
-    public ArrayList<Product> findAll() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    @SneakyThrows
+    public ArrayList<Product> findAll() {
+
+        try {
+
+            if (productRepository.findAll().isEmpty()) {
+
+                throw new ProductServiceException("empty list");
+            }
+
+        } catch (ProductServiceException e) {
+
+            System.out.println(e.getMessage());
+        }
+        
+        return productRepository.findAll();
     }
 
+    private boolean checkDuplicate(Product object) {
+
+        return findAll().stream().anyMatch(t -> {
+
+            product = t;
+
+            return (t.getName().equalsIgnoreCase(object.getName())
+                    && t.getBrand().equalsIgnoreCase(object.getBrand())
+                    && t.getProductCode().equalsIgnoreCase(object.getProductCode()));
+        });
+    }
 }

@@ -4,6 +4,9 @@ public class DaoExceptions extends Exception{
 
     private static final long serialVersionUID = 1L;
 
+    public DaoExceptions() {
+    }
+
     public DaoExceptions(String message) {
         super(message);
     }

@@ -1,7 +1,9 @@
 package interfaces.persistences.crud;
 
+import java.util.Optional;
+
 public interface Update<T,ID> {
     
-    T update (ID id, T object) throws Exception;
+    Optional<T> update (ID id, T object);
     
 }

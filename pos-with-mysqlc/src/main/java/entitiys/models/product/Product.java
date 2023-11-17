@@ -2,25 +2,26 @@ package entitiys.models.product;
 
 import interfaces.entitys.product.IProduct;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@EqualsAndHashCode
 public class Product implements IProduct{
 
     private static final long serialVersionUID = 1L;
 
     private Integer id;
     private String name;
-    private Double price;
-    private boolean availability;
-    private Integer stock;
     private String brand;
+    private Double price; 
+    private Integer stock;
+    private boolean availability;
     private String productCode;
-    private Integer quantity;
-
+    
     @Override
     public Integer getId() {
         return id;
@@ -89,15 +90,5 @@ public class Product implements IProduct{
     @Override
     public void setProductCode(String productCode) {
         this.productCode = productCode;
-    }
-
-    @Override
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    @Override
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
     }
 }

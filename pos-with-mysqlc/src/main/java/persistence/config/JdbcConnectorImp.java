@@ -6,7 +6,8 @@ import persistence.dao.exceptios.DaoExceptions;
 
 public class JdbcConnectorImp implements DbConnector {
 
-    public static Connection connection;
+    private static Connection connection;
+    private static final long serialVersionUID = 1L;
 
     @Override
     public Connection startConnection() throws DaoExceptions {

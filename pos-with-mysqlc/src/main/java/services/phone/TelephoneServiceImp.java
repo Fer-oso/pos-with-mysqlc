@@ -3,12 +3,11 @@ package services.phone;
 import entitiys.models.phone.Telephone;
 import interfaces.persistences.repositorys.entitys.phones.TelephoneRepository;
 import interfaces.services.TelephoneService;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Optional;
 import services.exceptions.AddresServiceException;
 import services.exceptions.PhoneServiceException;
 import interfaces.entitys.phone.IPhone;
+import lombok.SneakyThrows;
 
 public class TelephoneServiceImp implements TelephoneService {
 
@@ -23,17 +22,18 @@ public class TelephoneServiceImp implements TelephoneService {
     }
 
     @Override
-    public Telephone save(Telephone object) throws Exception {
+    @SneakyThrows
+    public Telephone save(Telephone object) {
 
         if (checkDuplicate(object)) {
 
-             return findById(telephone.getId()).orElseThrow(() -> new Exception("Not found"));
-               
+            return findById(telephone.getId());
+
         } else {
 
             try {
 
-                return phoneRepository.save(object);
+                return phoneRepository.save(object).orElseThrow();
 
             } catch (Exception e) {
 
@@ -43,10 +43,11 @@ public class TelephoneServiceImp implements TelephoneService {
     }
 
     @Override
-    public Telephone update(Integer id, Telephone object) throws Exception {
+    @SneakyThrows
+    public Telephone update(Integer id, Telephone object) {
         try {
 
-            return phoneRepository.update(id, object);
+            return phoneRepository.update(id, object).orElseThrow();
 
         } catch (Exception e) {
 
@@ -55,7 +56,8 @@ public class TelephoneServiceImp implements TelephoneService {
     }
 
     @Override
-    public void delete(Integer id) throws Exception {
+    @SneakyThrows
+    public void delete(Integer id) {
         try {
 
             phoneRepository.delete(id);
@@ -67,10 +69,11 @@ public class TelephoneServiceImp implements TelephoneService {
     }
 
     @Override
-    public Optional<Telephone> findById(Integer id) throws Exception {
+    @SneakyThrows
+    public Telephone findById(Integer id) {
         try {
 
-            return phoneRepository.findById(id);
+            return phoneRepository.findById(id).orElseThrow(() -> new PhoneServiceException("Value not present. Cant find by that id"));
 
         } catch (Exception e) {
 
@@ -79,7 +82,8 @@ public class TelephoneServiceImp implements TelephoneService {
     }
 
     @Override
-    public ArrayList<Telephone> findAll() throws Exception {
+    @SneakyThrows
+    public ArrayList<Telephone> findAll() {
         try {
 
             return phoneRepository.findAll();
@@ -90,21 +94,14 @@ public class TelephoneServiceImp implements TelephoneService {
         }
     }
 
-    private boolean checkDuplicate(IPhone phone) throws Exception {
-   
-        try {
+    private boolean checkDuplicate(IPhone phone) {
 
-            return findAll().stream().anyMatch(t -> {
+        return findAll().stream().anyMatch(t -> {
 
-                telephone = t;
+            telephone = t;
 
-                return (t.getNumberPhone().equals(phone.getNumberPhone())
-                        && t.getTypePhone().equalsIgnoreCase(phone.getTypePhone()));
-            });
-
-        } catch (SQLException e) {
-
-            throw new AddresServiceException(e.getMessage());
-        }
+            return (t.getNumberPhone().equals(phone.getNumberPhone())
+                    && t.getTypePhone().equalsIgnoreCase(phone.getTypePhone()));
+        });
     }
 }

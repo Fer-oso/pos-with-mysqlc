@@ -4,5 +4,5 @@ import java.util.ArrayList;
 
 public interface FindAll<T> {
     
-    ArrayList<T> findAll() throws Exception;
+    ArrayList<T> findAll();
 }

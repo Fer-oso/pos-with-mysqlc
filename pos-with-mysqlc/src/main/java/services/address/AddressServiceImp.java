@@ -7,8 +7,9 @@ import java.util.Optional;
 import services.exceptions.AddresServiceException;
 import interfaces.persistences.repositorys.entitys.address.AddressRepository;
 import interfaces.services.AddressService;
+import lombok.SneakyThrows;
 
-public class StandardAddressServiceImp implements AddressService {
+public class AddressServiceImp implements AddressService {
 
     private static final long serialVersionUID = 1L;
 
@@ -16,25 +17,26 @@ public class StandardAddressServiceImp implements AddressService {
 
     private Address standardAddress;
 
-    public StandardAddressServiceImp(AddressRepository addressRepository) {
-        
+    public AddressServiceImp(AddressRepository addressRepository) {
+
         this.addressRepository = addressRepository;
     }
 
     @Override
-    public Address save(Address object) throws Exception {
+    @SneakyThrows({AddresServiceException.class, Exception.class})
+    public Address save(Address object) {
 
         if (checkDuplicate(object)) {
 
             System.out.println("duplicated" + object);
 
-            return findById(standardAddress.getId()).orElseThrow(() -> new Exception("Not found"));
+            return findById(standardAddress.getId());
 
         } else {
 
             try {
 
-                return addressRepository.save(object);
+                return addressRepository.save(object).orElseThrow();
 
             } catch (Exception e) {
 
@@ -44,11 +46,12 @@ public class StandardAddressServiceImp implements AddressService {
     }
 
     @Override
-    public Address update(Integer id, Address object) throws Exception {
+    @SneakyThrows
+    public Address update(Integer id, Address object) {
 
         try {
 
-            return addressRepository.update(id, object);
+            return addressRepository.update(id, object).orElseThrow();
 
         } catch (Exception e) {
 
@@ -57,23 +60,12 @@ public class StandardAddressServiceImp implements AddressService {
     }
 
     @Override
-    public void delete(Integer id) throws Exception {
+    @SneakyThrows
+    public void delete(Integer id) {
 
         try {
 
             addressRepository.delete(id);
-            
-        } catch (Exception e) {
-
-            throw new AddresServiceException(e.getMessage());
-        }
-    }
-
-    @Override
-    public Optional<Address> findById(Integer id) throws Exception {
-        try {
-
-            return addressRepository.findById(id);
 
         } catch (Exception e) {
 
@@ -82,35 +74,42 @@ public class StandardAddressServiceImp implements AddressService {
     }
 
     @Override
-    public ArrayList<Address> findAll() throws Exception {
-        
+    @SneakyThrows
+    public Address findById(Integer id) {
         try {
-            
+
+            return addressRepository.findById(id).orElseThrow();
+
+        } catch (Exception e) {
+
+            throw new AddresServiceException(e.getMessage());
+        }
+    }
+
+    @Override
+    @SneakyThrows
+    public ArrayList<Address> findAll() {
+
+        try {
+
             return addressRepository.findAll();
-            
+
         } catch (Exception e) {
 
             throw new AddresServiceException(e.getMessage());
         }
     }
 
-    private boolean checkDuplicate(Address address) throws Exception {
+    private boolean checkDuplicate(Address address) {
 
-        try {
+        return findAll().stream().anyMatch(t -> {
 
-            return findAll().stream().anyMatch(t -> {
+            standardAddress = t;
 
-                standardAddress = t;
-
-                return (t.getStreetNumber().equals(address.getStreetNumber())
-                        && t.getStreetDirection().equalsIgnoreCase(address.getStreetDirection())
-                        && t.getCity().equalsIgnoreCase(address.getCity())
-                        && t.getState().equalsIgnoreCase(address.getState()));
-            });
-
-        } catch (SQLException e) {
-
-            throw new AddresServiceException(e.getMessage());
-        }
+            return (t.getStreetNumber().equals(address.getStreetNumber())
+                    && t.getStreetDirection().equalsIgnoreCase(address.getStreetDirection())
+                    && t.getCity().equalsIgnoreCase(address.getCity())
+                    && t.getState().equalsIgnoreCase(address.getState()));
+        });
     }
 }

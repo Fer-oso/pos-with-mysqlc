@@ -74,10 +74,14 @@ public class ProductFindByPcController extends MouseAdapter implements ActionLis
         }
 
         if (e.getSource() == productFindByPcFormView.getBtnEdit()) {
-
+            
             if (setProductWithDataOfForm()) {
 
-                editProduct();
+                try {
+                    editProduct();
+                } catch (Exception ex) {
+                    Logger.getLogger(ProductFindByPcController.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
                 clearForm();
 
@@ -144,12 +148,14 @@ public class ProductFindByPcController extends MouseAdapter implements ActionLis
         this.productFindByPcFormView.getJtTableProducts().setModel(model);
     }
 @SneakyThrows
-    private Product editProduct() {
+    private Product editProduct() throws Exception{
 
         setProductWithDataOfForm();
 
         return productServiceImp.update(row, product);
     }
+    
+    
     @SneakyThrows
     private void deleteProduct() {
 

@@ -9,22 +9,24 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Optional;
+import lombok.SneakyThrows;
 import persistence.dao.exceptios.DaoExceptions;
 
 public class TelephoneRepositoryImp implements TelephoneRepository {
-    
+
     DbConnector dbConnector;
 
     public TelephoneRepositoryImp(DbConnector dbConnector) {
-        this.dbConnector = dbConnector; 
+        this.dbConnector = dbConnector;
     }
-    
+
     private static final long serialVersionUID = 1L;
 
     private static Integer idGeneratedKey;
 
     @Override
-    public Telephone save(Telephone object) throws Exception {
+    @SneakyThrows
+    public Optional<Telephone> save(Telephone object) {
         try {
 
             String sql = "INSERT INTO phone (number_phone, type_phone) VALUES (?, ?)";
@@ -38,7 +40,7 @@ public class TelephoneRepositoryImp implements TelephoneRepository {
             preparedStatement.executeUpdate();
 
             dbConnector.commit();
-            
+
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
 
             if (resultSet.next()) {
@@ -46,7 +48,7 @@ public class TelephoneRepositoryImp implements TelephoneRepository {
                 idGeneratedKey = resultSet.getInt(1);
             }
 
-            return findById(idGeneratedKey).get();
+            return findById(idGeneratedKey);
 
         } catch (SQLException e) {
 
@@ -61,12 +63,13 @@ public class TelephoneRepositoryImp implements TelephoneRepository {
     }
 
     @Override
-    public Telephone update(Integer id, Telephone object) throws Exception {
+    @SneakyThrows
+    public Optional<Telephone> update(Integer id, Telephone object) {
         try {
 
             String sql = "UPDATE phone SET number_phone = ?, type_phone = ? WHERE id = ?";
 
-           PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
+            PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
 
             preparedStatement.setInt(1, object.getNumberPhone());
 
@@ -78,7 +81,7 @@ public class TelephoneRepositoryImp implements TelephoneRepository {
 
             dbConnector.commit();
 
-            return findById(id).get();
+            return findById(id);
 
         } catch (SQLException e) {
 
@@ -93,7 +96,8 @@ public class TelephoneRepositoryImp implements TelephoneRepository {
     }
 
     @Override
-    public void delete(Integer id) throws Exception {
+    @SneakyThrows
+    public void delete(Integer id) {
         try {
 
             String sql = "DELETE FROM phone WHERE id = ?";
@@ -119,7 +123,8 @@ public class TelephoneRepositoryImp implements TelephoneRepository {
     }
 
     @Override
-    public Optional<Telephone> findById(Integer id) throws Exception {
+    @SneakyThrows
+    public Optional<Telephone> findById(Integer id) {
         try {
             String sql = "SELECT * FROM phone WHERE id = ?";
 
@@ -127,7 +132,7 @@ public class TelephoneRepositoryImp implements TelephoneRepository {
 
             preparedStatement.setInt(1, id);
 
-           ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
 
@@ -156,7 +161,8 @@ public class TelephoneRepositoryImp implements TelephoneRepository {
     }
 
     @Override
-    public ArrayList<Telephone> findAll() throws Exception {
+    @SneakyThrows
+    public ArrayList<Telephone> findAll() {
         try {
             String sql = "SELECT * FROM phone";
 
@@ -189,5 +195,4 @@ public class TelephoneRepositoryImp implements TelephoneRepository {
             dbConnector.closeConnection();
         }
     }
-
 }

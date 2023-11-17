@@ -17,6 +17,7 @@ import interfaces.services.TelephoneService;
 import java.io.Serializable;
 import interfaces.services.AddressService;
 import interfaces.services.ClientService;
+import java.awt.HeadlessException;
 
 public class ClientFindByNameController extends MouseAdapter implements ActionListener, Serializable {
 
@@ -195,7 +196,7 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
         String clientName = clientFindByNameFormView.getTxtSearch().getText();
 
-        return clientServiceImp.findAllByName(clientName);
+        return clientServiceImp.findAll();
     }
 
     private void editClient(Integer id, Client client) throws Exception {
@@ -210,7 +211,7 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
             JOptionPane.showMessageDialog(null, "Client edited succesfully");
 
-        } catch (Exception e) {
+        } catch (HeadlessException e) {
 
             JOptionPane.showMessageDialog(null, "Error editing client");
 

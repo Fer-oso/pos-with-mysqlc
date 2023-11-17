@@ -9,6 +9,7 @@ import persistence.dao.exceptios.DaoExceptions;
 import interfaces.persistences.repositorys.entitys.address.AddressRepository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import lombok.SneakyThrows;
 import persistence.config.DbConnector;
 
 public class AddressRepositoryImp implements AddressRepository {
@@ -24,7 +25,8 @@ public class AddressRepositoryImp implements AddressRepository {
     private Integer idGeneratedKey;
 
     @Override
-    public Address save(Address object) throws Exception {
+    @SneakyThrows
+    public Optional<Address> save(Address object) {
 
         try {
 
@@ -53,7 +55,7 @@ public class AddressRepositoryImp implements AddressRepository {
                 idGeneratedKey = resultSet.getInt(1);
             }
 
-            return findById(idGeneratedKey).get();
+            return findById(idGeneratedKey);
 
         } catch (SQLException e) {
 
@@ -68,7 +70,8 @@ public class AddressRepositoryImp implements AddressRepository {
     }
 
     @Override
-    public Address update(Integer id, Address object) throws Exception {
+    @SneakyThrows
+    public Optional<Address> update(Integer id, Address object) {
 
         try {
 
@@ -92,7 +95,7 @@ public class AddressRepositoryImp implements AddressRepository {
 
             dbConnector.commit();
 
-            return findById(id).get();
+            return findById(id);
 
         } catch (SQLException e) {
 
@@ -107,7 +110,8 @@ public class AddressRepositoryImp implements AddressRepository {
     }
 
     @Override
-    public void delete(Integer id) throws Exception {
+    @SneakyThrows
+    public void delete(Integer id){
 
         try {
 
@@ -134,7 +138,8 @@ public class AddressRepositoryImp implements AddressRepository {
     }
 
     @Override
-    public Optional<Address> findById(Integer id) throws Exception {
+    @SneakyThrows
+    public Optional<Address> findById(Integer id) {
 
         try {
 
@@ -177,7 +182,8 @@ public class AddressRepositoryImp implements AddressRepository {
     }
 
     @Override
-    public ArrayList<Address> findAll() throws Exception {
+    @SneakyThrows
+    public ArrayList<Address> findAll() {
 
         try {
             String sql = "SELECT * FROM address";

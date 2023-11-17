@@ -8,7 +8,7 @@ import views.clients.ClientFindByNameFormView;
 import views.clients.ClientRegisterFormView;
 import persistence.dao.AddressRepositoryImp;
 import persistence.dao.TelephoneRepositoryImp;
-import services.address.StandardAddressServiceImp;
+import services.address.AddressServiceImp;
 import services.client.ClientServiceImp;
 import services.phone.TelephoneServiceImp;
 import interfaces.persistences.repositorys.entitys.phones.TelephoneRepository;
@@ -35,7 +35,7 @@ public class POSController implements ActionListener {
 
     AddressRepository addressRepository = new AddressRepositoryImp(dbConnector);
 
-    AddressService addressService = new StandardAddressServiceImp(addressRepository);
+    AddressService addressService = new AddressServiceImp(addressRepository);
 
     TelephoneRepository phoneRepository = new TelephoneRepositoryImp(dbConnector);
 
@@ -45,7 +45,7 @@ public class POSController implements ActionListener {
 
     ClientService clientService = new ClientServiceImp(clientRepository);
 
-    ProductRepository productRepository = new ProductRepositoryImp();
+    ProductRepository productRepository = new ProductRepositoryImp(dbConnector);
     
     ProductService productService = new ProductServiceImp(productRepository);
 
