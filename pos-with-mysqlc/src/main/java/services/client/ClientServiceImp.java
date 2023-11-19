@@ -26,13 +26,13 @@ public class ClientServiceImp implements ClientService {
     @SneakyThrows
     public Client save(Client object) {
 
-        if (!checkDuplicate(object)) {
-
-            return clientRepository.save(object).orElseThrow();
+        if (checkDuplicateRegister(object)) {
+            
+            throw new Exception("Cant duplicate registers, that client already registered with SSN" + client.getSsn());
 
         } else {
 
-            throw new Exception("Cant duplicate registers, that client already registered with SSN" + client.getSsn());
+            return clientRepository.save(object).orElseThrow();
         }
     }
 
@@ -84,8 +84,9 @@ public class ClientServiceImp implements ClientService {
             throw new ClientServiceExceptions(e.getMessage());
         }
     }
-    
-    private boolean checkDuplicate(Client object){
+
+    @Override
+    public boolean checkDuplicateRegister(Client object) {
 
         return findAll().stream().anyMatch(t -> {
 

@@ -26,7 +26,7 @@ public class AddressServiceImp implements AddressService {
     @SneakyThrows({AddresServiceException.class, Exception.class})
     public Address save(Address object) {
 
-        if (checkDuplicate(object)) {
+        if (checkDuplicateRegister(object)) {
 
             System.out.println("duplicated" + object);
 
@@ -100,7 +100,8 @@ public class AddressServiceImp implements AddressService {
         }
     }
 
-    private boolean checkDuplicate(Address address) {
+    @Override
+    public boolean checkDuplicateRegister(Address address) {
 
         return findAll().stream().anyMatch(t -> {
 

@@ -18,15 +18,13 @@ public class ProductServiceImp implements ProductService {
         this.productRepository = productRepository;
     }
 
-    Product product;
-
     @Override
     @SneakyThrows
     public Product save(Product object) {
 
-        if (checkDuplicate(object)) {
+        if (checkDuplicateRegister(object)) {
 
-            throw new ProductServiceException("Cant duplicate registers, that product already registered with product_code " + product.getProductCode());
+            throw new ProductServiceException("Cant duplicate registers, that product already registered with product_code " + object.getProductCode());
 
         } else {
 
@@ -44,9 +42,7 @@ public class ProductServiceImp implements ProductService {
     @Override
     @SneakyThrows
     public Product update(Integer id, Product object) {
-
-       // findById(id);
-
+        
         return productRepository.update(id, object).orElseThrow(() -> new ProductServiceException("No value present with that id"));
     }
 
@@ -77,16 +73,16 @@ public class ProductServiceImp implements ProductService {
 
         return productRepository.findAll();
     }
-
-    private boolean checkDuplicate(Product object) {
-
+    
+  
+    @Override
+    public boolean checkDuplicateRegister(Product product) {
+        
         return findAll().stream().anyMatch(t -> {
 
-            product = t;
-
-            return (t.getName().equalsIgnoreCase(object.getName())
-                    && t.getBrand().equalsIgnoreCase(object.getBrand())
-                    && t.getProductCode().equalsIgnoreCase(object.getProductCode()));
+            return (t.getName().equalsIgnoreCase(product.getName())
+                    && t.getBrand().equalsIgnoreCase(product.getBrand())
+                    && t.getProductCode().equalsIgnoreCase(product.getProductCode()));
         });
     }
 }

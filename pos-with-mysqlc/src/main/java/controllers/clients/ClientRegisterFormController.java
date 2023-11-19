@@ -3,6 +3,7 @@ package controllers.clients;
 import entitiys.models.addres.Address;
 import entitiys.models.client.Client;
 import entitiys.models.phone.Telephone;
+import interfaces.entitys.addres.IAddress;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -11,6 +12,7 @@ import interfaces.services.TelephoneService;
 import interfaces.services.AddressService;
 import interfaces.services.ClientService;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ClientRegisterFormController implements ActionListener {
 
@@ -79,73 +81,42 @@ public class ClientRegisterFormController implements ActionListener {
 
             if (checkFields()) {
 
-                client = clientServiceImp.create(Client.class);
+                client = new Client(null,
+                        clientRegisterFormView.getTxtName().getText(),
+                        clientRegisterFormView.getTxtLastName().getText(),
+                        Integer.valueOf(clientRegisterFormView.getTxtAge().getText()),
+                        clientRegisterFormView.getTxtSsn().getText(),
+                        clientRegisterFormView.getTxtClasification().getText(),
+                        clientRegisterFormView.getJcbAvailability().isSelected(),
+                        new ArrayList<>(),
+                        new ArrayList<>());
 
-                client.setName(clientRegisterFormView.getTxtName().getText());
+                client = clientServiceImp.save(client);
 
-                client.setLastName(clientRegisterFormView.getTxtLastName().getText());
+                address = new Address(null,
+                        clientRegisterFormView.getTxtStreetDirection().getText(),
+                        Integer.valueOf(clientRegisterFormView.getTxtStreetNumber().getText()),
+                        clientRegisterFormView.getTxtCity().getText(),
+                        clientRegisterFormView.getTxtState().getText(),
+                        Integer.valueOf(clientRegisterFormView.getTxtPostalCode().getText()));
 
-                client.setAge(Integer.valueOf(clientRegisterFormView.getTxtAge().getText()));
+                address = addressServiceImp.save(address);
 
-                client.setAvailability(clientRegisterFormView.getJcbAvailability().isSelected());
+                telephone = new Telephone(null, 
+                        Integer.valueOf(clientRegisterFormView.getTxtNumberPhone().getText()),
+                        clientRegisterFormView.getTxtTypePhone().getText());
 
-                client.setSsn(clientRegisterFormView.getTxtSsn().getText());
+                telephone = phoneServiceImp.save(telephone);
 
-                client.setClasification(clientRegisterFormView.getTxtClasification().getText());
+                clientServiceImp.insertClientAddressPhone(client, address, telephone);
 
-                if (checkDuplicate(client)) {
-
-                    JOptionPane.showMessageDialog(null, "Client already registered");
-
-                } else {
-
-                    client = clientServiceImp.save(client);
-                    
-                    address = addressServiceImp.create(Address.class);
-
-                    address.setStreetDirection(clientRegisterFormView.getTxtStreetDirection().getText());
-
-                    address.setStreetNumber(Integer.valueOf(clientRegisterFormView.getTxtStreetNumber().getText()));
-
-                    address.setCity(clientRegisterFormView.getTxtCity().getText());
-
-                    address.setState(clientRegisterFormView.getTxtState().getText());
-
-                    address.setPostalCode(Integer.valueOf(clientRegisterFormView.getTxtPostalCode().getText()));
-
-                    address = addressServiceImp.save(address);
-
-                    telephone = phoneServiceImp.create(Telephone.class);
-
-                    telephone.setNumberPhone(Integer.valueOf(clientRegisterFormView.getTxtNumberPhone().getText()));
-
-                    telephone.setTypePhone(clientRegisterFormView.getTxtTypePhone().getText());
-
-                    telephone = phoneServiceImp.save(telephone);
-
-                    clientServiceImp.insertClientAddressPhone(client, address, telephone);
-
-                    JOptionPane.showMessageDialog(clientRegisterFormView, "Client created succesfully");
-                }
+                JOptionPane.showMessageDialog(clientRegisterFormView, "Client created succesfully");
             }
 
         } catch (Exception e) {
-            
+
             throw new Exception(e.getMessage());
         }
-    }
-
-    private boolean checkDuplicate(Client client) throws Exception {
-
-        return clientServiceImp.findAll().stream().anyMatch(t -> {
-
-            this.client = t;
-
-            return (t.getName().equals(client.getName())
-                    && t.getLastName().equalsIgnoreCase(client.getLastName())
-                    && t.getSsn().equalsIgnoreCase(client.getSsn()));
-        });
-
     }
 
     private boolean checkFields() {

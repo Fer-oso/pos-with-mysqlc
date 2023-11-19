@@ -6,7 +6,6 @@ import interfaces.services.TelephoneService;
 import java.util.ArrayList;
 import services.exceptions.AddresServiceException;
 import services.exceptions.PhoneServiceException;
-import interfaces.entitys.phone.IPhone;
 import lombok.SneakyThrows;
 
 public class TelephoneServiceImp implements TelephoneService {
@@ -25,7 +24,7 @@ public class TelephoneServiceImp implements TelephoneService {
     @SneakyThrows
     public Telephone save(Telephone object) {
 
-        if (checkDuplicate(object)) {
+        if (checkDuplicateRegister(object)) {
 
             throw new AddresServiceException("Cant duplicate registers, that product already registered with number_phone " + object.getNumberPhone());
 
@@ -86,8 +85,8 @@ public class TelephoneServiceImp implements TelephoneService {
             throw new PhoneServiceException(e.getMessage());
         }
     }
-
-    private boolean checkDuplicate(IPhone phone) {
+    @Override
+    public boolean checkDuplicateRegister(Telephone phone) {
 
         return findAll().stream().anyMatch(t -> {
 

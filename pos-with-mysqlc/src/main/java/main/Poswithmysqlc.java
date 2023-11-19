@@ -1,6 +1,5 @@
 package main;
 
-import entitiys.models.product.Product;
 import persistence.dao.AddressRepositoryImp;
 import persistence.dao.TelephoneRepositoryImp;
 import services.address.AddressServiceImp;
@@ -53,14 +52,14 @@ public class Poswithmysqlc {
 //         
       //  productService.save(productToSave);
          
-      Product productDB = productService.findById(6);
+     // Product productDB = productService.findById(6);
 //        
 //        
 //            
 //         System.out.println(productDB);
 //         productDB.setName("fer");
 //         
-        System.out.println(productService.update(5, productDB));
+      //  System.out.println(productService.update(5, productDB));
 //                  
 //        
 //         System.out.println(productService.findAll());
