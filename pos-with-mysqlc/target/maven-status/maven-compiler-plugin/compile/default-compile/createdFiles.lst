@@ -3,10 +3,8 @@ persistence\config\DbConnector.class
 persistence\dao\exceptios\DaoExceptions.class
 interfaces\entitys\addres\IAddress.class
 main\Poswithmysqlc.class
-interfaces\persistences\repositorys\entitys\clients\client\FindAllByClasification.class
 interfaces\persistences\crud\CrudRepository.class
 interfaces\persistences\crud\Delete.class
-interfaces\persistences\repositorys\entitys\clients\client\FindAllByName.class
 interfaces\entitys\phone\IPhone.class
 interfaces\persistences\repositorys\entitys\address\AddressRepository.class
 views\Products\ProductFindByPcFormView.class
@@ -17,11 +15,11 @@ interfaces\persistences\repositorys\Repository.class
 interfaces\entitys\entity\Entity.class
 main\FunctionalEjemplos.class
 entitiys\models\product\Product.class
-interfaces\persistences\repositorys\entitys\clients\client\FindAllByAge.class
 interfaces\persistences\repositorys\entitys\clients\client\IClientRepository.class
 controllers\products\ProductFindByPcController.class
 views\Products\ProductFindByPcFormView$1.class
 interfaces\services\crud\CrudService.class
+services\exceptions\ClientServiceException.class
 interfaces\persistences\repositorys\FindAll.class
 interfaces\entitys\person\Person.class
 interfaces\services\IAddressService.class
@@ -46,7 +44,6 @@ interfaces\persistences\repositorys\entitys\phones\IPhoneRepository.class
 views\clients\ClientRegisterFormView.class
 interfaces\services\AddressService.class
 persistence\dao\ClientRepositoryImp.class
-interfaces\persistences\repositorys\entitys\clients\client\FindBySsn.class
 interfaces\persistences\repositorys\entitys\products\ProductRepository.class
 persistence\config\JdbcConnectorImp.class
 entitiys\models\client\Client.class
@@ -61,14 +58,12 @@ interfaces\services\IClientService.class
 services\products\ProductServiceImp.class
 views\clients\ClientFindByNameFormView$1.class
 services\client\ClientServiceImp.class
-services\exceptions\ClientServiceExceptions.class
 views\clients\ClientFindByNameFormView.class
 interfaces\persistences\repositorys\entitys\address\IAddressRepository.class
 interfaces\persistences\repositorys\entitys\products\IProductRepository.class
 views\Products\ProductRegisterFormView$1.class
 entitiys\models\addres\Address.class
 interfaces\persistences\crud\Save.class
-interfaces\persistences\repositorys\entitys\clients\client\FindAllByLastName.class
 views\POS.class
 services\exceptions\PhoneServiceException.class
 services\exceptions\ProductServiceException.class

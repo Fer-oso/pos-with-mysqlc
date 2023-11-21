@@ -3,7 +3,6 @@ package controllers.clients;
 import entitiys.models.addres.Address;
 import entitiys.models.client.Client;
 import entitiys.models.phone.Telephone;
-import interfaces.entitys.addres.IAddress;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -12,7 +11,8 @@ import interfaces.services.TelephoneService;
 import interfaces.services.AddressService;
 import interfaces.services.ClientService;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ClientRegisterFormController implements ActionListener {
 
@@ -25,13 +25,6 @@ public class ClientRegisterFormController implements ActionListener {
 
     /*VIEWS*/
     private final ClientRegisterFormView clientRegisterFormView;
-
-    private Client client;
-
-    private Address address;
-
-    private Telephone telephone;
-
     /*Constructors*/
     public ClientRegisterFormController(ClientRegisterFormView clientRegisterFormView, ClientService clientServiceImp, AddressService addressServiceImp, TelephoneService phoneServiceImp) {
 
@@ -60,10 +53,16 @@ public class ClientRegisterFormController implements ActionListener {
         if (e.getSource() == clientRegisterFormView.getBtnSave()) {
 
             try {
+                
                 createNewClient();
 
             } catch (Exception ex) {
-                System.out.println(ex.getMessage());
+                
+                try {
+                    throw new Exception(ex.getMessage());
+                } catch (Exception ex1) {
+                    Logger.getLogger(ClientRegisterFormController.class.getName()).log(Level.SEVERE, null, ex1);
+                }
             }
 
             if (e.getSource() == clientRegisterFormView.getBtnCancel()) {
@@ -71,7 +70,6 @@ public class ClientRegisterFormController implements ActionListener {
                 clearForm();
             }
         }
-
     }
 
     /*Functions*/
@@ -81,7 +79,7 @@ public class ClientRegisterFormController implements ActionListener {
 
             if (checkFields()) {
 
-                client = new Client(null,
+               Client client = new Client(null,
                         clientRegisterFormView.getTxtName().getText(),
                         clientRegisterFormView.getTxtLastName().getText(),
                         Integer.valueOf(clientRegisterFormView.getTxtAge().getText()),
@@ -93,22 +91,22 @@ public class ClientRegisterFormController implements ActionListener {
 
                 client = clientServiceImp.save(client);
 
-                address = new Address(null,
-                        clientRegisterFormView.getTxtStreetDirection().getText(),
-                        Integer.valueOf(clientRegisterFormView.getTxtStreetNumber().getText()),
-                        clientRegisterFormView.getTxtCity().getText(),
-                        clientRegisterFormView.getTxtState().getText(),
-                        Integer.valueOf(clientRegisterFormView.getTxtPostalCode().getText()));
-
-                address = addressServiceImp.save(address);
-
-                telephone = new Telephone(null, 
-                        Integer.valueOf(clientRegisterFormView.getTxtNumberPhone().getText()),
-                        clientRegisterFormView.getTxtTypePhone().getText());
-
-                telephone = phoneServiceImp.save(telephone);
-
-                clientServiceImp.insertClientAddressPhone(client, address, telephone);
+//               Address address = new Address(null,
+//                        clientRegisterFormView.getTxtStreetDirection().getText(),
+//                        Integer.valueOf(clientRegisterFormView.getTxtStreetNumber().getText()),
+//                        clientRegisterFormView.getTxtCity().getText(),
+//                        clientRegisterFormView.getTxtState().getText(),
+//                        Integer.valueOf(clientRegisterFormView.getTxtPostalCode().getText()));
+//
+//                address = addressServiceImp.save(address);
+//
+//               Telephone telephone = new Telephone(null, 
+//                        Integer.valueOf(clientRegisterFormView.getTxtNumberPhone().getText()),
+//                        clientRegisterFormView.getTxtTypePhone().getText());
+//
+//                telephone = phoneServiceImp.save(telephone);
+//
+//                clientServiceImp.insertClientAddressPhone(client, address, telephone);
 
                 JOptionPane.showMessageDialog(clientRegisterFormView, "Client created succesfully");
             }

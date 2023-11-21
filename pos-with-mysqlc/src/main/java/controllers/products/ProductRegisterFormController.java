@@ -9,7 +9,6 @@ import java.awt.event.MouseEvent;
 import javax.swing.table.DefaultTableModel;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.function.Consumer;
 import javax.swing.JOptionPane;
 import lombok.SneakyThrows;
 import views.Products.ProductRegisterFormView;
@@ -140,7 +139,7 @@ public class ProductRegisterFormController extends MouseAdapter implements Actio
         }
     }
 
-    private Product save() throws Exception {
+    private Product save() {
 
         if (productServiceImp.checkDuplicateRegister(product)) {
 
@@ -166,7 +165,7 @@ public class ProductRegisterFormController extends MouseAdapter implements Actio
         }
     }
 
-    public void listProducts() throws Exception {
+    public void listProducts() {
 
         listProducts = productServiceImp.findAll();
 

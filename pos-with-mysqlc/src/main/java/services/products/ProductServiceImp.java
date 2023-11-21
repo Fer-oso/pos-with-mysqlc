@@ -42,7 +42,7 @@ public class ProductServiceImp implements ProductService {
     @Override
     @SneakyThrows
     public Product update(Integer id, Product object) {
-        
+
         return productRepository.update(id, object).orElseThrow(() -> new ProductServiceException("No value present with that id"));
     }
 
@@ -59,25 +59,17 @@ public class ProductServiceImp implements ProductService {
     @SneakyThrows
     public ArrayList<Product> findAll() {
 
-        try {
-
-            if (productRepository.findAll().isEmpty()) {
-
-                throw new ProductServiceException("empty list");
-            }
-
-        } catch (ProductServiceException e) {
-
-            System.out.println(e.getMessage());
+        if (productRepository.findAll().isEmpty()) {
+            
+            throw new ProductServiceException("Empty List");
         }
 
         return productRepository.findAll();
     }
-    
-  
+
     @Override
     public boolean checkDuplicateRegister(Product product) {
-        
+
         return findAll().stream().anyMatch(t -> {
 
             return (t.getName().equalsIgnoreCase(product.getName())

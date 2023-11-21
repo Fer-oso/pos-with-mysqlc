@@ -6,17 +6,14 @@ import entitiys.models.phone.Telephone;
 import interfaces.persistences.repositorys.entitys.clients.client.ClientRepository;
 import interfaces.services.ClientService;
 import java.util.ArrayList;
-import java.util.Optional;
 import lombok.SneakyThrows;
-import services.exceptions.ClientServiceExceptions;
+import services.exceptions.ClientServiceException;
 
 public class ClientServiceImp implements ClientService {
 
     private static final long serialVersionUID = 1L;
 
     private final ClientRepository clientRepository;
-
-    private Client client;
 
     public ClientServiceImp(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
@@ -26,9 +23,9 @@ public class ClientServiceImp implements ClientService {
     @SneakyThrows
     public Client save(Client object) {
 
-        if (checkDuplicateRegister(object)) {
-            
-            throw new Exception("Cant duplicate registers, that client already registered with SSN" + client.getSsn());
+        if (true) { // CHEQUEAR ESTO. 
+
+            throw new ClientServiceException("Cant duplicate registers, that client already registered with SSN" + object.getSsn());
 
         } else {
 
@@ -38,59 +35,48 @@ public class ClientServiceImp implements ClientService {
 
     @Override
     @SneakyThrows
+    public Client findById(Integer id) {
+
+        return clientRepository.findById(id).orElseThrow(() -> new ClientServiceException("No value present with that id"));
+    }
+
+    @Override
+    @SneakyThrows
     public Client update(Integer id, Client object) {
 
-        try {
-
-            return clientRepository.update(id, object).orElseThrow();
-
-        } catch (Exception e) {
-
-            throw new ClientServiceExceptions(e.getMessage());
-        }
+        return clientRepository.update(id, object).orElseThrow(() -> new ClientServiceException("No value present with that id"));
     }
 
     @Override
     @SneakyThrows
     public void delete(Integer id) {
 
-        clientRepository.delete(id);
-    }
+        Client client = clientRepository.findById(id).orElseThrow(() -> new ClientServiceException("No value present with that id"));
 
-    @Override
-    @SneakyThrows
-    public Client findById(Integer id) {
-
-        try {
-
-            return clientRepository.findById(id).orElseThrow();
-
-        } catch (Exception e) {
-
-            throw new ClientServiceExceptions(e.getMessage());
-        }
+        clientRepository.delete(client.getId());
     }
 
     @Override
     @SneakyThrows
     public ArrayList<Client> findAll() {
 
-        try {
+        if (clientRepository.findAll().isEmpty()) {
+
+            throw new ClientServiceException("Empty List");
+            
+        } else {
 
             return clientRepository.findAll();
-
-        } catch (Exception e) {
-
-            throw new ClientServiceExceptions(e.getMessage());
         }
     }
 
     @Override
     public boolean checkDuplicateRegister(Client object) {
+        
+        
+        
 
         return findAll().stream().anyMatch(t -> {
-
-            client = t;
 
             return (t.getName().equals(object.getName())
                     && t.getLastName().equalsIgnoreCase(object.getLastName())
@@ -109,7 +95,7 @@ public class ClientServiceImp implements ClientService {
 
         } catch (Exception e) {
 
-            throw new ClientServiceExceptions(e.getMessage());
+            throw new ClientServiceException(e.getMessage());
         }
     }
 
@@ -121,7 +107,7 @@ public class ClientServiceImp implements ClientService {
 
         } catch (Exception e) {
 
-            throw new ClientServiceExceptions(e.getMessage());
+            throw new ClientServiceException(e.getMessage());
         }
     }
 
@@ -133,7 +119,15 @@ public class ClientServiceImp implements ClientService {
 
         } catch (Exception e) {
 
-            throw new ClientServiceExceptions(e.getMessage());
+            throw new ClientServiceException(e.getMessage());
         }
     }
+
+    @Override
+    public ArrayList<Client> findAllBy(String value) {
+        
+        return clientRepository.findBy(value);
+    }
+    
+     
 }

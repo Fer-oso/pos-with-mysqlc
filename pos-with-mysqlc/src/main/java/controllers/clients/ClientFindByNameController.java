@@ -75,7 +75,7 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
                 try {
                     refreshTable();
 
-                    listClients = findAllByName();
+               listClients = findAllBy();
 
                     listClients();
 
@@ -140,8 +140,6 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
                 refreshTable();
 
-                listClients = clientServiceImp.findAll();
-
                 listClients();
 
             } catch (Exception ex) {
@@ -172,7 +170,8 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
     public void listClients() throws Exception {
 
         try {
-            this.listClients = clientServiceImp.findAll();
+            
+           listClients = clientServiceImp.findAll();
 
             model = (DefaultTableModel) clientFindByNameFormView.getJtTableClients().getModel();
 
@@ -192,11 +191,11 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
         }
     }
 
-    private ArrayList<Client> findAllByName() throws Exception {
+    private ArrayList<Client> findAllBy() throws Exception {
 
-        String clientName = clientFindByNameFormView.getTxtSearch().getText();
+        String value = clientFindByNameFormView.getTxtSearch().getText();
 
-        return clientServiceImp.findAll();
+        return clientServiceImp.findAllBy(value);
     }
 
     private void editClient(Integer id, Client client) throws Exception {
@@ -250,7 +249,7 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
         row = clientFindByNameFormView.getJtTableClients().getSelectedRow();
 
         client = listClients.get(row);
-
+        
         id = client.getId();
     }
 

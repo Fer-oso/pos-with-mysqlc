@@ -1,5 +1,6 @@
 package main;
 
+import entitiys.models.client.Client;
 import persistence.dao.AddressRepositoryImp;
 import persistence.dao.TelephoneRepositoryImp;
 import services.address.AddressServiceImp;
@@ -48,8 +49,19 @@ public class Poswithmysqlc {
          
        // FunctionalEjemplos functionalEjemplos = new FunctionalEjemplos();
         
-       //  Product productToSave = new Product(1, "lupi", "asd", 100.00, 3, true, "fer");
+        
 //         
+//Client clientBD = clientService.findById(20);
+//
+//clientBD.setName("Fernando");
+//
+//clientService.update(20, clientBD);
+     //   productService.delete(5);
+  
+
+// Product productToSave = productService.findById(5);
+//productToSave.setStock(10);
+//        productService.update(5, productToSave);
       //  productService.save(productToSave);
          
      // Product productDB = productService.findById(6);
@@ -88,5 +100,10 @@ public class Poswithmysqlc {
 //        
 //        product4.ifPresent(functionalEjemplos.guardarymostrar);
         
+
+        
+      
+        
+     //   System.out.println(clientService.update(19, clientBD));
     }
 }

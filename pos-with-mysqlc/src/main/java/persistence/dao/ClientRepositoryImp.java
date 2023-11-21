@@ -26,8 +26,6 @@ public class ClientRepositoryImp implements ClientRepository {
 
     private Integer idGeneratedKey;
 
-    private Client client;
-
     @Override
     @SneakyThrows
     public Optional<Client> save(Client object) {
@@ -154,12 +152,14 @@ public class ClientRepositoryImp implements ClientRepository {
             PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
 
             preparedStatement.setInt(1, id);
+            
+            Client client = null;
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
 
-                client = new Client(
+               client = new Client(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getString("lastname"),
@@ -316,7 +316,6 @@ public class ClientRepositoryImp implements ClientRepository {
 
             dbConnector.closeConnection();
         }
-
     }
 
     @Override
@@ -355,28 +354,55 @@ public class ClientRepositoryImp implements ClientRepository {
     }
 
     @Override
-    public ArrayList<Client> findAllByName(String name) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    @SneakyThrows
+    public ArrayList<Client> findBy(String value) {
+        
+        try {
+            String sql = "SELECT * FROM clients WHERE name = ? OR lastname = ? OR age = ? OR ssn = ? OR clasification = ?";
+            
+            PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
+            
+            preparedStatement.setString(1, value);
+            
+            preparedStatement.setString(2, value);
+            
+            preparedStatement.setInt(3, Integer.parseInt(value));
+            
+            preparedStatement.setString(4, value);
+            
+            preparedStatement.setString(5, value);
+            
+            ResultSet resultSet = preparedStatement.executeQuery();
+            
+            ArrayList<Client> clientList = new ArrayList<>();
+            
+            while (resultSet.next()) {                
+                
+                clientList.add( new Client(resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("lastname"),
+                        resultSet.getInt("age"),
+                        resultSet.getString("ssn"),
+                        resultSet.getString("clasification"),
+                        resultSet.getBoolean("available"),
+                        new ArrayList<>(),
+                        new ArrayList<>()));
+            }
+            
+            return clientList;
+        
+        } catch (Exception e) {
+            
+            dbConnector.rollbackTransaction();
+            
+            throw new DaoExceptions(e.getMessage());
+            
+        } finally {
+        
+            dbConnector.closeConnection();
+        }
+        
     }
-
-    @Override
-    public ArrayList<Client> findAllByLastName(String lastName) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public ArrayList<Client> findAllByAge(int age) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Client findBySsn(String ssn) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public ArrayList<Client> findAllByClasification(String clasification) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
+    
+    
 }

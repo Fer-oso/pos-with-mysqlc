@@ -6,8 +6,10 @@ import interfaces.entitys.clients.IClient;
 import interfaces.persistences.crud.CrudRepository;
 import java.util.ArrayList;
 
-public interface IClientRepository<T extends IClient,ID> extends FindAllByName<T>, FindAllByLastName<T>, FindAllByAge<T>, FindBySsn<T>, FindAllByClasification<T>, CrudRepository<T, ID> {
-
+public interface IClientRepository<T extends IClient,ID> extends CrudRepository<T, ID> {
+    
+    ArrayList<T> findBy(String value);
+    
     void insertClientAddress(T client, Address address) throws Exception;
 
     void insertClientPhone(T client, Telephone phone) throws Exception;
