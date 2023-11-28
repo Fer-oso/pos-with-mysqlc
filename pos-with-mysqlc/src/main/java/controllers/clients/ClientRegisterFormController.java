@@ -10,9 +10,9 @@ import views.clients.ClientRegisterFormView;
 import interfaces.services.TelephoneService;
 import interfaces.services.AddressService;
 import interfaces.services.ClientService;
+import java.awt.HeadlessException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import lombok.SneakyThrows;
 
 public class ClientRegisterFormController implements ActionListener {
 
@@ -21,12 +21,19 @@ public class ClientRegisterFormController implements ActionListener {
 
     private final AddressService addressServiceImp;
 
-    private final TelephoneService phoneServiceImp;
+    private final TelephoneService telehponeServiceImp;
+
+    Client client;
+
+    Address address;
+
+    Telephone telephone;
 
     /*VIEWS*/
     private final ClientRegisterFormView clientRegisterFormView;
+
     /*Constructors*/
-    public ClientRegisterFormController(ClientRegisterFormView clientRegisterFormView, ClientService clientServiceImp, AddressService addressServiceImp, TelephoneService phoneServiceImp) {
+    public ClientRegisterFormController(ClientRegisterFormView clientRegisterFormView, ClientService clientServiceImp, AddressService addressServiceImp, TelephoneService telehponeServiceImp) {
 
         this.clientRegisterFormView = clientRegisterFormView;
 
@@ -34,7 +41,7 @@ public class ClientRegisterFormController implements ActionListener {
 
         this.addressServiceImp = addressServiceImp;
 
-        this.phoneServiceImp = phoneServiceImp;
+        this.telehponeServiceImp = telehponeServiceImp;
 
         addACtionsListeners();
     }
@@ -53,16 +60,16 @@ public class ClientRegisterFormController implements ActionListener {
         if (e.getSource() == clientRegisterFormView.getBtnSave()) {
 
             try {
-                
+
                 createNewClient();
 
+                save(client, address, telephone);
+
+                clearForm();
+
             } catch (Exception ex) {
-                
-                try {
-                    throw new Exception(ex.getMessage());
-                } catch (Exception ex1) {
-                    Logger.getLogger(ClientRegisterFormController.class.getName()).log(Level.SEVERE, null, ex1);
-                }
+
+                System.out.println(ex.getMessage());
             }
 
             if (e.getSource() == clientRegisterFormView.getBtnCancel()) {
@@ -79,7 +86,7 @@ public class ClientRegisterFormController implements ActionListener {
 
             if (checkFields()) {
 
-               Client client = new Client(null,
+                client = new Client(null,
                         clientRegisterFormView.getTxtName().getText(),
                         clientRegisterFormView.getTxtLastName().getText(),
                         Integer.valueOf(clientRegisterFormView.getTxtAge().getText()),
@@ -89,32 +96,44 @@ public class ClientRegisterFormController implements ActionListener {
                         new ArrayList<>(),
                         new ArrayList<>());
 
-                client = clientServiceImp.save(client);
+                address = new Address(null,
+                        clientRegisterFormView.getTxtStreetDirection().getText(),
+                        Integer.valueOf(clientRegisterFormView.getTxtStreetNumber().getText()),
+                        clientRegisterFormView.getTxtCity().getText(),
+                        clientRegisterFormView.getTxtState().getText(),
+                        Integer.valueOf(clientRegisterFormView.getTxtPostalCode().getText()));
 
-//               Address address = new Address(null,
-//                        clientRegisterFormView.getTxtStreetDirection().getText(),
-//                        Integer.valueOf(clientRegisterFormView.getTxtStreetNumber().getText()),
-//                        clientRegisterFormView.getTxtCity().getText(),
-//                        clientRegisterFormView.getTxtState().getText(),
-//                        Integer.valueOf(clientRegisterFormView.getTxtPostalCode().getText()));
-//
-//                address = addressServiceImp.save(address);
-//
-//               Telephone telephone = new Telephone(null, 
-//                        Integer.valueOf(clientRegisterFormView.getTxtNumberPhone().getText()),
-//                        clientRegisterFormView.getTxtTypePhone().getText());
-//
-//                telephone = phoneServiceImp.save(telephone);
-//
-//                clientServiceImp.insertClientAddressPhone(client, address, telephone);
-
-                JOptionPane.showMessageDialog(clientRegisterFormView, "Client created succesfully");
+                telephone = new Telephone(null,
+                        Integer.valueOf(clientRegisterFormView.getTxtNumberPhone().getText()),
+                        clientRegisterFormView.getTxtTypePhone().getText());
             }
 
-        } catch (Exception e) {
+        } catch (HeadlessException | NumberFormatException e) {
 
             throw new Exception(e.getMessage());
         }
+    }
+
+    @SneakyThrows
+    private void save(Client client, Address address, Telephone telephone) {
+
+        if (clientServiceImp.checkDuplicateRegister(client)) {
+
+            JOptionPane.showMessageDialog(null, "Client already registered, can find him with SSN " + client.getSsn());
+
+        } else {
+
+            client = clientServiceImp.save(client);
+
+            address = addressServiceImp.save(address);
+
+            telephone = telehponeServiceImp.save(telephone);
+
+            clientServiceImp.insertClientAddressPhone(client, address, telephone);
+
+            JOptionPane.showMessageDialog(clientRegisterFormView, "Client registered succesfully");
+        }
+
     }
 
     private boolean checkFields() {
