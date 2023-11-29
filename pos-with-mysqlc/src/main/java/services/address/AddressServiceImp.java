@@ -1,9 +1,7 @@
 package services.address;
 
 import entitiys.models.addres.Address;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Optional;
 import services.exceptions.AddresServiceException;
 import interfaces.persistences.repositorys.entitys.address.AddressRepository;
 import interfaces.services.AddressService;
@@ -14,8 +12,8 @@ public class AddressServiceImp implements AddressService {
     private static final long serialVersionUID = 1L;
 
     private final AddressRepository addressRepository;
-
-    private Address standardAddress;
+    
+     Address address;
 
     public AddressServiceImp(AddressRepository addressRepository) {
 
@@ -23,90 +21,56 @@ public class AddressServiceImp implements AddressService {
     }
 
     @Override
-    @SneakyThrows({AddresServiceException.class, Exception.class})
+    @SneakyThrows()
     public Address save(Address object) {
 
         if (checkDuplicateRegister(object)) {
 
-            System.out.println("duplicated" + object);
-
-            return findById(standardAddress.getId());
+           return findById(address.getId());
 
         } else {
 
-            try {
-
-                return addressRepository.save(object).orElseThrow();
-
-            } catch (Exception e) {
-
-                throw new AddresServiceException(e.getMessage());
-            }
-        }
-    }
-
-    @Override
-    @SneakyThrows
-    public Address update(Integer id, Address object) {
-
-        try {
-
-            return addressRepository.update(id, object).orElseThrow();
-
-        } catch (Exception e) {
-
-            throw new AddresServiceException(e.getMessage());
-        }
-    }
-
-    @Override
-    @SneakyThrows
-    public void delete(Integer id) {
-
-        try {
-
-            addressRepository.delete(id);
-
-        } catch (Exception e) {
-
-            throw new AddresServiceException(e.getMessage());
+            return addressRepository.save(object).orElseThrow(()->new AddresServiceException("Cant duplicate address"));
         }
     }
 
     @Override
     @SneakyThrows
     public Address findById(Integer id) {
-        try {
 
-            return addressRepository.findById(id).orElseThrow();
+        return addressRepository.findById(id).orElseThrow(() -> new AddresServiceException("No value present with that id"));
+    }
 
-        } catch (Exception e) {
+    @Override
+    @SneakyThrows
+    public Address update(Integer id, Address object) {
 
-            throw new AddresServiceException(e.getMessage());
-        }
+        return addressRepository.update(id, object).orElseThrow(() -> new AddresServiceException("No value present with that id"));
+    }
+
+    @Override
+    @SneakyThrows
+    public void delete(Integer id) {
+
+        Address address = addressRepository.findById(id).orElseThrow(() -> new AddresServiceException("No value present with that id"));
+
+        addressRepository.delete(address.getId());
     }
 
     @Override
     @SneakyThrows
     public ArrayList<Address> findAll() {
 
-        try {
-
-            return addressRepository.findAll();
-
-        } catch (Exception e) {
-
-            throw new AddresServiceException(e.getMessage());
-        }
+        return addressRepository.findAll();
     }
 
     @Override
     public boolean checkDuplicateRegister(Address address) {
 
         return findAll().stream().anyMatch(t -> {
-
-            standardAddress = t;
-
+            
+            this.address = t;
+            
             return (t.getStreetNumber().equals(address.getStreetNumber())
                     && t.getStreetDirection().equalsIgnoreCase(address.getStreetDirection())
                     && t.getCity().equalsIgnoreCase(address.getCity())

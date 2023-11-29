@@ -355,7 +355,7 @@ public class ClientRepositoryImp implements ClientRepository {
 
     @Override
     @SneakyThrows
-    public ArrayList<Client> findBy(String value) {
+    public ArrayList<Client> findAllBy(String value) {
         
         try {
             String sql = "SELECT * FROM clients WHERE name = ? OR lastname = ? OR age = ? OR ssn = ? OR clasification = ?";

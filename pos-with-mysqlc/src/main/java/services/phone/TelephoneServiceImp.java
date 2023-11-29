@@ -12,13 +12,13 @@ public class TelephoneServiceImp implements TelephoneService {
 
     private static final long serialVersionUID = 1L;
 
-    private final TelephoneRepository phoneRepository;
+    private final TelephoneRepository telephoneRepository;
+    
+    Telephone telephone;
 
     public TelephoneServiceImp(TelephoneRepository phoneRepository) {
-        this.phoneRepository = phoneRepository;
+        this.telephoneRepository = phoneRepository;
     }
-
-    private Telephone telephone;
 
     @Override
     @SneakyThrows
@@ -26,74 +26,52 @@ public class TelephoneServiceImp implements TelephoneService {
 
         if (checkDuplicateRegister(object)) {
 
-            throw new AddresServiceException("Cant duplicate registers, that product already registered with number_phone " + object.getNumberPhone());
+           return findById(telephone.getId());
 
         } else {
 
-            return phoneRepository.save(object).orElseThrow();
+            return telephoneRepository.save(object).orElseThrow(()->new AddresServiceException("Cant duplicate telephone"));
         }
     }
 
     @Override
     @SneakyThrows
     public Telephone findById(Integer id) {
-        try {
 
-            return phoneRepository.findById(id).orElseThrow(() -> new PhoneServiceException("Value not present. Cant find by that id"));
-
-        } catch (Exception e) {
-
-            throw new PhoneServiceException(e.getMessage());
-        }
+        return telephoneRepository.findById(id).orElseThrow(() -> new PhoneServiceException("Value not present. Cant find by that id"));
     }
 
     @Override
     @SneakyThrows
     public Telephone update(Integer id, Telephone object) {
-        try {
 
-            return phoneRepository.update(id, object).orElseThrow();
-
-        } catch (Exception e) {
-
-            throw new PhoneServiceException(e.getMessage());
-        }
+        return telephoneRepository.update(id, object).orElseThrow(() -> new PhoneServiceException("Value not present. Cant find by that id"));
     }
 
     @Override
     @SneakyThrows
     public void delete(Integer id) {
-        try {
 
-            phoneRepository.delete(id);
+        Telephone telephone = telephoneRepository.findById(id).orElseThrow(() -> new PhoneServiceException("Value not present. Cant find by that id"));
 
-        } catch (Exception e) {
-
-            throw new PhoneServiceException(e.getMessage());
-        }
+        telephoneRepository.delete(telephone.getId());
     }
 
     @Override
     @SneakyThrows
     public ArrayList<Telephone> findAll() {
-        try {
 
-            return phoneRepository.findAll();
-
-        } catch (Exception e) {
-
-            throw new PhoneServiceException(e.getMessage());
-        }
+        return telephoneRepository.findAll();
     }
+
     @Override
-    public boolean checkDuplicateRegister(Telephone phone) {
+    public boolean checkDuplicateRegister(Telephone object) {
 
         return findAll().stream().anyMatch(t -> {
 
             telephone = t;
-
-            return (t.getNumberPhone().equals(phone.getNumberPhone())
-                    && t.getTypePhone().equalsIgnoreCase(phone.getTypePhone()));
+            
+            return (t.getNumberPhone().equals(object.getNumberPhone()));
         });
     }
 }

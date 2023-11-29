@@ -23,12 +23,12 @@ public class ClientServiceImp implements ClientService {
     @SneakyThrows
     public Client save(Client object) {
 
-        if (checkDuplicateRegister(object)) { // CHEQUEAR ESTO. 
-            
+        if (checkDuplicateRegister(object)) {
+
             throw new ClientServiceException("Cant duplicate registers, that client already registered with SSN " + object.getSsn());
 
         } else {
-            
+
             return clientRepository.save(object).orElseThrow();
         }
     }
@@ -60,33 +60,18 @@ public class ClientServiceImp implements ClientService {
     @SneakyThrows
     public ArrayList<Client> findAll() {
 
-        if (clientRepository.findAll().isEmpty()) {
+        return clientRepository.findAll();
 
-            return null;
-            
-        } else {
-
-            return clientRepository.findAll();
-        }
     }
 
     @Override
     public boolean checkDuplicateRegister(Client object) {
 
-        //CREAR VALIDACION SI LA LISTAS TIENE REGISTROS
-        
-        ArrayList<Client> clientList = findAll();
-        
-        if (clientList != null) {
-            
-             return findAll().stream().anyMatch(t -> {
+        return findAll().stream().anyMatch(t -> {
 
-            return (t.getName().equals(object.getName())
-                    && t.getLastName().equalsIgnoreCase(object.getLastName())
-                    && t.getSsn().equalsIgnoreCase(object.getSsn()));
+            return t.getSsn().equalsIgnoreCase(object.getSsn());
+
         });
-        } 
-        return false;
     }
 
     @Override
@@ -130,9 +115,8 @@ public class ClientServiceImp implements ClientService {
 
     @Override
     public ArrayList<Client> findAllBy(String value) {
-        
-        return clientRepository.findBy(value);
+
+        return clientRepository.findAllBy(value);
     }
-    
-     
+
 }
