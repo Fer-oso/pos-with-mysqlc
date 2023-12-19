@@ -68,8 +68,8 @@ public class TelephoneServiceImp implements TelephoneService {
     public boolean checkDuplicateRegister(Telephone object) {
 
         return findAll().stream().anyMatch(t -> {
-
-            telephone = t;
+            
+            this.telephone = t;
             
             return (t.getNumberPhone().equals(object.getNumberPhone()));
         });

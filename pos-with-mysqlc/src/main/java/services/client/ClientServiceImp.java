@@ -23,15 +23,9 @@ public class ClientServiceImp implements ClientService {
     @SneakyThrows
     public Client save(Client object) {
 
-        if (checkDuplicateRegister(object)) {
-
-            throw new ClientServiceException("Cant duplicate registers, that client already registered with SSN " + object.getSsn());
-
-        } else {
-
             return clientRepository.save(object).orElseThrow();
         }
-    }
+    
 
     @Override
     @SneakyThrows
@@ -114,7 +108,7 @@ public class ClientServiceImp implements ClientService {
     }
 
     @Override
-    public ArrayList<Client> findAllBy(String value) {
+    public ArrayList<Client> findAllBy(Object value) {
 
         return clientRepository.findAllBy(value);
     }

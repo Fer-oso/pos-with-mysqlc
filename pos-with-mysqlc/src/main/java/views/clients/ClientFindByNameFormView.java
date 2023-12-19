@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 import interfaces.services.TelephoneService;
 import interfaces.services.AddressService;
 import interfaces.services.ClientService;
+import java.awt.event.ItemEvent;
 
 public class ClientFindByNameFormView extends javax.swing.JPanel {
 
@@ -15,7 +16,7 @@ public class ClientFindByNameFormView extends javax.swing.JPanel {
 
     ClientFindByNameController clientFindByNameController;
 
-    public ClientFindByNameFormView(ClientService clientService,AddressService standardAddressService, TelephoneService telephoneService) {
+    public ClientFindByNameFormView(ClientService clientService, AddressService standardAddressService, TelephoneService telephoneService) {
 
         initComponents();
 
@@ -83,9 +84,17 @@ public class ClientFindByNameFormView extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Id", "Name", "Lastname", "Age", "Availability", "SSN"
+                "Id", "Name", "Lastname", "Age", "Availability", "SSN", "clasification"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jtTableClients.setFocusable(false);
         jScrollPane1.setViewportView(jtTableClients);
 
@@ -351,11 +360,11 @@ public class ClientFindByNameFormView extends javax.swing.JPanel {
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
 
         try {
-            clientFindByNameController.refreshTable();
 
-            clientFindByNameController.listClients();
+            clientFindByNameController.loadList();
+
         } catch (Exception e) {
-       
+
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_formComponentShown

@@ -162,6 +162,8 @@ public class ClientRegisterFormController implements ActionListener {
         clientRegisterFormView.getTxtLastName().setText("");
 
         clientRegisterFormView.getTxtAge().setText("");
+        
+        clientRegisterFormView.getTxtClasification().setText("");
 
         clientRegisterFormView.getJcbAvailability().setSelected(false);
 

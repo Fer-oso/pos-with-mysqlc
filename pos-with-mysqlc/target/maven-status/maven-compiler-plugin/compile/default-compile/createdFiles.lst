@@ -36,6 +36,7 @@ interfaces\services\ProductService.class
 interfaces\services\IProductService.class
 persistence\dao\TelephoneRepositoryImp.class
 entitiys\models\phone\Telephone.class
+views\clients\ClientFindByNameFormView$2.class
 interfaces\services\TelephoneService.class
 interfaces\persistences\repositorys\FindById.class
 services\phone\TelephoneServiceImp.class

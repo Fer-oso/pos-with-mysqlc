@@ -55,10 +55,10 @@ public class ClientRepositoryImp implements ClientRepository {
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
 
             if (resultSet.next()) {
-                
+
                 idGeneratedKey = resultSet.getInt(1);
             }
-            
+
             return findById(idGeneratedKey);
 
         } catch (SQLException e) {
@@ -143,7 +143,7 @@ public class ClientRepositoryImp implements ClientRepository {
 
     @Override
     @SneakyThrows
-    public Optional<Client> findById(Integer id){
+    public Optional<Client> findById(Integer id) {
 
         try {
 
@@ -152,14 +152,14 @@ public class ClientRepositoryImp implements ClientRepository {
             PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
 
             preparedStatement.setInt(1, id);
-            
+
             Client client = null;
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
 
-               client = new Client(
+                client = new Client(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getString("lastname"),
@@ -353,32 +353,36 @@ public class ClientRepositoryImp implements ClientRepository {
         }
     }
 
+    Integer age = 0;
+
     @Override
     @SneakyThrows
-    public ArrayList<Client> findAllBy(String value) {
-        
+    public ArrayList<Client> findAllBy(Object value) {
+
         try {
             String sql = "SELECT * FROM clients WHERE name = ? OR lastname = ? OR age = ? OR ssn = ? OR clasification = ?";
-            
+
             PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
-            
-            preparedStatement.setString(1, value);
-            
-            preparedStatement.setString(2, value);
-            
-            preparedStatement.setInt(3, Integer.parseInt(value));
-            
-            preparedStatement.setString(4, value);
-            
-            preparedStatement.setString(5, value);
-            
+
+            preparedStatement.setString(1, String.valueOf(value));
+
+            preparedStatement.setString(2, String.valueOf(value));
+
+            age = checkObject(value);
+
+            preparedStatement.setInt(3, age);
+
+            preparedStatement.setString(4, String.valueOf(value));
+
+            preparedStatement.setString(5, String.valueOf(value));
+
             ResultSet resultSet = preparedStatement.executeQuery();
-            
+
             ArrayList<Client> clientList = new ArrayList<>();
-            
-            while (resultSet.next()) {                
-                
-                clientList.add( new Client(resultSet.getInt("id"),
+
+            while (resultSet.next()) {
+
+                clientList.add(new Client(resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getString("lastname"),
                         resultSet.getInt("age"),
@@ -388,21 +392,31 @@ public class ClientRepositoryImp implements ClientRepository {
                         new ArrayList<>(),
                         new ArrayList<>()));
             }
-            
+
             return clientList;
-        
+
         } catch (Exception e) {
-            
+
             dbConnector.rollbackTransaction();
-            
+
             throw new DaoExceptions(e.getMessage());
-            
+
         } finally {
-        
+
             dbConnector.closeConnection();
         }
-        
     }
-    
-    
+
+    private Integer checkObject(Object value) {
+
+        if (value instanceof Integer integer) {
+
+            return integer;
+
+        }
+
+        return 0;
+
+    }
+
 }

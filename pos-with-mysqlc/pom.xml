@@ -12,13 +12,13 @@
 <dependency>
   <groupId>com.formdev</groupId>
   <artifactId>flatlaf</artifactId>
-  <version>3.2.2</version>
+  <version>3.2.5</version>
 </dependency>
 
 <dependency>
   <groupId>com.formdev</groupId>
   <artifactId>flatlaf-intellij-themes</artifactId>
-  <version>3.2.2</version>
+  <version>3.2.5</version>
 </dependency>
 
 
@@ -34,20 +34,19 @@
 <dependency>
     <groupId>org.projectlombok</groupId>
     <artifactId>lombok</artifactId>
-    <version>1.18.28</version>
+    <version>1.18.30</version>
     <scope>provided</scope>
 </dependency>
         <dependency>
             <groupId>org.netbeans.external</groupId>
             <artifactId>AbsoluteLayout</artifactId>
-            <version>RELEASE180</version>
+            <version>RELEASE190</version>
         </dependency>
     </dependencies>
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
         <exec.mainClass>Poswithmysqlc</exec.mainClass>
+        <maven.compiler.release>17</maven.compiler.release>
     </properties>
 </project>

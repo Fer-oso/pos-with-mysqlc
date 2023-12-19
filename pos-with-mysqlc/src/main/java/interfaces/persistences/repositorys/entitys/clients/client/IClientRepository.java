@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public interface IClientRepository<T extends IClient,ID> extends CrudRepository<T, ID> {
     
-    ArrayList<T> findAllBy(String value);
+    ArrayList<T> findAllBy(Object value);
     
     void insertClientAddress(T client, Address address) throws Exception;
 

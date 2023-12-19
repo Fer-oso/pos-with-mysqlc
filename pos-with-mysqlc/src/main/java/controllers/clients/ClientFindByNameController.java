@@ -18,6 +18,10 @@ import java.io.Serializable;
 import interfaces.services.AddressService;
 import interfaces.services.ClientService;
 import java.awt.HeadlessException;
+import java.awt.event.ItemEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import lombok.SneakyThrows;
 
 public class ClientFindByNameController extends MouseAdapter implements ActionListener, Serializable {
 
@@ -31,6 +35,7 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
     private DefaultTableModel model = new DefaultTableModel();
     private ArrayList<Client> listClients;
+    private ArrayList<Telephone> phoneList;
     private int row;
     private int id;
     private Client client;
@@ -63,6 +68,8 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
         clientFindByNameFormView.getBtnDelete().addActionListener(this);
 
         clientFindByNameFormView.getBtnCancel().addActionListener(this);
+        
+        clientFindByNameFormView.getJcbPhones().addActionListener(this);
     }
 
     @Override
@@ -70,61 +77,52 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
         if (e.getSource() == clientFindByNameFormView.getBtnSearch()) {
 
-            if (searchButton()) {
-
-                try {
-                    refreshTable();
-
-               listClients = findAllBy();
-
-                    listClients();
-
-                } catch (Exception ex) {
-
-                    System.out.println(ex.getMessage());
-                }
-
-                System.out.println(listClients);
-
-                return;
-            }
-
-            System.out.println(listClients);
-        }
-
-        if (e.getSource() == clientFindByNameFormView.getBtnEdit()) {
-
             try {
-                if (setClientwithDataOfForm()) {
 
-                    editClient(id, client);
-
-                    clearForm();
+                if (!searchButton()) {
 
                     refreshTable();
 
-                    listClients();
+                    String value = clientFindByNameFormView.getTxtSearch().getText().toLowerCase();
+
+                    listClients = findAllBy(value);
+
+                    listClients(listClients);
                 }
+
             } catch (Exception ex) {
 
                 System.out.println(ex.getMessage());
             }
 
-            System.out.println(listClients);
+        }
+
+        if (e.getSource() == clientFindByNameFormView.getBtnEdit()) {
+
+            try {
+
+                if (setClientwithDataOfForm()) {
+
+                    editClient(id, client);
+
+                    loadList();
+
+                }
+
+            } catch (Exception ex) {
+
+                System.out.println(ex.getMessage());
+            }
+
         }
 
         if (e.getSource() == clientFindByNameFormView.getBtnDelete()) {
 
             try {
+
                 deleteClient(id);
 
-                refreshTable();
-                
-                clearForm();
-
-                listClients();
-
-                System.out.println(listClients);
+                loadList();
 
             } catch (Exception ex) {
 
@@ -136,17 +134,19 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
             try {
 
-                clearForm();
-
-                refreshTable();
-
-                listClients();
+                loadList();
 
             } catch (Exception ex) {
 
                 System.out.println(ex.getMessage());
             }
         }
+        
+        
+        if (e.getSource() == clientFindByNameFormView.getJcbPhones()) {
+              
+           getSelectedPhone();
+        }       
     }
 
     @Override
@@ -158,27 +158,42 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
                 getClientSelectedOfTable();
 
                 setFormWithSelectedClient();
-                
+
             } catch (Exception ex) {
-                
+
                 System.out.println(ex.getMessage());
             }
         }
     }
 
     /*Functions*/
-    public void listClients() throws Exception {
+    public void loadList() {
+        try {
+
+            refreshTable();
+
+            clearForm();
+
+            listClients = clientServiceImp.findAll();
+
+            listClients(listClients);
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void listClients(ArrayList<Client> listClients) throws Exception {
 
         try {
-            
-           listClients = clientServiceImp.findAll();
 
             model = (DefaultTableModel) clientFindByNameFormView.getJtTableClients().getModel();
 
             for (IClient cl : listClients) {
 
                 Object[] clientObject = {cl.getId(), cl.getName(), cl.getLastName(), cl.getAge(),
-                    cl.isAvailability(), cl.getSsn()};
+                    cl.isAvailability(), cl.getSsn(), cl.getClasification()};
 
                 model.addRow(clientObject);
             }
@@ -187,15 +202,8 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
         } catch (Exception e) {
 
-            throw new Exception(e.getMessage());
+            System.out.println(e.getMessage());
         }
-    }
-
-    private ArrayList<Client> findAllBy() throws Exception {
-
-        String value = clientFindByNameFormView.getTxtSearch().getText();
-
-        return clientServiceImp.findAllBy(value);
     }
 
     private void editClient(Integer id, Client client) throws Exception {
@@ -204,7 +212,7 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
             telephoneServiceImp.update(telephone.getId(), telephone);
 
-            standardAddressServiceImp.update(address.getId(), address);
+            editTelephone(telephone);
 
             clientServiceImp.update(id, client);
 
@@ -216,7 +224,6 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
             System.out.println(e.getMessage());
 
-            throw new Exception(e.getCause());
         }
     }
 
@@ -228,7 +235,7 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
         } catch (Exception e) {
 
-            throw new Exception(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
@@ -236,12 +243,12 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
         if (clientFindByNameFormView.getTxtSearch().getText().equals("")) {
 
-            JOptionPane.showMessageDialog(null, "Input search value");
+            JOptionPane.showMessageDialog(null, "Insert Value");
 
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     private void getClientSelectedOfTable() {
@@ -249,27 +256,65 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
         row = clientFindByNameFormView.getJtTableClients().getSelectedRow();
 
         client = listClients.get(row);
-        
+
         id = client.getId();
     }
 
-    private void setModelJcbPhones() throws Exception {
+    @SneakyThrows
+    private void setModelJcbPhones() {
 
-        ArrayList<Telephone> phoneList = new ArrayList<>();
+        try {
 
-        phoneList = clientServiceImp.getPhonesClients(client);
+            phoneList = new ArrayList<>();
 
-        clientFindByNameFormView.getJcbPhones().removeAllItems();
+            phoneList = clientServiceImp.getPhonesClients(client);
 
-        clientFindByNameFormView.getJcbPhones().setEditable(true);
+            clientFindByNameFormView.getJcbPhones().removeAllItems();
 
-        for (Telephone telephone : phoneList) {
+            clientFindByNameFormView.getJcbPhones().setEditable(true);
 
-            clientFindByNameFormView.getJcbPhones().addItem(telephone);
+            phoneList.add(new Telephone(1, null, "Default"));
+
+            for (Telephone telephone : phoneList) {
+
+                clientFindByNameFormView.getJcbPhones().addItem(telephone);
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(ClientFindByNameController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    private void setModelJcbAddress() throws Exception {
+    public void getSelectedPhone() {
+
+        telephone = (Telephone) clientFindByNameFormView.getJcbPhones().getSelectedItem();
+
+        clientFindByNameFormView.getTxtTypePhone().setText(telephone.getTypePhone());
+
+        System.out.println(telephone.getNumberPhone());
+
+    }
+
+    private void editTelephone(Telephone telephone) {
+
+        Telephone telephoneOfList = phoneList.get(row);
+
+        if (phoneList.contains(telephone)) {
+
+            if (!(telephone.getNumberPhone().equals(telephoneOfList.getNumberPhone())) || !(telephone.getTypePhone().equals(telephoneOfList.getTypePhone()))) {
+
+                telephoneServiceImp.update(telephone.getId(), telephone);
+            }
+
+        } else {
+
+            telephoneServiceImp.save(telephone);
+        }
+
+    }
+
+    @SneakyThrows
+    private void setModelJcbAddress() {
 
         ArrayList<Address> addressList = new ArrayList<>();
 
@@ -285,7 +330,18 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
         }
     }
 
-    private void setFormWithSelectedClient() throws Exception {
+    private ArrayList<Client> findAllBy(String value) {
+
+        if (!(value.charAt(0) >= 97 && value.charAt(0) <= 122)) {
+
+            return clientServiceImp.findAllBy(Integer.parseInt(value));
+
+        }
+
+        return clientServiceImp.findAllBy(value);
+    }
+
+    private void setFormWithSelectedClient() {
 
         clientFindByNameFormView.getLblId().setText(String.valueOf(client.getId()));
 
@@ -300,10 +356,6 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
         clientFindByNameFormView.getTxtClasification().setText(client.getClasification());
 
         setModelJcbPhones();
-
-        telephone = clientFindByNameFormView.getJcbPhones().getItemAt(clientFindByNameFormView.getJcbPhones().getSelectedIndex());
-
-        clientFindByNameFormView.getTxtTypePhone().setText(telephone.getTypePhone());
 
         setModelJcbAddress();
 
@@ -320,7 +372,7 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
         clientFindByNameFormView.getJcbAvailability().setSelected(client.isAvailability());
     }
 
-    private boolean setClientwithDataOfForm() throws Exception {
+    private boolean setClientwithDataOfForm() {
 
         if (clientFindByNameFormView.getTxtName().getText().equals("") || clientFindByNameFormView.getTxtLastname().getText().equals("")
                 || clientFindByNameFormView.getTxtAge().getText().equals("") || clientFindByNameFormView.getTxtSsn().getText().equals("")) {
@@ -368,7 +420,7 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
         return true;
     }
 
-    public void refreshTable() {
+    private void refreshTable() {
 
         for (int i = 0; i < model.getRowCount(); i++) {
 
@@ -392,9 +444,9 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
         clientFindByNameFormView.getTxtClasification().setText("");
 
-        clientFindByNameFormView.getJcbPhones().removeAllItems();
-
         clientFindByNameFormView.getTxtTypePhone().setText("");
+
+        clientFindByNameFormView.getJcbPhones().removeAllItems();
 
         clientFindByNameFormView.getJcbStreetDirection().removeAllItems();
 

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public interface IClientService<T extends IClient, ID> extends CrudService<T, ID>{
     
-    ArrayList<T> findAllBy(String value);
+    ArrayList<T> findAllBy(Object value);
     
     void insertClientAddressPhone(T client, Address address, Telephone phone) throws Exception;
 
