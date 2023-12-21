@@ -19,6 +19,7 @@ interfaces\services\ITelephoneService.class
 controllers\products\ProductFindByPcController.class
 views\Products\ProductFindByPcFormView$1.class
 interfaces\services\crud\CrudService.class
+views\clients\ClientFindByNameFormView$3.class
 services\exceptions\ClientServiceException.class
 interfaces\persistences\repositorys\FindAll.class
 interfaces\entitys\person\Person.class

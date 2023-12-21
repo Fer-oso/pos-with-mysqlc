@@ -18,7 +18,6 @@ import java.io.Serializable;
 import interfaces.services.AddressService;
 import interfaces.services.ClientService;
 import java.awt.HeadlessException;
-import java.awt.event.ItemEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import lombok.SneakyThrows;
@@ -68,8 +67,8 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
         clientFindByNameFormView.getBtnDelete().addActionListener(this);
 
         clientFindByNameFormView.getBtnCancel().addActionListener(this);
-        
-        clientFindByNameFormView.getJcbPhones().addActionListener(this);
+
+      //  clientFindByNameFormView.getJcbPhones().addActionListener(this);
     }
 
     @Override
@@ -141,12 +140,11 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
                 System.out.println(ex.getMessage());
             }
         }
-        
-        
+
         if (e.getSource() == clientFindByNameFormView.getJcbPhones()) {
-              
-           getSelectedPhone();
-        }       
+
+            editTelephone();
+        }
     }
 
     @Override
@@ -210,10 +208,6 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
         try {
 
-            telephoneServiceImp.update(telephone.getId(), telephone);
-
-            editTelephone(telephone);
-
             clientServiceImp.update(id, client);
 
             JOptionPane.showMessageDialog(null, "Client edited succesfully");
@@ -265,51 +259,42 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
         try {
 
-            phoneList = new ArrayList<>();
-
             phoneList = clientServiceImp.getPhonesClients(client);
 
             clientFindByNameFormView.getJcbPhones().removeAllItems();
 
             clientFindByNameFormView.getJcbPhones().setEditable(true);
 
-            phoneList.add(new Telephone(1, null, "Default"));
-
+            phoneList.add(new Telephone(0, 11111, "default"));
+            
             for (Telephone telephone : phoneList) {
 
                 clientFindByNameFormView.getJcbPhones().addItem(telephone);
             }
 
         } catch (Exception ex) {
+
             Logger.getLogger(ClientFindByNameController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void getSelectedPhone() {
+    private void editTelephone() {
+             
+//            telephone = new Telephone();
+//     
+//            telephone.setNumberPhone(Integer.valueOf(clientFindByNameFormView.getJcbPhones().getEditor().getItem().toString()));
+//            
+//            telephone.setTypePhone(clientFindByNameFormView.getTxtTypePhone().getText());
+//            
+// 
+//        clientFindByNameFormView.getTxtTypePhone().setText(telephone.getTypePhone());
 
-        telephone = (Telephone) clientFindByNameFormView.getJcbPhones().getSelectedItem();
+        System.out.println(telephone);
+        
+      // telephone.setNumberPhone(Integer.valueOf(clientFindByNameFormView.getJcbPhones().getEditor().getItem().toString()));
 
-        clientFindByNameFormView.getTxtTypePhone().setText(telephone.getTypePhone());
-
-        System.out.println(telephone.getNumberPhone());
-
-    }
-
-    private void editTelephone(Telephone telephone) {
-
-        Telephone telephoneOfList = phoneList.get(row);
-
-        if (phoneList.contains(telephone)) {
-
-            if (!(telephone.getNumberPhone().equals(telephoneOfList.getNumberPhone())) || !(telephone.getTypePhone().equals(telephoneOfList.getTypePhone()))) {
-
-                telephoneServiceImp.update(telephone.getId(), telephone);
-            }
-
-        } else {
-
-            telephoneServiceImp.save(telephone);
-        }
+      //  telephone.setTypePhone(clientFindByNameFormView.getTxtTypePhone().getText());
+      //  telephoneServiceImp.update(telephone.getId(), telephone);
 
     }
 
@@ -334,7 +319,7 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
         if (!(value.charAt(0) >= 97 && value.charAt(0) <= 122)) {
 
-            return clientServiceImp.findAllBy(Integer.parseInt(value));
+            return clientServiceImp.findAllBy(Integer.valueOf(value));
 
         }
 
@@ -356,6 +341,10 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
         clientFindByNameFormView.getTxtClasification().setText(client.getClasification());
 
         setModelJcbPhones();
+
+        telephone = clientFindByNameFormView.getJcbPhones().getItemAt(clientFindByNameFormView.getJcbPhones().getSelectedIndex());
+
+        clientFindByNameFormView.getTxtTypePhone().setText(telephone.getTypePhone());
 
         setModelJcbAddress();
 
@@ -397,10 +386,7 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
         client.setAvailability(clientFindByNameFormView.getJcbAvailability().isSelected());
 
-        /*Edicion de la entidad Telephone para pasarlo a la entidad Client*/
-        telephone.setNumberPhone(Integer.valueOf(clientFindByNameFormView.getJcbPhones().getEditor().getItem().toString()));
-
-        telephone.setTypePhone(clientFindByNameFormView.getTxtTypePhone().getText());
+        editTelephone();
 
         client.getPhone().add(telephone);
 
@@ -443,6 +429,18 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
         clientFindByNameFormView.getTxtSsn().setText("");
 
         clientFindByNameFormView.getTxtClasification().setText("");
+
+        clientFindByNameFormView.getJcbStreetDirection().removeAllItems();
+
+        clientFindByNameFormView.getTxtStreetNumber().setText("");
+
+        clientFindByNameFormView.getTxtPostalCode().setText("");
+
+        clientFindByNameFormView.getTxtCity().setText("");
+
+        clientFindByNameFormView.getTxtState().setText("");
+
+        clientFindByNameFormView.getJcbAvailability().setSelected(false);
 
         clientFindByNameFormView.getTxtTypePhone().setText("");
 
