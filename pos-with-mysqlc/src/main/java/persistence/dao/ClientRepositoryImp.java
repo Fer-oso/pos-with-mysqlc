@@ -227,21 +227,25 @@ public class ClientRepositoryImp implements ClientRepository {
     }
 
     @Override
-    public void insertClientAddress(Client client, Address address) throws Exception {
+    public void insertClientAddress(Client client, Address... addresses) throws Exception {
 
         String sql = "INSERT INTO client_address ( id_client, id_address ) VALUES (?, ?)";
 
         try {
 
-            PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
+            for (Address address : addresses) {
 
-            preparedStatement.setInt(1, client.getId());
+                PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
 
-            preparedStatement.setInt(2, address.getId());
+                preparedStatement.setInt(1, client.getId());
 
-            preparedStatement.executeUpdate();
+                preparedStatement.setInt(2, address.getId());
 
-            dbConnector.commit();
+                preparedStatement.executeUpdate();
+
+                dbConnector.commit();
+
+            }
 
         } catch (SQLException e) {
 
@@ -256,20 +260,23 @@ public class ClientRepositoryImp implements ClientRepository {
     }
 
     @Override
-    public void insertClientPhone(Client client, Telephone phone) throws Exception {
+    public void insertClientPhone(Client client, Telephone... phones) throws Exception {
 
         String sql = "INSERT INTO client_phone (id_client, id_phone) VALUES (?, ?)";
 
         try {
-            PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
+            for (Telephone telephone : phones) {
+                
+                PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
 
-            preparedStatement.setInt(1, client.getId());
+                preparedStatement.setInt(1, client.getId());
 
-            preparedStatement.setInt(2, phone.getId());
+                preparedStatement.setInt(2, telephone.getId());
 
-            preparedStatement.executeUpdate();
+                preparedStatement.executeUpdate();
 
-            dbConnector.commit();
+                dbConnector.commit();
+            }
 
         } catch (SQLException e) {
 

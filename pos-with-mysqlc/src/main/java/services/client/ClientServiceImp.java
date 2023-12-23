@@ -23,9 +23,8 @@ public class ClientServiceImp implements ClientService {
     @SneakyThrows
     public Client save(Client object) {
 
-            return clientRepository.save(object).orElseThrow();
-        }
-    
+        return clientRepository.save(object).orElseThrow();
+    }
 
     @Override
     @SneakyThrows
@@ -68,19 +67,19 @@ public class ClientServiceImp implements ClientService {
         });
     }
 
+    @SneakyThrows
     @Override
-    public void insertClientAddressPhone(Client client, Address address, Telephone phone) throws Exception {
+    public void insertClientAddress(Client client, Address... address) {
 
-        try {
+        clientRepository.insertClientAddress(client, address);
 
-            clientRepository.insertClientAddress(client, address);
+    }
 
-            clientRepository.insertClientPhone(client, phone);
-
-        } catch (Exception e) {
-
-            throw new ClientServiceException(e.getMessage());
-        }
+    @SneakyThrows
+    @Override
+    public void insertClientPhones(Client client, Telephone... telephones) {
+        
+        clientRepository.insertClientPhone(client, telephones);
     }
 
     @Override

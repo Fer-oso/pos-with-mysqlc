@@ -10,9 +10,9 @@ public interface IClientRepository<T extends IClient,ID> extends CrudRepository<
     
     ArrayList<T> findAllBy(Object value);
     
-    void insertClientAddress(T client, Address address) throws Exception;
+    void insertClientAddress(T client, Address... address) throws Exception;
 
-    void insertClientPhone(T client, Telephone phone) throws Exception;
+    void insertClientPhone(T client, Telephone... phone) throws Exception;
 
     ArrayList<Telephone> getPhonesClients(T client) throws Exception;
 

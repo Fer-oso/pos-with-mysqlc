@@ -28,6 +28,8 @@ public class ClientRegisterFormController implements ActionListener {
     Address address;
 
     Telephone telephone;
+    
+    Telephone telephone2;
 
     /*VIEWS*/
     private final ClientRegisterFormView clientRegisterFormView;
@@ -106,6 +108,10 @@ public class ClientRegisterFormController implements ActionListener {
                 telephone = new Telephone(null,
                         Integer.valueOf(clientRegisterFormView.getTxtNumberPhone().getText()),
                         clientRegisterFormView.getTxtTypePhone().getText());
+                
+                telephone2 = new Telephone(null,
+                        Integer.valueOf(clientRegisterFormView.getTxtNumberPhone2().getText()),
+                        clientRegisterFormView.getTxtTypePhone2().getText());
             }
 
         } catch (HeadlessException | NumberFormatException e) {
@@ -128,8 +134,12 @@ public class ClientRegisterFormController implements ActionListener {
             address = addressServiceImp.save(address);
 
             telephone = telehponeServiceImp.save(telephone);
+            
+            telephone2 = telehponeServiceImp.save(telephone2);
 
-            clientServiceImp.insertClientAddressPhone(client, address, telephone);
+            clientServiceImp.insertClientAddress(client, address);
+            
+            clientServiceImp.insertClientPhones(client, telephone,telephone2);
 
             JOptionPane.showMessageDialog(clientRegisterFormView, "Client registered succesfully");
         }
