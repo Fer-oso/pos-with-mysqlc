@@ -1,7 +1,6 @@
-package entitiys.models.client;
+package entitys.models.client;
 
 import interfaces.entitys.clients.IClient;
-import java.io.Serializable;
 import java.util.ArrayList;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -12,7 +11,7 @@ import interfaces.entitys.phone.IPhone;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Client implements IClient, Serializable {
+public class Client implements IClient {
 
     private static final long serialVersionUID = 1L;
 

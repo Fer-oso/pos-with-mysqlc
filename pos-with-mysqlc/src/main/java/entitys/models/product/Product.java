@@ -1,4 +1,4 @@
-package entitiys.models.product;
+package entitys.models.product;
 
 import interfaces.entitys.product.IProduct;
 import lombok.AllArgsConstructor;

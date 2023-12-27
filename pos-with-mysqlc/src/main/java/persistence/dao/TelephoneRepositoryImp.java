@@ -1,7 +1,7 @@
 package persistence.dao;
 
 import persistence.config.DbConnector;
-import entitiys.models.phone.Telephone;
+import entitys.models.phone.Telephone;
 import interfaces.persistences.repositorys.entitys.phones.TelephoneRepository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -17,45 +17,54 @@ import persistence.dao.ClientRepositoryImp;
 import interfaces.persistences.repositorys.entitys.address.AddressRepository;
 import interfaces.persistences.repositorys.entitys.clients.client.ClientRepository;
 import interfaces.persistences.repositorys.entitys.products.ProductRepository;
+import interfaces.persistences.repositorys.entitys.shop.ShoppingCartRepository;
 import interfaces.services.AddressService;
 import interfaces.services.ClientService;
 import interfaces.services.ProductService;
+import interfaces.services.ShoppingCartService;
 import persistence.config.DbConnector;
 import persistence.config.JdbcConnectorImp;
 import persistence.dao.ProductRepositoryImp;
+import persistence.dao.ShoppingCartRepositoryImp;
 import services.products.ProductServiceImp;
-import views.Products.ProductFindByPcFormView;
-import views.Products.ProductRegisterFormView;
+import services.shop.ShoppingCartServiceImp;
+import views.products.ProductFindByPcFormView;
+import views.products.ProductRegisterFormView;
+import views.shop.ShopFormView;
 
 public class POSController implements ActionListener {
 
     POS pos;
-    
+
     DbConnector dbConnector = new JdbcConnectorImp();
 
     AddressRepository addressRepository = new AddressRepositoryImp(dbConnector);
-
     AddressService addressService = new AddressServiceImp(addressRepository);
 
     TelephoneRepository phoneRepository = new TelephoneRepositoryImp(dbConnector);
-
     TelephoneService phoneService = new TelephoneServiceImp(phoneRepository);
 
     ClientRepository clientRepository = new ClientRepositoryImp(dbConnector);
-
     ClientService clientService = new ClientServiceImp(clientRepository);
 
     ProductRepository productRepository = new ProductRepositoryImp(dbConnector);
-    
     ProductService productService = new ProductServiceImp(productRepository);
+    
+    
+    ShoppingCartRepository shoppingCartRepository = new ShoppingCartRepositoryImp(dbConnector);
+    ShoppingCartService shoppingCartService = new ShoppingCartServiceImp(shoppingCartRepository);
+    
 
-//    ShopFormView shopForm = new ShopFormView( clientService );
-     ProductRegisterFormView productRegisterFormView = new ProductRegisterFormView(productService);
-     ProductFindByPcFormView productFindByPcFormView = new ProductFindByPcFormView(productService);
+    ShopFormView shopForm = new ShopFormView(productService, clientService, shoppingCartService);
+    
+    ProductRegisterFormView productRegisterFormView = new ProductRegisterFormView(productService);
+    ProductFindByPcFormView productFindByPcFormView = new ProductFindByPcFormView(productService);
+    
     ClientRegisterFormView clientRegisterFormView = new ClientRegisterFormView(clientService, addressService, phoneService);
+    ClientFindByNameFormView clientFindByNameFormView = new ClientFindByNameFormView(clientService, addressService, phoneService);
 
-    ClientFindByNameFormView clientFindByNameFormView = new ClientFindByNameFormView(clientService,addressService,phoneService);
-
+    ShopFormView shopFormView = new ShopFormView(productService, clientService, shoppingCartService);
+    
     public POSController(POS pos) {
 
         this.pos = pos;
@@ -67,7 +76,7 @@ public class POSController implements ActionListener {
 
         /*Shopping Views*/
         this.pos.jMenuItemShopForm.addActionListener(this);
-
+        
         /*Product Views*/
         this.pos.jMenuItemProductRegister.addActionListener(this);
         this.pos.jMenuItemProductByPC.addActionListener(this);
@@ -84,21 +93,21 @@ public class POSController implements ActionListener {
 
             pos.jTabbedPane1.removeAll();
 
-            //    pos.jTabbedPane1.addTab("", shopForm);     
+            pos.jTabbedPane1.addTab("", shopForm);     
         }
 
         if (e.getSource() == pos.jMenuItemProductByPC) {
 
             pos.jTabbedPane1.removeAll();
 
-              pos.jTabbedPane1.addTab("", productFindByPcFormView);   
+            pos.jTabbedPane1.addTab("", productFindByPcFormView);
         }
 
         if (e.getSource() == pos.jMenuItemProductRegister) {
 
             pos.jTabbedPane1.removeAll();
 
-             pos.jTabbedPane1.addTab("", productRegisterFormView); 
+            pos.jTabbedPane1.addTab("", productRegisterFormView);
         }
 
         if (e.getSource() == pos.jMenuItemClientRegister) {

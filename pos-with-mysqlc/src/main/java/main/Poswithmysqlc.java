@@ -1,6 +1,6 @@
 package main;
 
-import entitiys.models.client.Client;
+import entitys.models.client.Client;
 import persistence.dao.AddressRepositoryImp;
 import persistence.dao.TelephoneRepositoryImp;
 import services.address.AddressServiceImp;

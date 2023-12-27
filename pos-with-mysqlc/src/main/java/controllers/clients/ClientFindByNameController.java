@@ -1,8 +1,8 @@
 package controllers.clients;
 
-import entitiys.models.addres.Address;
-import entitiys.models.client.Client;
-import entitiys.models.phone.Telephone;
+import entitys.models.addres.Address;
+import entitys.models.client.Client;
+import entitys.models.phone.Telephone;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -20,7 +20,6 @@ import interfaces.services.ClientService;
 import java.awt.HeadlessException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import lombok.SneakyThrows;
 
 public class ClientFindByNameController extends MouseAdapter implements ActionListener, Serializable {
 
@@ -30,11 +29,11 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
     private final ClientService clientServiceImp;
     private final TelephoneService telephoneServiceImp;
-    private final AddressService standardAddressServiceImp;
+    private final AddressService addressServiceImp;
 
     private DefaultTableModel model = new DefaultTableModel();
     private ArrayList<Client> listClients;
-    private ArrayList<Telephone> phoneList;
+
     private int row;
     private int id;
     private Client client;
@@ -42,7 +41,7 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
     private Address address;
 
     /*Constructors*/
-    public ClientFindByNameController(ClientFindByNameFormView clientFindByNameFormView, ClientService clientServiceImp, AddressService standardAddressServiceImp, TelephoneService telephoneServiceImp) {
+    public ClientFindByNameController(ClientFindByNameFormView clientFindByNameFormView, ClientService clientServiceImp, AddressService addressServiceImp, TelephoneService telephoneServiceImp) {
 
         this.clientFindByNameFormView = clientFindByNameFormView;
 
@@ -50,7 +49,7 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
         this.telephoneServiceImp = telephoneServiceImp;
 
-        this.standardAddressServiceImp = standardAddressServiceImp;
+        this.addressServiceImp = addressServiceImp;
 
         addActionsListeners();
     }
@@ -69,6 +68,8 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
         clientFindByNameFormView.getBtnCancel().addActionListener(this);
 
         clientFindByNameFormView.getJcbPhones().addActionListener(this);
+        
+        clientFindByNameFormView.getJcbStreetDirection().addActionListener(this);
     }
 
     @Override
@@ -103,6 +104,8 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
                 if (setClientwithDataOfForm()) {
 
                     telephoneServiceImp.update(telephone.getId(), telephone);
+                    
+                    addressServiceImp.update(address.getId(), address);
 
                     editClient(id, client);
 
@@ -146,6 +149,11 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
         if (e.getSource() == clientFindByNameFormView.getJcbPhones()) {
 
             editTelephone();
+        }
+        
+        if (e.getSource() == clientFindByNameFormView.getJcbStreetDirection()) {
+            
+           editAddress();
         }
     }
 
@@ -212,7 +220,7 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
         try {
 
-            phoneList = clientServiceImp.getPhonesClients(client);
+            ArrayList<Telephone> phoneList = clientServiceImp.getPhonesClients(client);
 
             clientFindByNameFormView.getJcbPhones().removeAllItems();
 
@@ -233,9 +241,7 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
         try {
 
-            ArrayList<Address> addressList = new ArrayList<>();
-
-            addressList = clientServiceImp.getAddressClients(client);
+            ArrayList<Address> addressList = clientServiceImp.getAddressClients(client);
 
             clientFindByNameFormView.getJcbStreetDirection().removeAllItems();
 
@@ -263,13 +269,12 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
         return false;
     }
-    
-        private ArrayList<Client> findAllBy(String value) {
+
+    private ArrayList<Client> findAllBy(String value) {
 
         if (!(value.charAt(0) >= 97 && value.charAt(0) <= 122)) {
 
             return clientServiceImp.findAllBy(Integer.valueOf(value));
-
         }
 
         return clientServiceImp.findAllBy(value);
@@ -289,7 +294,6 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
             JOptionPane.showMessageDialog(null, "Error editing client");
 
             System.out.println(e.getMessage());
-
         }
     }
 
@@ -363,10 +367,23 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
         }
     }
 
+    private void editAddress() {
 
+        if (!clientFindByNameFormView.getJcbStreetDirection().getEditor().getItem().toString().equals("")) {
+
+            address = (Address) clientFindByNameFormView.getJcbStreetDirection().getSelectedItem();
+
+            clientFindByNameFormView.getTxtStreetNumber().setText(address.getStreetDirection());
+
+            clientFindByNameFormView.getTxtPostalCode().setText(String.valueOf(address.getPostalCode()));
+
+            clientFindByNameFormView.getTxtCity().setText(address.getCity());
+
+            clientFindByNameFormView.getTxtState().setText(address.getState());
+        }
+    }
 
     /*Functions to manipulate UX*/
-    
     private void getClientSelectedOfTable() {
 
         row = clientFindByNameFormView.getJtTableClients().getSelectedRow();
@@ -394,7 +411,7 @@ public class ClientFindByNameController extends MouseAdapter implements ActionLi
 
         setModelJcbAddress();
 
-        address = clientFindByNameFormView.getJcbStreetDirection().getItemAt(clientFindByNameFormView.getJcbStreetDirection().getSelectedIndex());
+        
 
         clientFindByNameFormView.getTxtStreetNumber().setText(String.valueOf(address.getStreetNumber()));
 

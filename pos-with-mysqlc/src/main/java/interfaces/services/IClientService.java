@@ -1,7 +1,7 @@
 package interfaces.services;
 
-import entitiys.models.addres.Address;
-import entitiys.models.phone.Telephone;
+import entitys.models.addres.Address;
+import entitys.models.phone.Telephone;
 import interfaces.entitys.clients.IClient;
 import interfaces.services.crud.CrudService;
 import java.util.ArrayList;

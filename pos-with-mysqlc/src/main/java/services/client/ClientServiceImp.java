@@ -1,8 +1,8 @@
 package services.client;
 
-import entitiys.models.addres.Address;
-import entitiys.models.client.Client;
-import entitiys.models.phone.Telephone;
+import entitys.models.addres.Address;
+import entitys.models.client.Client;
+import entitys.models.phone.Telephone;
 import interfaces.persistences.repositorys.entitys.clients.client.ClientRepository;
 import interfaces.services.ClientService;
 import java.util.ArrayList;

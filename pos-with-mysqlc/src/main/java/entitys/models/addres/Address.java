@@ -1,4 +1,4 @@
-package entitiys.models.addres;
+package entitys.models.addres;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

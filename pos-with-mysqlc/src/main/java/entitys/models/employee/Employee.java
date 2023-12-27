@@ -1,4 +1,4 @@
-package entitiys.models.employee;
+package entitys.models.employee;
 
 import interfaces.entitys.employee.IEmployee;
 import lombok.NoArgsConstructor;

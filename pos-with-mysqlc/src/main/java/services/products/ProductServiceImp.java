@@ -1,6 +1,6 @@
 package services.products;
 
-import entitiys.models.product.Product;
+import entitys.models.product.Product;
 import interfaces.persistences.repositorys.entitys.products.ProductRepository;
 import interfaces.services.ProductService;
 import java.util.ArrayList;
@@ -76,5 +76,12 @@ public class ProductServiceImp implements ProductService {
                     && t.getBrand().equalsIgnoreCase(product.getBrand())
                     && t.getProductCode().equalsIgnoreCase(product.getProductCode()));
         });
+    }
+
+    @Override
+    @SneakyThrows
+    public Product findByProductCode(String productCode) {
+        
+        return productRepository.findByProductCode(productCode).orElseThrow(() -> new ProductServiceException("No value present with that product code"));
     }
 }

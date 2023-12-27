@@ -1,6 +1,6 @@
 package services.address;
 
-import entitiys.models.addres.Address;
+import entitys.models.addres.Address;
 import java.util.ArrayList;
 import services.exceptions.AddresServiceException;
 import interfaces.persistences.repositorys.entitys.address.AddressRepository;

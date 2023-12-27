@@ -1,6 +1,6 @@
 package persistence.dao;
 
-import entitiys.models.addres.Address;
+import entitys.models.addres.Address;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;

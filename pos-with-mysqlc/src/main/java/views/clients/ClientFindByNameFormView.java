@@ -1,8 +1,8 @@
 package views.clients;
 
 import controllers.clients.ClientFindByNameController;
-import entitiys.models.addres.Address;
-import entitiys.models.phone.Telephone;
+import entitys.models.addres.Address;
+import entitys.models.phone.Telephone;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import interfaces.services.TelephoneService;
@@ -398,7 +398,7 @@ public class ClientFindByNameFormView extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JCheckBox jcbAvailability;
     private javax.swing.JComboBox<Telephone> jcbPhones;
-    private javax.swing.JComboBox<entitiys.models.addres.Address> jcbStreetDirection;
+    private javax.swing.JComboBox<entitys.models.addres.Address> jcbStreetDirection;
     private javax.swing.JPanel jpForm;
     private javax.swing.JTable jtTableClients;
     private javax.swing.JLabel lblAge;

@@ -1,7 +1,7 @@
 package interfaces.persistences.repositorys.entitys.clients.client;
 
-import entitiys.models.addres.Address;
-import entitiys.models.phone.Telephone;
+import entitys.models.addres.Address;
+import entitys.models.phone.Telephone;
 import interfaces.entitys.clients.IClient;
 import interfaces.persistences.crud.CrudRepository;
 import java.util.ArrayList;

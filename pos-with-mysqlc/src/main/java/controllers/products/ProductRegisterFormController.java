@@ -1,6 +1,6 @@
 package controllers.products;
 
-import entitiys.models.product.Product;
+import entitys.models.product.Product;
 import interfaces.services.ProductService;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import lombok.SneakyThrows;
-import views.Products.ProductRegisterFormView;
+import views.products.ProductRegisterFormView;
 
 public class ProductRegisterFormController extends MouseAdapter implements ActionListener, Serializable {
 

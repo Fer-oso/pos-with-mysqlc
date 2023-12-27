@@ -1,6 +1,6 @@
 package main;
 
-import entitiys.models.product.Product;
+import entitys.models.product.Product;
 import interfaces.persistences.repositorys.entitys.address.AddressRepository;
 import interfaces.persistences.repositorys.entitys.clients.client.ClientRepository;
 import interfaces.persistences.repositorys.entitys.phones.TelephoneRepository;

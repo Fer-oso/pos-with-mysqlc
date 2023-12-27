@@ -1,6 +1,6 @@
 package persistence.dao;
 
-import entitiys.models.product.Product;
+import entitys.models.product.Product;
 import interfaces.persistences.repositorys.entitys.products.ProductRepository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -209,6 +209,46 @@ public class ProductRepositoryImp implements ProductRepository {
             }
 
             return productList;
+
+        } catch (Exception e) {
+
+            dbConnector.rollbackTransaction();
+
+            throw new DaoExceptions(e.getMessage());
+
+        } finally {
+
+            dbConnector.closeConnection();
+        }
+    }
+
+    @SneakyThrows
+    @Override
+    public Optional<Product> findByProductCode(String productCode) {
+         try {
+
+            String sql = "SELECT * FROM products WHERE product_code = ?";
+
+            PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
+
+            preparedStatement.setString(1, productCode);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            Product product = null;
+
+            if (resultSet.next()) {
+
+                product = new Product(resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("brand"),
+                        resultSet.getDouble("price"),
+                        resultSet.getInt("stock"),
+                        resultSet.getBoolean("availability"),
+                        resultSet.getString("product_code"));
+            }
+
+            return Optional.ofNullable(product);
 
         } catch (Exception e) {
 

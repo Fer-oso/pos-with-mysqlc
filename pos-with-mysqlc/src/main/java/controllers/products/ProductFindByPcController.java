@@ -1,6 +1,6 @@
 package controllers.products;
 
-import entitiys.models.product.Product;
+import entitys.models.product.Product;
 import interfaces.services.ProductService;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import lombok.SneakyThrows;
-import views.Products.ProductFindByPcFormView;
+import views.products.ProductFindByPcFormView;
 
 public class ProductFindByPcController extends MouseAdapter implements ActionListener,Serializable {
 
