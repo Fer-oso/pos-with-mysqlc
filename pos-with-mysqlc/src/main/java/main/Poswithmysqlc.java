@@ -1,14 +1,13 @@
 package main;
 
-import entitys.models.client.Client;
-import persistence.dao.AddressRepositoryImp;
-import persistence.dao.TelephoneRepositoryImp;
+import persistence.dao.persistence.AddressRepositoryImp;
+import persistence.dao.persistence.TelephoneRepositoryImp;
 import services.address.AddressServiceImp;
 import services.client.ClientServiceImp;
 import services.phone.TelephoneServiceImp;
 import interfaces.persistences.repositorys.entitys.phones.TelephoneRepository;
 import interfaces.services.TelephoneService;
-import persistence.dao.ClientRepositoryImp;
+import persistence.dao.persistence.ClientRepositoryImp;
 import interfaces.persistences.repositorys.entitys.address.AddressRepository;
 import interfaces.persistences.repositorys.entitys.clients.client.ClientRepository;
 import interfaces.persistences.repositorys.entitys.products.ProductRepository;
@@ -17,7 +16,7 @@ import interfaces.services.ClientService;
 import interfaces.services.ProductService;
 import persistence.config.DbConnector;
 import persistence.config.JdbcConnectorImp;
-import persistence.dao.ProductRepositoryImp;
+import persistence.dao.persistence.ProductRepositoryImp;
 import services.products.ProductServiceImp;
 
 public class Poswithmysqlc {
@@ -46,7 +45,7 @@ public class Poswithmysqlc {
         
         ProductService productService = new ProductServiceImp(productRepository);
  
-         
+        
        // FunctionalEjemplos functionalEjemplos = new FunctionalEjemplos();
         
         

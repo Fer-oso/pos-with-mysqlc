@@ -173,8 +173,8 @@ public class ProductRegisterFormController extends MouseAdapter implements Actio
 
         for (var pr : listProducts) {
 
-            Object[] productObject = {pr.getId(), pr.getName(), pr.getPrice(), pr.isAvailabity(),
-                pr.getStock(), pr.getBrand(), pr.getProductCode()};
+            Object[] productObject = {pr.getId(), pr.getName(), pr.getPrice(),
+                pr.getStock(), pr.isAvailabity(), pr.getBrand(), pr.getProductCode()};
 
             model.addRow(productObject);
         }

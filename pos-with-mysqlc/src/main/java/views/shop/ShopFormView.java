@@ -96,8 +96,6 @@ public class ShopFormView extends javax.swing.JPanel {
         lblProductCode.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblProductCode.setText("Product Code");
 
-        txtProductCode.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
         lblProductName.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblProductName.setText("Name");
 
@@ -105,17 +103,16 @@ public class ShopFormView extends javax.swing.JPanel {
         lblProductBrand.setText("Brand");
 
         txtProductBrand.setEditable(false);
-        txtProductBrand.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtProductBrand.setFocusable(false);
 
         txtProductStock.setEditable(false);
-        txtProductStock.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtProductStock.setFocusable(false);
 
         lblProductStock.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblProductStock.setText("Stock");
 
         txtProductPrice.setEditable(false);
-        txtProductPrice.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtProductPrice.setFocusable(false);
 
         lblProductPrice.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblProductPrice.setText("Price");
@@ -123,13 +120,13 @@ public class ShopFormView extends javax.swing.JPanel {
         lblProductQuantity.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblProductQuantity.setText("Quantity");
 
-        txtProductQuantityToSell.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
+        btnRemove.setText("remove");
         btnRemove.setFocusable(false);
 
         txtProductName.setEditable(false);
-        txtProductName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtProductName.setFocusable(false);
 
+        btnFindProduct.setText("find");
         btnFindProduct.setFocusable(false);
 
         javax.swing.GroupLayout jpProductFindLayout = new javax.swing.GroupLayout(jpProductFind);
@@ -147,58 +144,61 @@ public class ShopFormView extends javax.swing.JPanel {
                     .addComponent(lblProductName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpProductFindLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtProductBrand, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblProductBrand))
+                    .addGroup(jpProductFindLayout.createSequentialGroup()
+                        .addComponent(lblProductBrand)
+                        .addGap(88, 88, 88)
+                        .addComponent(lblProductStock))
+                    .addGroup(jpProductFindLayout.createSequentialGroup()
+                        .addComponent(txtProductBrand, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtProductStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpProductFindLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtProductStock, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblProductStock))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpProductFindLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtProductPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblProductPrice))
+                    .addComponent(lblProductPrice)
+                    .addComponent(txtProductPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpProductFindLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpProductFindLayout.createSequentialGroup()
                         .addComponent(txtProductQuantityToSell, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnFindProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnFindProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRemove))
                     .addComponent(lblProductQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
         jpProductFindLayout.setVerticalGroup(
             jpProductFindLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpProductFindLayout.createSequentialGroup()
-                .addGap(0, 22, Short.MAX_VALUE)
+                .addGap(0, 16, Short.MAX_VALUE)
+                .addGroup(jpProductFindLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jpProductFindLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblProductCode)
+                        .addComponent(lblProductName)
+                        .addComponent(lblProductBrand))
+                    .addGroup(jpProductFindLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblProductStock)
+                        .addComponent(lblProductPrice)
+                        .addComponent(lblProductQuantity)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpProductFindLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpProductFindLayout.createSequentialGroup()
-                        .addGroup(jpProductFindLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jpProductFindLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lblProductCode)
-                                .addComponent(lblProductName)
-                                .addComponent(lblProductBrand))
-                            .addGroup(jpProductFindLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lblProductStock)
-                                .addComponent(lblProductPrice)
-                                .addComponent(lblProductQuantity)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jpProductFindLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jpProductFindLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtProductCode, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtProductBrand, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtProductStock, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtProductPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtProductQuantityToSell, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpProductFindLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btnRemove, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                        .addComponent(btnFindProduct, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(txtProductQuantityToSell, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpProductFindLayout.createSequentialGroup()
+                            .addComponent(txtProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap())
+                        .addGroup(jpProductFindLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnFindProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtProductPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jpNuevaVenta.add(jpProductFind, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, 80));
 
-        jTableProducts.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTableProducts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -207,14 +207,24 @@ public class ShopFormView extends javax.swing.JPanel {
                 "product code", "Name", "Brand", "Quantity", "Price", "Final price"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                true, true, true, true, true, false
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        jTableProducts.setFocusable(false);
+        jTableProducts.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTableProducts.setShowGrid(true);
         jScrollPane1.setViewportView(jTableProducts);
 
         javax.swing.GroupLayout jpTableShoppingFormLayout = new javax.swing.GroupLayout(jpTableShoppingForm);
@@ -237,7 +247,7 @@ public class ShopFormView extends javax.swing.JPanel {
 
         txtClientSsn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        txtClientName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtClientName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lblNameClient.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblNameClient.setText("Name");
@@ -248,8 +258,9 @@ public class ShopFormView extends javax.swing.JPanel {
         lblTotalPrice.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         lblTotalPrice.setText("Total a pagar: $");
 
-        lblTotal.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lblTotal.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
+        btnFindClient.setText("find ");
         btnFindClient.setFocusable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -261,41 +272,44 @@ public class ShopFormView extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtClientSsn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSsn))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNameClient)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblNameClient)
+                        .addContainerGap(691, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtClientName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnFindClient, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnFindClient)
                         .addGap(18, 18, 18)
-                        .addComponent(lblTotalPrice)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAddToShoppingCart, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                        .addComponent(lblTotalPrice)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAddToShoppingCart)
+                        .addGap(27, 27, 27))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTotalPrice)
-                    .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAddToShoppingCart, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSsn)
-                    .addComponent(lblNameClient))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtClientSsn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtClientName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnFindClient, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblSsn)
+                            .addComponent(lblNameClient))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtClientSsn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtClientName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnFindClient, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblTotalPrice))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnAddToShoppingCart)
+                            .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(43, 43, 43))
         );
 
         jpNuevaVenta.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 900, 90));
@@ -308,7 +322,9 @@ public class ShopFormView extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpNuevaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jpNuevaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
    public javax.swing.JLabel getLblNameClient() {

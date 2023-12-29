@@ -3,12 +3,12 @@ package controllers.shop.shopformcontroller;
 import entitys.models.product.SelectedProduct;
 import entitys.models.shop.ShoppingCart;
 import interfaces.services.CheckOutService;
+import interfaces.services.ShoppingCartService;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import services.shop.ShoppingCartServiceImp;
 import views.shop.CheckOutFormView;
 import views.shop.ShoppingCartFormView;
 
@@ -21,23 +21,21 @@ public class ShoppingCartFormController extends MouseAdapter implements ActionLi
     private final ShoppingCart shoppingCart;
 
     /*Services*/
-    ShoppingCartServiceImp shoppingCartServiceImp;
+    ShoppingCartService shoppingCartService;
     
     CheckOutService checkOutService;
 
     /*Global variables*/
     private final ArrayList<SelectedProduct> listShoppingCartProducts;
 
-    private DefaultTableModel model = new DefaultTableModel();
-
     /*Constructors*/
-    public ShoppingCartFormController(ShoppingCartFormView shoppingCartFormView, ShoppingCart shoppingCart, ShoppingCartServiceImp shoppingCartServiceImp) {
+    public ShoppingCartFormController(ShoppingCartFormView shoppingCartFormView, ShoppingCart shoppingCart, ShoppingCartService shoppingCartService) {
 
         this.shoppingCartFormView = shoppingCartFormView;
 
         this.shoppingCart = shoppingCart;
 
-        this.shoppingCartServiceImp = shoppingCartServiceImp;
+        this.shoppingCartService = shoppingCartService;
         
         addActionsListeners();
 
@@ -66,9 +64,9 @@ public class ShoppingCartFormController extends MouseAdapter implements ActionLi
 
         if (e.getSource() == shoppingCartFormView.getBtnGenerateOrder()) {
 
-            shoppingCartServiceImp.save(shoppingCart);
+            shoppingCartService.save(shoppingCart);
 
-            shoppingCartServiceImp.findById(shoppingCart.getId());
+            shoppingCartService.findById(shoppingCart.getId());
             
             CheckOutFormView checkOutFormView = new CheckOutFormView(shoppingCart,checkOutService);
             
@@ -81,7 +79,7 @@ public class ShoppingCartFormController extends MouseAdapter implements ActionLi
     /*Functions*/
     private void listProductsCarshop() {
 
-        model = (DefaultTableModel) shoppingCartFormView.getjTableProducts().getModel();
+    DefaultTableModel model = (DefaultTableModel) shoppingCartFormView.getjTableProducts().getModel();
 
        for (SelectedProduct sp : listShoppingCartProducts) {
 

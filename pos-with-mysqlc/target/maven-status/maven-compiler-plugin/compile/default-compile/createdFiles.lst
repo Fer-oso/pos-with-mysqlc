@@ -25,10 +25,10 @@ interfaces\services\ProductService.class
 interfaces\services\IProductService.class
 interfaces\entitys\checkout\ICheckOut.class
 entitys\models\client\Client.class
+persistence\dao\persistence\TelephoneRepositoryImp.class
 entitys\models\shop\ShoppingCart.class
 views\clients\ClientRegisterFormView.class
 interfaces\services\AddressService.class
-persistence\dao\ClientRepositoryImp.class
 views\shop\ShopFormView$1.class
 persistence\config\JdbcConnectorImp.class
 persistence\dao\CheckOutRepositoryImp.class
@@ -38,6 +38,7 @@ interfaces\persistences\crud\Update.class
 interfaces\services\Service.class
 interfaces\persistences\repositorys\entitys\shop\checkout\ICheckOutRepository.class
 services\products\ProductServiceImp.class
+controllers\utils\RefreshTable.class
 interfaces\persistences\repositorys\entitys\products\IProductRepository.class
 views\POS.class
 views\shop\CheckOutFormView.class
@@ -46,7 +47,9 @@ services\exceptions\ProductServiceException.class
 views\products\ProductFindByPcFormView$1.class
 interfaces\entitys\addres\IAddress.class
 views\products\ProductRegisterFormView.class
+persistence\dao\persistence\ProductRepositoryImp.class
 interfaces\services\IShoppingCartService.class
+persistence\dao\persistence\AddressRepositoryImp.class
 interfaces\persistences\crud\Delete.class
 interfaces\entitys\phone\IPhone.class
 interfaces\persistences\repositorys\entitys\address\AddressRepository.class
@@ -66,9 +69,7 @@ interfaces\entitys\person\Person.class
 interfaces\services\IAddressService.class
 interfaces\entitys\clients\IClient.class
 interfaces\persistences\crud\Crud.class
-persistence\dao\ProductRepositoryImp.class
 services\address\AddressServiceImp.class
-persistence\dao\TelephoneRepositoryImp.class
 entitys\models\shop\paymentmethod\Cash.class
 controllers\Shop\shopformcontroller\ShoppingCartFormController.class
 views\clients\ClientFindByNameFormView$2.class
@@ -81,7 +82,6 @@ interfaces\persistences\repositorys\entitys\phones\IPhoneRepository.class
 interfaces\persistences\repositorys\entitys\shop\IShoppingCartRepository.class
 interfaces\persistences\repositorys\entitys\products\ProductRepository.class
 interfaces\persistences\repositorys\entitys\clients\client\ClientRepository.class
-persistence\dao\AddressRepositoryImp.class
 views\shop\ShoppingCartFormView.class
 interfaces\services\ICheckOutService.class
 interfaces\services\ClientService.class
@@ -93,5 +93,6 @@ views\clients\ClientFindByNameFormView$1.class
 services\client\ClientServiceImp.class
 views\clients\ClientFindByNameFormView.class
 entitys\models\phone\Telephone.class
+persistence\dao\persistence\ClientRepositoryImp.class
 interfaces\persistences\repositorys\entitys\address\IAddressRepository.class
 interfaces\persistences\crud\Save.class

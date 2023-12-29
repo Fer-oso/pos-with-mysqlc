@@ -13,10 +13,10 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import persistence.config.DbConnector;
 import persistence.config.JdbcConnectorImp;
-import persistence.dao.AddressRepositoryImp;
-import persistence.dao.ClientRepositoryImp;
-import persistence.dao.ProductRepositoryImp;
-import persistence.dao.TelephoneRepositoryImp;
+import persistence.dao.persistence.AddressRepositoryImp;
+import persistence.dao.persistence.ClientRepositoryImp;
+import persistence.dao.persistence.ProductRepositoryImp;
+import persistence.dao.persistence.TelephoneRepositoryImp;
 import services.address.AddressServiceImp;
 import services.client.ClientServiceImp;
 import services.phone.TelephoneServiceImp;
@@ -43,8 +43,8 @@ public class FunctionalEjemplos {
     ProductRepository productRepository = new ProductRepositoryImp(dbConnector);
 
     ProductService productService = new ProductServiceImp(productRepository);
-
-    Product productToSave = new Product(1, "raul", "asd", 100.00, 3, true, "fer");
+    
+    Product productToSave = new Product(1, "raul", "asd", 123.2, 3, true, "fer");
 
     Function<Product, Product> guardar = product -> productService.save(product);
     

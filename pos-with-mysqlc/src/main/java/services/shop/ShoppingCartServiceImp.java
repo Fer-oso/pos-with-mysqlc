@@ -7,7 +7,7 @@ import interfaces.persistences.repositorys.entitys.shop.ShoppingCartRepository;
 
 import interfaces.services.ShoppingCartService;
 import java.util.ArrayList;
-
+import java.util.Optional;
 
 public class ShoppingCartServiceImp implements ShoppingCartService {
 
@@ -19,43 +19,20 @@ public class ShoppingCartServiceImp implements ShoppingCartService {
         this.shoppingCartRepository = shoppingCartRepository;
     }
 
-    public ShoppingCart createShoppingCart(Client client, ArrayList<SelectedProduct> listSelectedProducts,Double total){
+    @Override
+    public ShoppingCart createShoppingCart(Client client, ArrayList<SelectedProduct> listSelectedProducts, Double total){
     
     return new ShoppingCart(client, listSelectedProducts, total);
     
     }
 
     @Override
-    public ShoppingCart save(ShoppingCart object) {
+    public Optional<ShoppingCart> save(ShoppingCart object) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ShoppingCart update(Integer id, ShoppingCart object) {
+    public Optional<ShoppingCart> findById(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
-    @Override
-    public void delete(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public ArrayList<ShoppingCart> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public ShoppingCart findById(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public boolean checkDuplicateRegister(ShoppingCart t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-
-  
-
 }

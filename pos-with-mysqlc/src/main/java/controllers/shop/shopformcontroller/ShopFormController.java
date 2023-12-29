@@ -1,8 +1,10 @@
 package controllers.Shop.shopformcontroller;
 
+import controllers.utils.RefreshTable;
 import entitys.models.client.Client;
 import entitys.models.product.Product;
 import entitys.models.product.SelectedProduct;
+import entitys.models.shop.ShoppingCart;
 import interfaces.services.ClientService;
 import interfaces.services.ProductService;
 import interfaces.services.ShoppingCartService;
@@ -16,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import views.shop.ShopFormView;
+import views.shop.ShoppingCartFormView;
 
 public class ShopFormController extends MouseAdapter implements ActionListener {
 
@@ -28,11 +31,10 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
 
     /*Views*/
     private final ShopFormView shopFormView;
-    
+
     /*Global variables*/
-    
     private DefaultTableModel model = new DefaultTableModel();
-    
+
     private final ArrayList<SelectedProduct> listSelectedProducts = new ArrayList<>();
 
     private Product product;
@@ -45,22 +47,18 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
 
     private int row;
 
-    private Integer id;
-
-    private Integer ssn;
-
     private Double total;
 
     //Constructors
-    public ShopFormController(ShopFormView shopFormView, ProductService productServiceImp, ClientService clientServiceImp, ShoppingCartService shoppingCartServiceImp) {
+    public ShopFormController(ShopFormView shopFormView, ProductService productService, ClientService clientService, ShoppingCartService shoppingCartService) {
 
         this.shopFormView = shopFormView;
 
-        this.productServiceImp = productServiceImp;
+        this.productServiceImp = productService;
 
-        this.clientServiceImp = clientServiceImp;
+        this.clientServiceImp = clientService;
 
-        this.shoppingCartServiceImp = shoppingCartServiceImp;
+        this.shoppingCartServiceImp = shoppingCartService;
 
         addACtionsListeners();
     }
@@ -70,11 +68,15 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
 
         shopFormView.getTxtProductCode().addActionListener(this);
 
+        shopFormView.getBtnFindProduct().addActionListener(this);
+
         shopFormView.getTxtProductQuantityToSell().addActionListener(this);
 
         shopFormView.getBtnRemove().addActionListener(this);
 
         shopFormView.getTxtClientSsn().addActionListener(this);
+
+        shopFormView.getBtnFindClient().addActionListener(this);
 
         shopFormView.getBtnAddToShoppingCart().addActionListener(this);
 
@@ -84,7 +86,7 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == shopFormView.getTxtProductCode()) {
+        if (e.getSource() == shopFormView.getTxtProductCode() || (e.getSource() == shopFormView.getBtnFindProduct())) {
 
             findProduct();
         }
@@ -93,21 +95,21 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
 
             checkQuantityLessStock();
 
-            refreshTable(model);
+            RefreshTable.refreshTable(model);
 
             listProductsCarshop();
         }
 
         if (e.getSource() == shopFormView.getBtnRemove()) {
 
-            removeProductToList(id);
+            removeProductToList();
 
-            refreshTable(model);
+            RefreshTable.refreshTable(model);
 
             listProductsCarshop();
         }
 
-        if (e.getSource() == shopFormView.getTxtClientSsn()) {
+        if (e.getSource() == shopFormView.getTxtClientSsn() || e.getSource() == shopFormView.getBtnFindClient()) {
 
             findClient();
         }
@@ -132,13 +134,9 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
 
         if (!"".equals(shopFormView.getTxtProductCode().getText())) {
 
-            String productCode = shopFormView.getTxtProductCode().getText();
+            product = productServiceImp.findByProductCode(shopFormView.getTxtProductCode().getText());
 
-            product = productServiceImp.findByProductCode(productCode);
-
-            System.out.println(product);
-
-            if (product.getName() != null) {
+            if (product != null) {
 
                 shopFormView.getTxtProductName().setText("" + product.getName());
 
@@ -152,15 +150,17 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
 
             } else {
 
+                JOptionPane.showMessageDialog(null, "Cant find with that product code, try again");
+
+                shopFormView.getTxtProductCode().requestFocus();
+
                 shopFormView.getTxtProductName().setText("");
 
                 shopFormView.getTxtProductBrand().setText("");
 
-                shopFormView.getTxtProductPrice().setText("");
-
                 shopFormView.getTxtProductStock().setText("");
 
-                shopFormView.getTxtProductCode().requestFocus();
+                shopFormView.getTxtProductPrice().setText("");
 
                 shopFormView.getTxtProductQuantityToSell().setText("");
             }
@@ -177,8 +177,6 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
 
     private void checkQuantityLessStock() {
 
-        int actualStock;
-
         if (!"".equals(shopFormView.getTxtProductQuantityToSell().getText())) {
 
             int productStock = Integer.parseInt(shopFormView.getTxtProductStock().getText());
@@ -193,15 +191,15 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
 
                 addProductToList(); // añade a la lista el producto seleccionado
 
-                actualStock = (productStock - productQuantityToSell);
+                int actualStock = (productStock - productQuantityToSell);
 
-                shopFormView.getTxtProductStock().setText("" + actualStock);
+                shopFormView.getTxtProductStock().setText(String.valueOf(actualStock));
 
             } else {
 
                 JOptionPane.showMessageDialog(null, "Stock no disponible");
             }
-            
+
         } else {
 
             JOptionPane.showMessageDialog(null, "Insert quantity ");
@@ -214,54 +212,17 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
 
     private SelectedProduct createSelectedProduct() {
 
-        id = product.getId();
+        String productCode = shopFormView.getTxtProductCode().getText();
 
-        String productCode = product.getProductCode();
+        String productName = shopFormView.getTxtProductName().getText();
 
-        String productName = product.getName();
+        String productBrand = shopFormView.getTxtProductBrand().getText();
 
-        String productBrand = product.getBrand();
-
-        double productPrice = product.getPrice();
+        double productPrice = Double.parseDouble(shopFormView.getTxtProductPrice().getText());
 
         double finalPrice = productQuantityToSell * productPrice;
 
-        return new SelectedProduct(id, productCode, productName, productBrand, productPrice, productQuantityToSell, finalPrice);
-    }
-
-    private void addProductToList() {
-
-        boolean existDuplicate = false; //Flag to check duplicate existence
-
-        if (listSelectedProducts.isEmpty()) { // if the list is empty 
-
-            listSelectedProducts.add(selectedProduct); //add directly the product
-
-            System.out.println("producto añadido por que estaba vacia" + listSelectedProducts);
-
-        } else {
-
-            for (SelectedProduct p : listSelectedProducts) {
-
-                if (p.getProductCode().equals(selectedProduct.getProductCode())) {
-
-                    JOptionPane.showMessageDialog(null, "producto ya esta en la lista");
-
-                    p.setProductQuantity(p.getProductQuantity() + productQuantityToSell);
-
-                    p.setFinalPrice(p.getProductQuantity() * selectedProduct.getProductPrice());
-
-                    existDuplicate = true; // change the value to true  if the product exist
-
-                    break;
-                }
-            }
-
-            if (!existDuplicate) {
-
-                listSelectedProducts.add(selectedProduct);
-            }
-        }
+        return new SelectedProduct(productCode, productName, productBrand, productPrice, productQuantityToSell, finalPrice);
     }
 
     private void listProductsCarshop() {
@@ -293,11 +254,7 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
 
             total += finalPrice;
 
-            shopFormView.getLblTotal().setText("" + total);
-
-            System.out.println(finalPrice);
-
-            System.out.println(total);
+            shopFormView.getLblTotal().setText(String.valueOf(total));
         }
     }
 
@@ -306,60 +263,75 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
         row = shopFormView.getjTableProducts().getSelectedRow();
 
         selectedProduct = listSelectedProducts.get(row);
-
-        id = selectedProduct.getId();
-
-        System.out.println(id);
     }
 
-    private void refreshTable(DefaultTableModel modelo) {
+    private void addProductToList() {
 
-        for (int i = 0; i < modelo.getRowCount(); i++) {
+        boolean existDuplicate = false; //Flag to check duplicate existence
 
-            modelo.removeRow(i);
+        if (listSelectedProducts.isEmpty()) { // if the list is empty 
 
-            i = i - 1;
+            listSelectedProducts.add(selectedProduct); //add directly the product
+
+        } else {
+
+            for (SelectedProduct p : listSelectedProducts) {
+
+                if (p.getProductCode().equals(selectedProduct.getProductCode())) {
+
+                    JOptionPane.showMessageDialog(null, "producto ya esta en la lista");
+
+                    p.setProductQuantity(p.getProductQuantity() + productQuantityToSell);
+
+                    p.setFinalPrice(p.getProductQuantity() * selectedProduct.getProductPrice());
+
+                    existDuplicate = true; // change the value to true  if the product exist
+
+                    break;
+                }
+            }
+
+            if (!existDuplicate) {
+
+                listSelectedProducts.add(selectedProduct);
+            }
         }
     }
 
-    private void removeProductToList(Integer id) {
+    private void removeProductToList() {
 
         Iterator<SelectedProduct> iteratorList = listSelectedProducts.iterator();
 
         while (iteratorList.hasNext()) {
 
-            selectedProduct = iteratorList.next();
+            if (iteratorList.next().getProductCode().equals(selectedProduct.getProductCode())) {
 
-            if (selectedProduct.getId().equals(id)) {
-
-                System.out.println("" + selectedProduct);
+                shopFormView.getTxtProductStock().setText(String.valueOf(product.getStock()));
 
                 iteratorList.remove();
-                
-                shopFormView.getLblTotal().setText("" + (total - selectedProduct.getFinalPrice()*1.21));
+
+                shopFormView.getLblTotal().setText("" + (total - selectedProduct.getFinalPrice() * 1.21));
 
                 break;
             }
         }
-
-        System.out.println(listSelectedProducts);
     }
 
     private void findClient() {
 
         if (!"".equals(shopFormView.getTxtClientSsn().getText())) {
 
-            ssn = Integer.valueOf(shopFormView.getTxtClientSsn().getText());
+            String ssn = shopFormView.getTxtClientSsn().getText();
 
-            client = clientServiceImp.findById(id);
+            client = clientServiceImp.findBySsn(ssn).orElse(null);
 
-            if (client.getName() != null) {
+            if (client != null) {
 
-                shopFormView.getTxtClientName().setText("" + client.getName());
+                shopFormView.getTxtClientName().setText(client.getName() + " " + client.getLastName());
 
             } else {
 
-                JOptionPane.showMessageDialog(null, "Client not found");
+                JOptionPane.showMessageDialog(null, "Client not found, try again");
 
                 shopFormView.getTxtClientSsn().setText("");
             }
@@ -378,18 +350,16 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
 
             return;
         }
-        
-        if (shopFormView.getjTableProducts().getRowCount() == 0) {
-            
-            JOptionPane.showMessageDialog(null, "Need add products");
 
-            return;
+        if (shopFormView.getjTableProducts().getRowCount() == 0) {
+
+            JOptionPane.showMessageDialog(null, "Need add products");
         }
 
-      //  ShoppingCart shoppingCart = shoppingCartServiceImp.createShoppingCart(client, listSelectedProducts, total);
+        ShoppingCart shoppingCart = shoppingCartServiceImp.createShoppingCart(client, listSelectedProducts, total);
 
-       // ShoppingCartFormView shoppingCartFormView = new ShoppingCartFormView(shoppingCart, shoppingCartServiceImp);
+        ShoppingCartFormView shoppingCartFormView = new ShoppingCartFormView(shoppingCart, shoppingCartServiceImp);
 
-     //   shoppingCartFormView.setVisible(true);
+        shoppingCartFormView.setVisible(true);
     }
 }

@@ -6,6 +6,7 @@ import entitys.models.phone.Telephone;
 import interfaces.persistences.repositorys.entitys.clients.client.ClientRepository;
 import interfaces.services.ClientService;
 import java.util.ArrayList;
+import java.util.Optional;
 import lombok.SneakyThrows;
 import services.exceptions.ClientServiceException;
 
@@ -28,13 +29,6 @@ public class ClientServiceImp implements ClientService {
 
     @Override
     @SneakyThrows
-    public Client findById(Integer id) {
-
-        return clientRepository.findById(id).orElseThrow(() -> new ClientServiceException("No value present with that id"));
-    }
-
-    @Override
-    @SneakyThrows
     public Client update(Integer id, Client object) {
 
         return clientRepository.update(id, object).orElseThrow(() -> new ClientServiceException("No value present with that id"));
@@ -51,10 +45,23 @@ public class ClientServiceImp implements ClientService {
 
     @Override
     @SneakyThrows
+    public Client findById(Integer id) {
+
+        return clientRepository.findById(id).orElseThrow(() -> new ClientServiceException("No value present with that id"));
+    }
+
+    @Override
+    @SneakyThrows
+    public Optional<Client> findBySsn(String ssn) {
+        
+        return clientRepository.findBySsn(ssn);
+    }
+
+    @Override
+    @SneakyThrows
     public ArrayList<Client> findAll() {
 
         return clientRepository.findAll();
-
     }
 
     @Override
@@ -78,7 +85,7 @@ public class ClientServiceImp implements ClientService {
     @SneakyThrows
     @Override
     public void insertClientPhones(Client client, Telephone... telephones) {
-        
+
         clientRepository.insertClientPhone(client, telephones);
     }
 

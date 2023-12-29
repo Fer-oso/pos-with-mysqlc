@@ -32,7 +32,10 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jpNuevaVenta" alignment="0" min="-2" pref="510" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Component id="jpNuevaVenta" alignment="0" min="-2" pref="510" max="-2" attributes="0"/>
+              <EmptySpace pref="25" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -132,66 +135,72 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtProductBrand" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
-                          <Component id="lblProductBrand" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="lblProductBrand" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+                              <Component id="lblProductStock" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="txtProductBrand" min="-2" pref="130" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txtProductStock" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtProductStock" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
-                          <Component id="lblProductStock" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblProductPrice" min="-2" max="-2" attributes="0"/>
                           <Component id="txtProductPrice" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
-                          <Component id="lblProductPrice" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Component id="txtProductQuantityToSell" min="-2" pref="94" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnFindProduct" min="-2" pref="29" max="-2" attributes="0"/>
+                              <Component id="btnFindProduct" min="-2" pref="60" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnRemove" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="lblProductQuantity" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
+                          <Component id="lblProductQuantity" min="-2" pref="72" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="115" max="32767" attributes="0"/>
+                      <EmptySpace pref="123" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="0" pref="22" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="16" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                              <Component id="lblProductCode" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblProductName" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblProductBrand" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                              <Component id="lblProductStock" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblProductPrice" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblProductQuantity" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                                      <Component id="lblProductCode" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblProductName" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblProductBrand" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                                      <Component id="lblProductStock" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblProductPrice" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblProductQuantity" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="txtProductCode" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   <Component id="txtProductBrand" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                  <Component id="txtProductName" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   <Component id="txtProductStock" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                  <Component id="txtProductPrice" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   <Component id="txtProductQuantityToSell" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                               </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="txtProductName" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="btnFindProduct" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="btnRemove" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="btnRemove" alignment="1" pref="30" max="32767" attributes="0"/>
-                              <Component id="btnFindProduct" alignment="1" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="txtProductPrice" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -210,11 +219,6 @@
               </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="txtProductCode">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="18" style="0"/>
-                </Property>
-              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblProductName">
               <Properties>
@@ -241,17 +245,12 @@
             <Component class="javax.swing.JTextField" name="txtProductBrand">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="18" style="0"/>
-                </Property>
+                <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtProductStock">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="18" style="0"/>
-                </Property>
                 <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
@@ -269,9 +268,7 @@
             <Component class="javax.swing.JTextField" name="txtProductPrice">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="18" style="0"/>
-                </Property>
+                <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblProductPrice">
@@ -297,27 +294,22 @@
               </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="txtProductQuantityToSell">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="18" style="0"/>
-                </Property>
-              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnRemove">
               <Properties>
+                <Property name="text" type="java.lang.String" value="remove"/>
                 <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtProductName">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="18" style="0"/>
-                </Property>
+                <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnFindProduct">
               <Properties>
+                <Property name="text" type="java.lang.String" value="find"/>
                 <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
@@ -355,19 +347,19 @@
               <SubComponents>
                 <Component class="javax.swing.JTable" name="jTableProducts">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="18" style="0"/>
-                    </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="6" rowCount="0">
-                        <Column editable="true" title="product code" type="java.lang.Object"/>
-                        <Column editable="true" title="Name" type="java.lang.Object"/>
-                        <Column editable="true" title="Brand" type="java.lang.Object"/>
-                        <Column editable="true" title="Quantity" type="java.lang.Object"/>
-                        <Column editable="true" title="Price" type="java.lang.Object"/>
-                        <Column editable="false" title="Final price" type="java.lang.Object"/>
+                        <Column editable="false" title="product code" type="java.lang.Object"/>
+                        <Column editable="false" title="Name" type="java.lang.String"/>
+                        <Column editable="false" title="Brand" type="java.lang.String"/>
+                        <Column editable="true" title="Quantity" type="java.lang.Integer"/>
+                        <Column editable="true" title="Price" type="java.lang.Double"/>
+                        <Column editable="false" title="Final price" type="java.lang.Double"/>
                       </Table>
                     </Property>
+                    <Property name="focusable" type="boolean" value="false"/>
+                    <Property name="selectionMode" type="int" value="0"/>
+                    <Property name="showGrid" type="boolean" value="true"/>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
@@ -393,50 +385,56 @@
                           <Component id="txtClientSsn" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                           <Component id="lblSsn" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblNameClient" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lblNameClient" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="691" max="32767" attributes="0"/>
+                          </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="txtClientName" min="-2" pref="150" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnFindClient" min="-2" pref="35" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnFindClient" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="lblTotalPrice" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lblTotal" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btnAddToShoppingCart" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="lblTotal" min="-2" pref="165" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnAddToShoppingCart" min="-2" pref="163" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblTotalPrice" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblTotal" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
-                          <Component id="btnAddToShoppingCart" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblSsn" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblNameClient" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="txtClientSsn" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="txtClientName" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblSsn" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblNameClient" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtClientSsn" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                      <Component id="txtClientName" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="btnFindClient" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                                      <Component id="lblTotalPrice" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
-                          <Component id="btnFindClient" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="btnAddToShoppingCart" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblTotal" min="-2" pref="35" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -466,7 +464,7 @@
             <Component class="javax.swing.JTextField" name="txtClientName">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="18" style="0"/>
+                  <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -503,7 +501,7 @@
             <Component class="javax.swing.JLabel" name="lblTotal">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="24" style="0"/>
+                  <Font name="Segoe UI" size="18" style="1"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -512,6 +510,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnFindClient">
               <Properties>
+                <Property name="text" type="java.lang.String" value="find "/>
                 <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>

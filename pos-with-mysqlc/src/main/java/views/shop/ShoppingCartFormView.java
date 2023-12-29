@@ -2,16 +2,16 @@ package views.shop;
 
 import controllers.shop.shopformcontroller.ShoppingCartFormController;
 import entitys.models.shop.ShoppingCart;
-import services.shop.ShoppingCartServiceImp;
+import interfaces.services.ShoppingCartService;
 
 public class ShoppingCartFormView extends javax.swing.JFrame {
 
     private static final long serialVersionUID = 1L;
 
   
-    public ShoppingCartFormView(ShoppingCart shoppingCart, ShoppingCartServiceImp shoppingCartServiceImp) {
+    public ShoppingCartFormView(ShoppingCart shoppingCart, ShoppingCartService shoppingCartService) {
         initComponents();
-        ShoppingCartFormController shoppingCartController = new ShoppingCartFormController(this, shoppingCart, shoppingCartServiceImp );
+        ShoppingCartFormController shoppingCartFormController = new ShoppingCartFormController(this, shoppingCart, shoppingCartService );
 
     }
 
@@ -45,7 +45,6 @@ public class ShoppingCartFormView extends javax.swing.JFrame {
         jpNuevaVenta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnCancel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/shoppingsystemicons/cancel shopping cart icon 48px.png"))); // NOI18N
         btnCancel.setText("Cancel Order ");
         jpNuevaVenta.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 450, 180, 50));
 
@@ -70,7 +69,6 @@ public class ShoppingCartFormView extends javax.swing.JFrame {
         jpNuevaVenta.add(lblNameClient, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, -1, -1));
 
         btnGenerateOrder.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnGenerateOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/shoppingsystemicons/accept shopping cart icon 48px.png"))); // NOI18N
         btnGenerateOrder.setText("Generate Order");
         jpNuevaVenta.add(btnGenerateOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 390, -1, 50));
 
@@ -83,8 +81,6 @@ public class ShoppingCartFormView extends javax.swing.JFrame {
         jpNuevaVenta.add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 470, 170, 30));
 
         jpTitle.setPreferredSize(new java.awt.Dimension(1020, 57));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market icons/shoppingsystemicons/shopping cart icon 64px.png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Roboto", 0, 48)); // NOI18N
         jLabel2.setText("Shopping Cart");
@@ -108,7 +104,7 @@ public class ShoppingCartFormView extends javax.swing.JFrame {
 
         jpNuevaVenta.add(jpTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 80));
 
-        jTableProducts.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTableProducts.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTableProducts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -125,17 +121,22 @@ public class ShoppingCartFormView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableProducts.setFocusable(false);
+        jTableProducts.setRequestFocusEnabled(false);
         jScrollPane1.setViewportView(jTableProducts);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1010, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(78, 78, 78)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 757, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(175, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         jpNuevaVenta.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 1010, 300));

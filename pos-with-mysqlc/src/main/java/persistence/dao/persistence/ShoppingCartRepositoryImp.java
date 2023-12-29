@@ -1,4 +1,4 @@
-package persistence.dao;
+package persistence.dao.persistence;
 
 import entitys.models.shop.ShoppingCart;
 import interfaces.persistences.repositorys.entitys.shop.ShoppingCartRepository;

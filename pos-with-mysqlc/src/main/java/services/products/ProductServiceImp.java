@@ -58,12 +58,7 @@ public class ProductServiceImp implements ProductService {
     @Override
     @SneakyThrows
     public ArrayList<Product> findAll() {
-
-        if (productRepository.findAll().isEmpty()) {
-            
-            throw new ProductServiceException("Empty List");
-        }
-
+        
         return productRepository.findAll();
     }
 
@@ -82,6 +77,6 @@ public class ProductServiceImp implements ProductService {
     @SneakyThrows
     public Product findByProductCode(String productCode) {
         
-        return productRepository.findByProductCode(productCode).orElseThrow(() -> new ProductServiceException("No value present with that product code"));
+        return productRepository.findByProductCode(productCode).orElse(null);
     }
 }

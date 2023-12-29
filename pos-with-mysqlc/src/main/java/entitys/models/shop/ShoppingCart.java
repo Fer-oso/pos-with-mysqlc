@@ -4,7 +4,6 @@ import entitys.models.client.Client;
 import entitys.models.product.SelectedProduct;
 import interfaces.entitys.shoppingCart.IShoppingCart;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ShoppingCart implements IShoppingCart<Integer> {
 
@@ -44,26 +43,32 @@ public class ShoppingCart implements IShoppingCart<Integer> {
        this.id = id;
     }
 
+    @Override
     public Client getClient() {
         return client;
     }
 
+    @Override
     public void setClient(Client client) {
         this.client = client;
     }
 
+    @Override
     public ArrayList<SelectedProduct> getProducts() {
         return products;
     }
 
+    @Override
     public void setProducts(ArrayList<SelectedProduct> products) {
         this.products = products;
     }
 
+    @Override
     public Double getFinalPrice() {
         return total;
     }
 
+    @Override
     public void setFinalPrice(Double total) {
         this.total = total;
     }

@@ -1,4 +1,4 @@
-package persistence.dao;
+package persistence.dao.persistence;
 
 import entitys.models.addres.Address;
 import entitys.models.client.Client;
@@ -188,6 +188,50 @@ public class ClientRepositoryImp implements ClientRepository {
 
     @Override
     @SneakyThrows
+    public Optional<Client> findBySsn(String ssn) {
+  try {
+
+            String sql = "SELECT * FROM clients WHERE ssn = ?";
+
+            PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
+
+            preparedStatement.setString(1, ssn);
+
+            Client client = null;
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+
+                client = new Client(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("lastname"),
+                        resultSet.getInt("age"),
+                        resultSet.getString("ssn"),
+                        resultSet.getString("clasification"),
+                        resultSet.getBoolean("available"),
+                        new ArrayList<>(),
+                        new ArrayList<>());
+
+            }
+
+            return Optional.ofNullable(client);
+
+        } catch (SQLException e) {
+
+            dbConnector.rollbackTransaction();
+
+            throw new DaoExceptions("Error Mysql" + e.getMessage());
+
+        } finally {
+
+            dbConnector.closeConnection();
+        }
+    }
+
+    @Override
+    @SneakyThrows
     public ArrayList<Client> findAll() {
         try {
             String sql = "SELECT * FROM  clients";
@@ -266,7 +310,7 @@ public class ClientRepositoryImp implements ClientRepository {
 
         try {
             for (Telephone telephone : phones) {
-                
+
                 PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
 
                 preparedStatement.setInt(1, client.getId());

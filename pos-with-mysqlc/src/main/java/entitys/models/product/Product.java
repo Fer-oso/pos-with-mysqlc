@@ -10,18 +10,18 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class Product implements IProduct{
+public class Product implements IProduct {
 
     private static final long serialVersionUID = 1L;
 
     private Integer id;
     private String name;
     private String brand;
-    private Double price; 
+    private Double price;
     private Integer stock;
     private boolean availability;
     private String productCode;
-    
+
     @Override
     public Integer getId() {
         return id;

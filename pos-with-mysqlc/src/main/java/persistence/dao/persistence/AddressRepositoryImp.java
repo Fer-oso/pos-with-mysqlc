@@ -1,41 +1,48 @@
-package persistence.dao;
+package persistence.dao.persistence;
 
-import persistence.config.DbConnector;
-import entitys.models.phone.Telephone;
-import interfaces.persistences.repositorys.entitys.phones.TelephoneRepository;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import entitys.models.addres.Address;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Optional;
-import lombok.SneakyThrows;
 import persistence.dao.exceptios.DaoExceptions;
+import interfaces.persistences.repositorys.entitys.address.AddressRepository;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import lombok.SneakyThrows;
+import persistence.config.DbConnector;
 
-public class TelephoneRepositoryImp implements TelephoneRepository {
+public class AddressRepositoryImp implements AddressRepository {
 
+    private static final long serialVersionUID = 1L;
+    
     DbConnector dbConnector;
 
-    public TelephoneRepositoryImp(DbConnector dbConnector) {
+    public AddressRepositoryImp(DbConnector dbConnector) {
         this.dbConnector = dbConnector;
     }
 
-    private static final long serialVersionUID = 1L;
-
-    private static Integer idGeneratedKey;
+    private Integer idGeneratedKey;
 
     @Override
     @SneakyThrows
-    public Optional<Telephone> save(Telephone object) {
+    public Optional<Address> save(Address object) {
+
         try {
 
-            String sql = "INSERT INTO phone (number_phone, type_phone) VALUES (?, ?)";
+            String sql = "INSERT INTO address (street_direction, street_number, city, state, postal_code ) VALUES (?, ?, ?, ?, ?)";
 
             PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            preparedStatement.setInt(1, object.getNumberPhone());
+            preparedStatement.setString(1, object.getStreetDirection());
 
-            preparedStatement.setString(2, object.getTypePhone());
+            preparedStatement.setInt(2, object.getStreetNumber());
+
+            preparedStatement.setString(3, object.getCity());
+
+            preparedStatement.setString(4, object.getState());
+
+            preparedStatement.setInt(5, object.getPostalCode());
 
             preparedStatement.executeUpdate();
 
@@ -64,18 +71,25 @@ public class TelephoneRepositoryImp implements TelephoneRepository {
 
     @Override
     @SneakyThrows
-    public Optional<Telephone> update(Integer id, Telephone object) {
+    public Optional<Address> update(Integer id, Address object) {
+
         try {
 
-            String sql = "UPDATE phone SET number_phone = ?, type_phone = ? WHERE id = ?";
+            String sql = "UPDATE address SET  street_direction = ?, street_number = ?, city = ?, state = ?, postal_code = ? WHERE id = ?";
 
             PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
 
-            preparedStatement.setInt(1, object.getNumberPhone());
+            preparedStatement.setString(1, object.getStreetDirection());
 
-            preparedStatement.setString(2, object.getTypePhone());
+            preparedStatement.setInt(2, object.getStreetNumber());
 
-            preparedStatement.setInt(3, id);
+            preparedStatement.setString(3, object.getCity());
+
+            preparedStatement.setString(4, object.getState());
+
+            preparedStatement.setInt(5, object.getPostalCode());
+
+            preparedStatement.setInt(6, id);
 
             preparedStatement.executeUpdate();
 
@@ -97,10 +111,11 @@ public class TelephoneRepositoryImp implements TelephoneRepository {
 
     @Override
     @SneakyThrows
-    public void delete(Integer id) {
+    public void delete(Integer id){
+
         try {
 
-            String sql = "DELETE FROM phone WHERE id = ?";
+            String sql = "DELETE FROM address WHERE id = ?";
 
             PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
 
@@ -124,9 +139,11 @@ public class TelephoneRepositoryImp implements TelephoneRepository {
 
     @Override
     @SneakyThrows
-    public Optional<Telephone> findById(Integer id) {
+    public Optional<Address> findById(Integer id) {
+
         try {
-            String sql = "SELECT * FROM phone WHERE id = ?";
+
+            String sql = "SELECT * FROM address WHERE id = ?";
 
             PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
 
@@ -136,23 +153,27 @@ public class TelephoneRepositoryImp implements TelephoneRepository {
 
             if (resultSet.next()) {
 
-                Telephone phone = new Telephone(resultSet.getInt("id"),
-                        resultSet.getInt("number_phone"),
-                        resultSet.getString("type_phone"));
+                Address address = new Address(
+                        resultSet.getInt("id"),
+                        resultSet.getString("street_direction"),
+                        resultSet.getInt("street_number"),
+                        resultSet.getString("city"),
+                        resultSet.getString("state"),
+                        resultSet.getInt("postal_code"));
+                Optional<Address> optionalStandardAddress = Optional.ofNullable(address);
 
-                Optional<Telephone> optionalPhone = Optional.ofNullable(phone);
-
-                return optionalPhone;
+                return optionalStandardAddress;
 
             } else {
 
-                throw new DaoExceptions("Not Found By ID Maybe Doesn't exists");
+                throw new DaoExceptions("Not Found by ID, maybe doesn't exists");
             }
+
         } catch (SQLException e) {
 
             dbConnector.rollbackTransaction();
 
-            throw new DaoExceptions(e.getMessage());
+            throw new DaoExceptions("Error Mysql" + e.getMessage());
 
         } finally {
 
@@ -162,27 +183,29 @@ public class TelephoneRepositoryImp implements TelephoneRepository {
 
     @Override
     @SneakyThrows
-    public ArrayList<Telephone> findAll() {
+    public ArrayList<Address> findAll() {
+
         try {
-            String sql = "SELECT * FROM phone";
+            String sql = "SELECT * FROM address";
 
             PreparedStatement preparedStatement = dbConnector.startConnection().prepareStatement(sql);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            ArrayList<Telephone> phones = new ArrayList<>();
+            ArrayList<Address> addresses = new ArrayList<>();
 
             while (resultSet.next()) {
 
-                Telephone phone = new Telephone(
+                addresses.add(new Address(
                         resultSet.getInt("id"),
-                        resultSet.getInt("number_phone"),
-                        resultSet.getString("type_phone"));
-
-                phones.add(phone);
+                        resultSet.getString("street_direction"),
+                        resultSet.getInt("street_number"),
+                        resultSet.getString("city"),
+                        resultSet.getString("state"),
+                        resultSet.getInt("postal_code")));
             }
 
-            return phones;
+            return addresses;
 
         } catch (SQLException e) {
 

@@ -1,49 +1,37 @@
 package entitys.models.product;
 
 public class SelectedProduct {
-    
-    private Integer id;
-    
+
     private String productCode;
-    
+
     private String productName;
-    
+
     private String productBrand;
-    
+
     private double productPrice;
-    
-    private int    productQuantity;
-    
+
+    private int productQuantity;
+
     private double finalPrice;
 
     public SelectedProduct() {
     }
 
-    public SelectedProduct(Integer id, String productCode, String productName, String productBrand, double productPrice, int productQuantity, double finalPrice) {
-       
-        this.id = id;
-        
+    public SelectedProduct(String productCode, String productName, String productBrand, double productPrice, int productQuantity, double finalPrice) {
+
         this.productCode = productCode;
-        
+
         this.productName = productName;
-        
+
         this.productBrand = productBrand;
-        
+
         this.productPrice = productPrice;
-        
+
         this.productQuantity = productQuantity;
-        
+
         this.finalPrice = finalPrice;
     }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
+    
     public String getProductCode() {
         return productCode;
     }
@@ -94,10 +82,7 @@ public class SelectedProduct {
 
     @Override
     public String toString() {
-        return "SelectedProduct{" + "id=" + id + ", productCode=" + productCode + ", productName=" + productName + ", productBrand=" + productBrand + ", productPrice=" + productPrice + ", productQuantity=" + productQuantity + ", finalPrice=" + finalPrice + '}';
+        return "SelectedProduct{productCode=" + productCode + ", productName=" + productName + ", productBrand=" + productBrand + ", productPrice=" + productPrice + ", productQuantity=" + productQuantity + ", finalPrice=" + finalPrice + '}';
     }
 
-   
-    
-    
 }

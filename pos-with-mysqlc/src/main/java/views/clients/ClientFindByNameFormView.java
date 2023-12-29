@@ -8,7 +8,6 @@ import javax.swing.JTextField;
 import interfaces.services.TelephoneService;
 import interfaces.services.AddressService;
 import interfaces.services.ClientService;
-import java.awt.event.ItemEvent;
 
 public class ClientFindByNameFormView extends javax.swing.JPanel {
 
