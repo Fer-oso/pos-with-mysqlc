@@ -4,7 +4,11 @@ import entitys.models.client.Client;
 import entitys.models.product.SelectedProduct;
 import interfaces.entitys.shoppingCart.IShoppingCart;
 import java.util.ArrayList;
+import lombok.Builder;
+import lombok.extern.jackson.Jacksonized;
 
+@Builder
+@Jacksonized
 public class ShoppingCart implements IShoppingCart<Integer> {
 
     private static final long serialVersionUID = 1L;
@@ -15,23 +19,7 @@ public class ShoppingCart implements IShoppingCart<Integer> {
 
     private ArrayList<SelectedProduct> products;
     
-    private Double total;
-
-    private static Integer countId = 0;
-
-
-    public ShoppingCart(Client client, ArrayList<SelectedProduct> products, Double total) {
-
-        countId++;
-
-        this.id = countId;
-
-        this.client = client;
-
-        this.products = products;
-        
-        this.total = total;
-    }
+    private Double finalPrice;
 
     @Override
     public Integer getId() {
@@ -65,16 +53,16 @@ public class ShoppingCart implements IShoppingCart<Integer> {
 
     @Override
     public Double getFinalPrice() {
-        return total;
+        return finalPrice;
     }
 
     @Override
     public void setFinalPrice(Double total) {
-        this.total = total;
+        this.finalPrice = total;
     }
 
     @Override
     public String toString() {
-        return "ShoppingCart{" + "id=" + id + ", client=" + client + ", products=" + products + ", total=" + total + '}';
+        return "ShoppingCart{" + "id=" + id + ", client=" + client + ", products=" + products + ", finalPrice=" + finalPrice + '}';
     }  
 }

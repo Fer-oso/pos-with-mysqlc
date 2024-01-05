@@ -1,0 +1,25 @@
+{
+    "id": 395,
+    "client": {
+        "id": 14,
+        "name": "Fernando",
+        "lastName": "Osorio",
+        "age": 29,
+        "ssn": "38128526",
+        "clasification": "Client",
+        "availability": true,
+        "address": [],
+        "phone": []
+    },
+    "products": [
+        {
+            "productCode": "gtx3060msi8gbddr6",
+            "productName": "gtx3060 8gb ddr6",
+            "productBrand": "MSI",
+            "productPrice": 2000.0,
+            "productQuantity": 1,
+            "finalPrice": 2000.0
+        }
+    ],
+    "finalPrice": 2420.0
+}

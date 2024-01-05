@@ -1,13 +1,16 @@
 package services.shop;
 
-import entitys.models.client.Client;
-import entitys.models.product.SelectedProduct;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import entitys.models.shop.ShoppingCart;
 import interfaces.persistences.repositorys.entitys.shop.ShoppingCartRepository;
 
 import interfaces.services.ShoppingCartService;
-import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import lombok.SneakyThrows;
 
 public class ShoppingCartServiceImp implements ShoppingCartService {
 
@@ -20,19 +23,26 @@ public class ShoppingCartServiceImp implements ShoppingCartService {
     }
 
     @Override
-    public ShoppingCart createShoppingCart(Client client, ArrayList<SelectedProduct> listSelectedProducts, Double total){
-    
-    return new ShoppingCart(client, listSelectedProducts, total);
-    
+    @SneakyThrows
+    public Optional<ShoppingCart> save(ShoppingCart shoppingCart) {
+
+        try {
+
+            shoppingCart = shoppingCartRepository.save(shoppingCart).orElse(null);
+
+            new ObjectMapper().writeValue(new File("shopping-cart-created.json"), shoppingCart);
+            
+        } catch (IOException ex) {
+
+            Logger.getLogger(ShoppingCartServiceImp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+         return Optional.ofNullable(shoppingCart);
     }
 
     @Override
-    public Optional<ShoppingCart> save(ShoppingCart object) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
+    @SneakyThrows
     public Optional<ShoppingCart> findById(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return shoppingCartRepository.findById(id);
     }
 }

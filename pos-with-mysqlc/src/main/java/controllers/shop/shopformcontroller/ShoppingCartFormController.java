@@ -18,11 +18,11 @@ public class ShoppingCartFormController extends MouseAdapter implements ActionLi
     private final ShoppingCartFormView shoppingCartFormView;
 
     /*Entitys*/
-    private final ShoppingCart shoppingCart;
+    private ShoppingCart shoppingCart;
 
     /*Services*/
     ShoppingCartService shoppingCartService;
-    
+
     CheckOutService checkOutService;
 
     /*Global variables*/
@@ -36,7 +36,7 @@ public class ShoppingCartFormController extends MouseAdapter implements ActionLi
         this.shoppingCart = shoppingCart;
 
         this.shoppingCartService = shoppingCartService;
-        
+
         addActionsListeners();
 
         listShoppingCartProducts = shoppingCart.getProducts();
@@ -64,14 +64,14 @@ public class ShoppingCartFormController extends MouseAdapter implements ActionLi
 
         if (e.getSource() == shoppingCartFormView.getBtnGenerateOrder()) {
 
-            shoppingCartService.save(shoppingCart);
+            shoppingCart = shoppingCartService.save(shoppingCart).get();
+            
+            System.out.println("este es el findbyid "+ shoppingCartService.findById(shoppingCart.getId()));
 
-            shoppingCartService.findById(shoppingCart.getId());
-            
-            CheckOutFormView checkOutFormView = new CheckOutFormView(shoppingCart,checkOutService);
-            
+            CheckOutFormView checkOutFormView = new CheckOutFormView(shoppingCart, checkOutService);
+
             shoppingCartFormView.setVisible(false);
-            
+
             checkOutFormView.setVisible(true);
         }
     }
@@ -79,9 +79,9 @@ public class ShoppingCartFormController extends MouseAdapter implements ActionLi
     /*Functions*/
     private void listProductsCarshop() {
 
-    DefaultTableModel model = (DefaultTableModel) shoppingCartFormView.getjTableProducts().getModel();
+        DefaultTableModel model = (DefaultTableModel) shoppingCartFormView.getjTableProducts().getModel();
 
-       for (SelectedProduct sp : listShoppingCartProducts) {
+        for (SelectedProduct sp : listShoppingCartProducts) {
 
             Object[] objectProduct = {sp.getProductCode(), sp.getProductName(), sp.getProductBrand(),
                 sp.getProductQuantity(), sp.getProductPrice(), sp.getFinalPrice()};

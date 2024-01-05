@@ -10,6 +10,7 @@ views\products\ProductFindByPcFormView.class
 interfaces\persistences\repositorys\Repository.class
 views\products\ProductRegisterFormView$1.class
 interfaces\entitys\entity\Entity.class
+entitys\models\shop\ShoppingCart$ShoppingCartBuilder.class
 interfaces\persistences\repositorys\entitys\clients\client\IClientRepository.class
 interfaces\persistences\repositorys\entitys\shop\ShoppingCartRepository.class
 interfaces\services\ITelephoneService.class
@@ -44,6 +45,7 @@ views\POS.class
 views\shop\CheckOutFormView.class
 services\exceptions\PhoneServiceException.class
 services\exceptions\ProductServiceException.class
+persistence\dao\persistence\ShoppingCartRepositoryImp.class
 views\products\ProductFindByPcFormView$1.class
 interfaces\entitys\addres\IAddress.class
 views\products\ProductRegisterFormView.class
@@ -53,7 +55,6 @@ persistence\dao\persistence\AddressRepositoryImp.class
 interfaces\persistences\crud\Delete.class
 interfaces\entitys\phone\IPhone.class
 interfaces\persistences\repositorys\entitys\address\AddressRepository.class
-persistence\dao\ShoppingCartRepositoryImp.class
 controllers\products\ProductRegisterFormController.class
 views\shop\ShoppingCartFormView$1.class
 interfaces\entitys\product\IProduct.class

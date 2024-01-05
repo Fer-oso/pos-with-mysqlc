@@ -14,6 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -356,7 +357,7 @@ public class ShopFormController extends MouseAdapter implements ActionListener {
             JOptionPane.showMessageDialog(null, "Need add products");
         }
 
-        ShoppingCart shoppingCart = shoppingCartServiceImp.createShoppingCart(client, listSelectedProducts, total);
+        ShoppingCart shoppingCart = ShoppingCart.builder().id(new Random().nextInt(1000)).client(client).products(listSelectedProducts).finalPrice(total).build();
 
         ShoppingCartFormView shoppingCartFormView = new ShoppingCartFormView(shoppingCart, shoppingCartServiceImp);
 

@@ -46,17 +46,18 @@ public class JdbcConnectorImp implements DbConnector {
     public void rollbackTransaction() throws DaoExceptions {
 
         try {
-
+            
             connection.rollback();
 
         } catch (SQLException e) {
 
-            throw new DaoExceptions("Rollback error" + e);
+            System.out.println(e.getMessage());
         }
     }
 
     @Override
     public void commit() throws Exception {
+        
        connection.commit();
     }
     
