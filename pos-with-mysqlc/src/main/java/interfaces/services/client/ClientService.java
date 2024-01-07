@@ -1,4 +1,4 @@
-package interfaces.services;
+package interfaces.services.client;
 
 import entitys.models.client.Client;
 

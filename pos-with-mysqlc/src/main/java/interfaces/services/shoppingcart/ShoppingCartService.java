@@ -1,6 +1,6 @@
-package interfaces.services;
+package interfaces.services.shoppingcart;
 
-import entitys.models.shop.ShoppingCart;
+import entitys.models.shop.shoppingcart.ShoppingCart;
 
 public interface ShoppingCartService extends IShoppingCartService<ShoppingCart, Integer>{
       

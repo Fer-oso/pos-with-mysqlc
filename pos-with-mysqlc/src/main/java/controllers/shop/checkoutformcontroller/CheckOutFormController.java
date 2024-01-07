@@ -2,14 +2,17 @@ package controllers.Shop.checkoutformcontroller;
 
 
 import entitys.models.product.SelectedProduct;
-import entitys.models.shop.ShoppingCart;
+import entitys.models.shop.shoppingcart.ShoppingCart;
 import entitys.models.shop.checkout.CheckOut;
 import entitys.models.shop.paymentmethod.Cash;
 import entitys.models.shop.paymentmethod.CreditCard;
 import interfaces.entitys.paymentMethod.PaymentMethod;
-import interfaces.services.CheckOutService;
+import interfaces.services.checkout.CheckOutService;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -51,6 +54,8 @@ public class CheckOutFormController implements ActionListener {
         addActionsListeners();
 
         listProductsCarshop();
+        
+        checkOut = new CheckOut(shoppingCart);
 
         setLblInfo();
     }
@@ -93,6 +98,10 @@ public class CheckOutFormController implements ActionListener {
     }
 
     private void setLblInfo() {
+        
+        checkOutFormView.getLblCheckOutNumberValue().setText(String.valueOf(checkOut.getId()));
+        
+        checkOutFormView.getLblDateValue().setText(LocalDate.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
 
         checkOutFormView.getLblClientName().setText(shoppingCart.getClient().getName() + " " + shoppingCart.getClient().getLastName());
 

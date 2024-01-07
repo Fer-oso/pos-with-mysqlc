@@ -1,7 +1,7 @@
 package controllers.products;
 
 import entitys.models.product.Product;
-import interfaces.services.ProductService;
+import interfaces.services.product.ProductService;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;

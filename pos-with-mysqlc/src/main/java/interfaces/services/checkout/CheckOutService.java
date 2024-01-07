@@ -1,4 +1,4 @@
-package interfaces.services;
+package interfaces.services.checkout;
 
 import entitys.models.shop.checkout.CheckOut;
 

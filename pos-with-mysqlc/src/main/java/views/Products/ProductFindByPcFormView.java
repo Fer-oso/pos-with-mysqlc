@@ -2,7 +2,7 @@
 package views.products;
 
 import controllers.products.ProductFindByPcController;
-import interfaces.services.ProductService;
+import interfaces.services.product.ProductService;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;

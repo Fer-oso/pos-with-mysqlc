@@ -1,4 +1,4 @@
-package interfaces.services;
+package interfaces.services.telephone;
 
 import interfaces.entitys.phone.IPhone;
 import interfaces.services.crud.CrudService;

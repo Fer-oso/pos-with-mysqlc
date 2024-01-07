@@ -1,8 +1,8 @@
 package views.shop;
 
 import controllers.shop.shopformcontroller.ShoppingCartFormController;
-import entitys.models.shop.ShoppingCart;
-import interfaces.services.ShoppingCartService;
+import entitys.models.shop.shoppingcart.ShoppingCart;
+import interfaces.services.shoppingcart.ShoppingCartService;
 
 public class ShoppingCartFormView extends javax.swing.JFrame {
 
@@ -113,9 +113,16 @@ public class ShoppingCartFormView extends javax.swing.JFrame {
                 "product code", "Name", "Brand", "Quantity", "Price", "Final price"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -124,6 +131,13 @@ public class ShoppingCartFormView extends javax.swing.JFrame {
         jTableProducts.setFocusable(false);
         jTableProducts.setRequestFocusEnabled(false);
         jScrollPane1.setViewportView(jTableProducts);
+        if (jTableProducts.getColumnModel().getColumnCount() > 0) {
+            jTableProducts.getColumnModel().getColumn(1).setPreferredWidth(200);
+            jTableProducts.getColumnModel().getColumn(2).setPreferredWidth(30);
+            jTableProducts.getColumnModel().getColumn(3).setPreferredWidth(20);
+            jTableProducts.getColumnModel().getColumn(4).setPreferredWidth(30);
+            jTableProducts.getColumnModel().getColumn(5).setPreferredWidth(30);
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

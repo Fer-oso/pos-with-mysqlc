@@ -2,7 +2,7 @@ package views.products;
 
 import services.products.ProductServiceImp;
 import controllers.products.ProductRegisterFormController;
-import interfaces.services.ProductService;
+import interfaces.services.product.ProductService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;

@@ -1,9 +1,9 @@
 package controllers.shop.shopformcontroller;
 
 import entitys.models.product.SelectedProduct;
-import entitys.models.shop.ShoppingCart;
-import interfaces.services.CheckOutService;
-import interfaces.services.ShoppingCartService;
+import entitys.models.shop.shoppingcart.ShoppingCart;
+import interfaces.services.checkout.CheckOutService;
+import interfaces.services.shoppingcart.ShoppingCartService;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -91,10 +91,10 @@ public class ShoppingCartFormController extends MouseAdapter implements ActionLi
 
         shoppingCartFormView.getjTableProducts().setModel(model);
 
-        shoppingCartFormView.getLblTotal().setText("" + shoppingCart.getFinalPrice());
+        shoppingCartFormView.getLblTotal().setText(String.valueOf(shoppingCart.getFinalPrice()));
 
-        shoppingCartFormView.getTxtClientName().setText("" + shoppingCart.getClient().getName());
+        shoppingCartFormView.getTxtClientName().setText(shoppingCart.getClient().getName() + " " + shoppingCart.getClient().getLastName());
 
-        shoppingCartFormView.getTxtClientSsn().setText("" + shoppingCart.getClient().getSsn());
+        shoppingCartFormView.getTxtClientSsn().setText(shoppingCart.getClient().getSsn());
     }
 }

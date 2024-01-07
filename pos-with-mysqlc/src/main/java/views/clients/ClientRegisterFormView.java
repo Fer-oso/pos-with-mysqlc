@@ -2,13 +2,13 @@ package views.clients;
 
 import controllers.clients.ClientRegisterFormController;
 import javax.swing.JTextField;
-import interfaces.services.TelephoneService;
+import interfaces.services.telephone.TelephoneService;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import interfaces.services.AddressService;
-import interfaces.services.ClientService;
+import interfaces.services.address.AddressService;
+import interfaces.services.client.ClientService;
 
 public class ClientRegisterFormView extends javax.swing.JPanel {
 

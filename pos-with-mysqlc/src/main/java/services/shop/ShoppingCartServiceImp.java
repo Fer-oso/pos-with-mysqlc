@@ -1,10 +1,10 @@
 package services.shop;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import entitys.models.shop.ShoppingCart;
+import entitys.models.shop.shoppingcart.ShoppingCart;
 import interfaces.persistences.repositorys.entitys.shop.ShoppingCartRepository;
 
-import interfaces.services.ShoppingCartService;
+import interfaces.services.shoppingcart.ShoppingCartService;
 import java.io.File;
 import java.io.IOException;
 import java.util.Optional;

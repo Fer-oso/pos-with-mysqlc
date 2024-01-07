@@ -1,4 +1,4 @@
-package interfaces.services;
+package interfaces.services.address;
 
 import interfaces.entitys.addres.IAddress;
 import interfaces.services.crud.CrudService;

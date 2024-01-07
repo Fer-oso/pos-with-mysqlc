@@ -1,6 +1,6 @@
-package interfaces.services;
+package interfaces.services.shoppingcart;
 
-import entitys.models.shop.ShoppingCart;
+import entitys.models.shop.shoppingcart.ShoppingCart;
 import interfaces.persistences.crud.Save;
 import interfaces.persistences.repositorys.FindById;
 import java.io.Serializable;

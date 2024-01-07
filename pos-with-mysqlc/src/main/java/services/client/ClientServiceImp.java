@@ -4,7 +4,7 @@ import entitys.models.addres.Address;
 import entitys.models.client.Client;
 import entitys.models.phone.Telephone;
 import interfaces.persistences.repositorys.entitys.clients.client.ClientRepository;
-import interfaces.services.ClientService;
+import interfaces.services.client.ClientService;
 import java.util.ArrayList;
 import java.util.Optional;
 import lombok.SneakyThrows;

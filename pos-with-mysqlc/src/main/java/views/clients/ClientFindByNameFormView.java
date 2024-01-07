@@ -5,9 +5,9 @@ import entitys.models.addres.Address;
 import entitys.models.phone.Telephone;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
-import interfaces.services.TelephoneService;
-import interfaces.services.AddressService;
-import interfaces.services.ClientService;
+import interfaces.services.telephone.TelephoneService;
+import interfaces.services.address.AddressService;
+import interfaces.services.client.ClientService;
 
 public class ClientFindByNameFormView extends javax.swing.JPanel {
 

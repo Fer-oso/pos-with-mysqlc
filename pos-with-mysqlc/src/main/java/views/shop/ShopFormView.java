@@ -1,9 +1,9 @@
 package views.shop;
 
 import controllers.Shop.shopformcontroller.ShopFormController;
-import interfaces.services.ClientService;
-import interfaces.services.ProductService;
-import interfaces.services.ShoppingCartService;
+import interfaces.services.client.ClientService;
+import interfaces.services.product.ProductService;
+import interfaces.services.shoppingcart.ShoppingCartService;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
@@ -226,16 +226,26 @@ public class ShopFormView extends javax.swing.JPanel {
         jTableProducts.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTableProducts.setShowGrid(true);
         jScrollPane1.setViewportView(jTableProducts);
+        if (jTableProducts.getColumnModel().getColumnCount() > 0) {
+            jTableProducts.getColumnModel().getColumn(1).setPreferredWidth(200);
+            jTableProducts.getColumnModel().getColumn(2).setPreferredWidth(50);
+            jTableProducts.getColumnModel().getColumn(3).setPreferredWidth(20);
+            jTableProducts.getColumnModel().getColumn(4).setPreferredWidth(30);
+            jTableProducts.getColumnModel().getColumn(5).setPreferredWidth(30);
+        }
 
         javax.swing.GroupLayout jpTableShoppingFormLayout = new javax.swing.GroupLayout(jpTableShoppingForm);
         jpTableShoppingForm.setLayout(jpTableShoppingFormLayout);
         jpTableShoppingFormLayout.setHorizontalGroup(
             jpTableShoppingFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpTableShoppingFormLayout.createSequentialGroup()
+                .addContainerGap(117, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(91, 91, 91))
         );
         jpTableShoppingFormLayout.setVerticalGroup(
             jpTableShoppingFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpTableShoppingFormLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpTableShoppingFormLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );

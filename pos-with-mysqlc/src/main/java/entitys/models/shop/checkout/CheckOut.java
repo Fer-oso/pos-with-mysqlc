@@ -1,13 +1,14 @@
 package entitys.models.shop.checkout;
 
-import entitys.models.shop.ShoppingCart;
+import entitys.models.shop.shoppingcart.ShoppingCart;
 import entitys.models.shop.paymentmethod.Cash;
 import entitys.models.shop.paymentmethod.CreditCard;
 import interfaces.entitys.checkout.ICheckOut;
 import interfaces.entitys.paymentMethod.PaymentMethod;
 import java.util.ArrayList;
+import java.util.Random;
 
-public class CheckOut implements ICheckOut<Integer>{
+public class CheckOut implements ICheckOut<Integer> {
 
     private static final long serialVersionUID = 1L;
 
@@ -19,13 +20,9 @@ public class CheckOut implements ICheckOut<Integer>{
 
     private boolean state;
 
-    private static Integer countId = 0;
-
     public CheckOut() {
 
-        countId++;
-
-        this.id = countId;
+        this.id = new Random().nextInt(100);
 
         this.paymentMethods.add(new Cash());
 
@@ -34,9 +31,7 @@ public class CheckOut implements ICheckOut<Integer>{
 
     public CheckOut(ShoppingCart shoppingCart) {
 
-        countId++;
-
-        this.id = countId;
+        this.id = new Random().nextInt(100);
 
         this.shoppingCart = shoppingCart;
 
@@ -47,14 +42,14 @@ public class CheckOut implements ICheckOut<Integer>{
 
     @Override
     public Integer getId() {
-       return id;
+        return id;
     }
 
     @Override
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     public ShoppingCart getShoppingCart() {
         return shoppingCart;
     }
@@ -75,18 +70,6 @@ public class CheckOut implements ICheckOut<Integer>{
         this.state = state;
     }
 
-    public final void addPaymentMethod(PaymentMethod paymentMethod) {
-
-//        if (paymentMethods instanceof Cash) {
-//
-//            this.paymentMethods.set(0, paymentMethod);
-//
-//        } else {
-//
-//            this.paymentMethods.set(1, paymentMethod);
-//        }
-    }
-    
     @Override
     public String toString() {
         return "Checking{" + "id=" + id + ", shoppingCart=" + shoppingCart + ", paymentMethod=" + paymentMethods + ", state=" + state + '}';

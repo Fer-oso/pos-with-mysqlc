@@ -4,7 +4,7 @@ import entitys.models.addres.Address;
 import java.util.ArrayList;
 import services.exceptions.AddresServiceException;
 import interfaces.persistences.repositorys.entitys.address.AddressRepository;
-import interfaces.services.AddressService;
+import interfaces.services.address.AddressService;
 import lombok.SneakyThrows;
 
 public class AddressServiceImp implements AddressService {

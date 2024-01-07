@@ -1,19 +1,24 @@
 package main;
 
+import entitys.models.client.Client;
+import interfaces.entitys.person.Person;
 import persistence.dao.persistence.AddressRepositoryImp;
 import persistence.dao.persistence.TelephoneRepositoryImp;
 import services.address.AddressServiceImp;
 import services.client.ClientServiceImp;
 import services.phone.TelephoneServiceImp;
 import interfaces.persistences.repositorys.entitys.phones.TelephoneRepository;
-import interfaces.services.TelephoneService;
+import interfaces.services.telephone.TelephoneService;
 import persistence.dao.persistence.ClientRepositoryImp;
 import interfaces.persistences.repositorys.entitys.address.AddressRepository;
 import interfaces.persistences.repositorys.entitys.clients.client.ClientRepository;
 import interfaces.persistences.repositorys.entitys.products.ProductRepository;
-import interfaces.services.AddressService;
-import interfaces.services.ClientService;
-import interfaces.services.ProductService;
+import interfaces.services.address.AddressService;
+import interfaces.services.client.ClientService;
+import interfaces.services.product.ProductService;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import persistence.config.DbConnector;
 import persistence.config.JdbcConnectorImp;
 import persistence.dao.persistence.ProductRepositoryImp;
@@ -45,10 +50,12 @@ public class Poswithmysqlc {
         
         ProductService productService = new ProductServiceImp(productRepository);
  
-        
        // FunctionalEjemplos functionalEjemplos = new FunctionalEjemplos();
         
+        String fechaActual = LocalDate.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
         
+        System.out.println(fechaActual);
+       
 //         
 //Client clientBD = clientService.findById(20);
 //

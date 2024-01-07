@@ -1,4 +1,4 @@
-package interfaces.services;
+package interfaces.services.client;
 
 import entitys.models.addres.Address;
 import entitys.models.phone.Telephone;

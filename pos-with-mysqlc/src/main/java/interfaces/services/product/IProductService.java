@@ -1,4 +1,4 @@
-package interfaces.services;
+package interfaces.services.product;
 
 import interfaces.entitys.product.IProduct;
 import interfaces.services.crud.CrudService;

@@ -1,4 +1,4 @@
-package entitys.models.shop;
+package entitys.models.shop.shoppingcart;
 
 import entitys.models.client.Client;
 import entitys.models.product.SelectedProduct;

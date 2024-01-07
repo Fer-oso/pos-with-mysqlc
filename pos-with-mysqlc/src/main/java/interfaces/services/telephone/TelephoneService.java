@@ -1,4 +1,4 @@
-package interfaces.services;
+package interfaces.services.telephone;
 
 import entitys.models.phone.Telephone;
 

@@ -1,7 +1,7 @@
 package persistence.dao.persistence;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import entitys.models.shop.ShoppingCart;
+import entitys.models.shop.shoppingcart.ShoppingCart;
 import interfaces.persistences.repositorys.entitys.shop.ShoppingCartRepository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -136,18 +136,14 @@ public class ShoppingCartRepositoryImp implements ShoppingCartRepository {
 
                 String jsonToString = resultSet.getString("shopping_cart");
 
-                shoppingCart
-                        = new ObjectMapper().readValue(jsonToString, ShoppingCart.class
-                        );
+                shoppingCart = new ObjectMapper().readValue(jsonToString, ShoppingCart.class);
             }
 
         } catch (Exception ex) {
 
             dbConnector.rollbackTransaction();
 
-            Logger
-                    .getLogger(ShoppingCartRepositoryImp.class
-                            .getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ShoppingCartRepositoryImp.class.getName()).log(Level.SEVERE, null, ex);
 
         } finally {
 

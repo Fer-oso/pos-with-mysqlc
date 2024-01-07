@@ -2,7 +2,7 @@ package services.products;
 
 import entitys.models.product.Product;
 import interfaces.persistences.repositorys.entitys.products.ProductRepository;
-import interfaces.services.ProductService;
+import interfaces.services.product.ProductService;
 import java.util.ArrayList;
 import lombok.SneakyThrows;
 import services.exceptions.ProductServiceException;

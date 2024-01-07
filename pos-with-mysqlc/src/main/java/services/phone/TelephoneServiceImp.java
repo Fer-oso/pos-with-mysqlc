@@ -2,7 +2,7 @@ package services.phone;
 
 import entitys.models.phone.Telephone;
 import interfaces.persistences.repositorys.entitys.phones.TelephoneRepository;
-import interfaces.services.TelephoneService;
+import interfaces.services.telephone.TelephoneService;
 import java.util.ArrayList;
 import services.exceptions.AddresServiceException;
 import services.exceptions.PhoneServiceException;

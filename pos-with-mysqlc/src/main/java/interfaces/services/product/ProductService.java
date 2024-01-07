@@ -1,4 +1,4 @@
-package interfaces.services;
+package interfaces.services.product;
 
 import entitys.models.product.Product;
 

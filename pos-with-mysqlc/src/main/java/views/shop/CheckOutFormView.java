@@ -1,8 +1,8 @@
 package views.shop;
 
 import controllers.Shop.checkoutformcontroller.CheckOutFormController;
-import entitys.models.shop.ShoppingCart;
-import interfaces.services.CheckOutService;
+import entitys.models.shop.shoppingcart.ShoppingCart;
+import interfaces.services.checkout.CheckOutService;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -82,7 +82,7 @@ public class CheckOutFormView extends javax.swing.JFrame {
 
         lblDateValue.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblDateValue.setText("Saturday 9/2/2023");
-        jPanel1.add(lblDateValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, -1, -1));
+        jPanel1.add(lblDateValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, -1, -1));
 
         lblCheckOutNumberValue.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblCheckOutNumberValue.setText("435232");
@@ -146,11 +146,11 @@ public class CheckOutFormView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -255,12 +255,12 @@ public class CheckOutFormView extends javax.swing.JFrame {
         this.lblCashText = lblCashText;
     }
 
-    public JLabel getLblCheckOutNumber() {
+    public JLabel getLblCheckOutNumberValue() {
         return lblCheckOutNumberValue;
     }
 
-    public void setLblCheckOutNumber(JLabel lblCheckOutNumber) {
-        this.lblCheckOutNumberValue = lblCheckOutNumber;
+    public void setLblCheckOutNumberValue(JLabel lblCheckOutNumberValue) {
+        this.lblCheckOutNumberValue = lblCheckOutNumberValue;
     }
 
     public JLabel getLblCheckOutNumberText() {
@@ -295,12 +295,12 @@ public class CheckOutFormView extends javax.swing.JFrame {
         this.lblCreditCardText = lblCreditCardText;
     }
 
-    public JLabel getLblDate() {
+    public JLabel getLblDateValue() {
         return lblDateValue;
     }
 
-    public void setLblDate(JLabel lblDate) {
-        this.lblDateValue = lblDate;
+    public void setLblDateValue(JLabel lblDateValue) {
+        this.lblDateValue = lblDateValue;
     }
 
     public JLabel getLblSelectPaymentMethodText() {
