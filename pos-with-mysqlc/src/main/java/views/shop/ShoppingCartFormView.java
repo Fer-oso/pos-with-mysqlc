@@ -53,13 +53,13 @@ public class ShoppingCartFormView extends javax.swing.JFrame {
         jpNuevaVenta.add(lblSsn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, -1));
 
         txtClientSsn.setEditable(false);
-        txtClientSsn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtClientSsn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtClientSsn.setFocusable(false);
         txtClientSsn.setOpaque(true);
         jpNuevaVenta.add(txtClientSsn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 150, 30));
 
         txtClientName.setEditable(false);
-        txtClientName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtClientName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtClientName.setFocusable(false);
         txtClientName.setOpaque(true);
         jpNuevaVenta.add(txtClientName, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 430, 150, 30));

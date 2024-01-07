@@ -65,20 +65,20 @@ public class CheckOutFormView extends javax.swing.JFrame {
         ));
         jTableCheckOut.setAutoscrolls(false);
         jTableCheckOut.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTableCheckOut.setFocusable(false);
         jTableCheckOut.setGridColor(new java.awt.Color(255, 255, 255));
         jTableCheckOut.setShowGrid(true);
         jScrollPane1.setViewportView(jTableCheckOut);
         if (jTableCheckOut.getColumnModel().getColumnCount() > 0) {
-            jTableCheckOut.getColumnModel().getColumn(0).setMinWidth(0);
-            jTableCheckOut.getColumnModel().getColumn(0).setMaxWidth(50);
-            jTableCheckOut.getColumnModel().getColumn(1).setMaxWidth(400);
+            jTableCheckOut.getColumnModel().getColumn(0).setPreferredWidth(40);
+            jTableCheckOut.getColumnModel().getColumn(1).setPreferredWidth(150);
             jTableCheckOut.getColumnModel().getColumn(2).setMaxWidth(100);
-            jTableCheckOut.getColumnModel().getColumn(3).setMaxWidth(50);
-            jTableCheckOut.getColumnModel().getColumn(4).setMaxWidth(100);
-            jTableCheckOut.getColumnModel().getColumn(5).setMaxWidth(100);
+            jTableCheckOut.getColumnModel().getColumn(3).setPreferredWidth(30);
+            jTableCheckOut.getColumnModel().getColumn(4).setPreferredWidth(40);
+            jTableCheckOut.getColumnModel().getColumn(5).setPreferredWidth(40);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 590, 200));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 610, 200));
 
         lblDateValue.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblDateValue.setText("Saturday 9/2/2023");
@@ -109,6 +109,7 @@ public class CheckOutFormView extends javax.swing.JFrame {
         jPanel2.add(jcbCuotes, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 100, 30));
 
         txtFinalPriceCc.setEditable(false);
+        txtFinalPriceCc.setFocusable(false);
         txtFinalPriceCc.setVisible(false);
         jPanel2.add(txtFinalPriceCc, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, 100, 30));
         jPanel2.add(txtCash, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 100, -1));
@@ -146,7 +147,9 @@ public class CheckOutFormView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -97,16 +97,7 @@ public class CheckOutFormController implements ActionListener {
         }
     }
 
-    private void setLblInfo() {
-        
-        checkOutFormView.getLblCheckOutNumberValue().setText(String.valueOf(checkOut.getId()));
-        
-        checkOutFormView.getLblDateValue().setText(LocalDate.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
-
-        checkOutFormView.getLblClientName().setText(shoppingCart.getClient().getName() + " " + shoppingCart.getClient().getLastName());
-
-        checkOutFormView.getLblTotalPrice().setText(String.valueOf(shoppingCart.getFinalPrice()));
-    }
+ 
 
     private void inputCash() {
 
@@ -148,21 +139,8 @@ public class CheckOutFormController implements ActionListener {
         }
     }
 
-    private void listProductsCarshop() {
-
-        List<SelectedProduct> listProductsShoppingCart = shoppingCart.getProducts();
-
-        model = (DefaultTableModel) checkOutFormView.getjTableCheckOut().getModel();
-
-        for (SelectedProduct psc : listProductsShoppingCart) {
-
-            Object[] objectProduct = {psc.getProductCode(), psc.getProductName(), psc.getProductBrand(),
-                psc.getProductQuantity(), psc.getProductPrice(), psc.getFinalPrice()};
-
-            model.addRow(objectProduct);
-        }
-    }
-
+    /*PASAR ESTO A UN BLOQUE SWITCH*/
+    
     private void selectedFees() {
 
         Double creditCardQuantity= 0.0;
@@ -239,13 +217,30 @@ public class CheckOutFormController implements ActionListener {
             }
         }
     }
+    
+       private void setLblInfo() {
+        
+        checkOutFormView.getLblCheckOutNumberValue().setText(String.valueOf(checkOut.getId()));
+        
+        checkOutFormView.getLblDateValue().setText(LocalDate.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
 
-    private void createCheckOut() {
+        checkOutFormView.getLblClientName().setText(shoppingCart.getClient().getName() + " " + shoppingCart.getClient().getLastName());
 
-        checkOut = new CheckOut(shoppingCart);
+        checkOutFormView.getLblTotalPrice().setText(String.valueOf(shoppingCart.getFinalPrice()));
+    }
+    
+        private void listProductsCarshop() {
 
-        if (true) {
+        List<SelectedProduct> listProductsShoppingCart = shoppingCart.getProducts();
 
+        model = (DefaultTableModel) checkOutFormView.getjTableCheckOut().getModel();
+
+        for (SelectedProduct psc : listProductsShoppingCart) {
+
+            Object[] objectProduct = {psc.getProductCode(), psc.getProductName(), psc.getProductBrand(),
+                psc.getProductQuantity(), psc.getProductPrice(), psc.getFinalPrice()};
+
+            model.addRow(objectProduct);
         }
     }
 
